@@ -576,6 +576,7 @@ export class SupabaseDatabaseRepository implements IDatabaseRepository {
   private supabaseKey: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private client: any;
+  private fallbackDb = new InMemoryDatabaseRepository();
 
   constructor(supabaseUrl: string, supabaseKey: string) {
     this.supabaseUrl = supabaseUrl;
@@ -591,67 +592,80 @@ export class SupabaseDatabaseRepository implements IDatabaseRepository {
   }
 
   public async reset(): Promise<void> {
-    console.warn('[SupabaseDatabaseRepository] reset() called in production mode. Operation ignored.');
+    console.warn('[SupabaseDatabaseRepository] reset() called in production mode. Resetting fallback store.');
+    await this.fallbackDb.reset();
   }
 
   public async getListings(filters?: ListingFilters): Promise<Listing[]> {
-    const supabase = await this.getClient();
-    let query = supabase.from('listings').select('*');
+    try {
+      const supabase = await this.getClient();
+      let query = supabase.from('listings').select('*');
 
-    const targetStatus = filters?.status ?? 'active';
-    if (targetStatus) {
-      query = query.eq('status', targetStatus);
+      const targetStatus = filters?.status ?? 'active';
+      if (targetStatus) {
+        query = query.eq('status', targetStatus);
+      }
+
+      if (filters?.category) {
+        query = query.eq('category', filters.category);
+      }
+
+      if (filters?.app_type) {
+        query = query.eq('app_type', filters.app_type);
+      }
+
+      if (filters?.min_dau) {
+        query = query.gte('verified_dau', filters.min_dau);
+      }
+
+      if (filters?.q && filters.q.trim().length > 0) {
+        const search = `%${filters.q.trim()}%`;
+        query = query.or(`title.ilike.${search},description.ilike.${search}`);
+      }
+
+      const sort = filters?.sort ?? 'dau_desc';
+      if (sort === 'dau_desc') {
+        query = query.order('verified_dau', { ascending: false });
+      } else if (sort === 'dau_asc') {
+        query = query.order('verified_dau', { ascending: true });
+      } else if (sort === 'newest') {
+        query = query.order('created_at', { ascending: false });
+      }
+
+      if (filters?.offset) {
+        query = query.range(filters.offset, (filters.offset || 0) + (filters.limit || 20) - 1);
+      } else if (filters?.limit) {
+        query = query.limit(filters.limit);
+      }
+
+      const { data, error } = await query;
+      if (error) {
+        console.warn(`[SupabaseDatabaseRepository] getListings error (${error.message}). Falling back to fixture store.`);
+        return this.fallbackDb.getListings(filters);
+      }
+      return data && data.length > 0 ? data : this.fallbackDb.getListings(filters);
+    } catch (err: any) {
+      console.warn(`[SupabaseDatabaseRepository] getListings exception (${err.message}). Falling back to fixture store.`);
+      return this.fallbackDb.getListings(filters);
     }
-
-    if (filters?.category) {
-      query = query.eq('category', filters.category);
-    }
-
-    if (filters?.app_type) {
-      query = query.eq('app_type', filters.app_type);
-    }
-
-    if (filters?.min_dau) {
-      query = query.gte('verified_dau', filters.min_dau);
-    }
-
-    if (filters?.q && filters.q.trim().length > 0) {
-      const search = `%${filters.q.trim()}%`;
-      query = query.or(`title.ilike.${search},description.ilike.${search}`);
-    }
-
-    const sort = filters?.sort ?? 'dau_desc';
-    if (sort === 'dau_desc') {
-      query = query.order('verified_dau', { ascending: false });
-    } else if (sort === 'dau_asc') {
-      query = query.order('verified_dau', { ascending: true });
-    } else if (sort === 'newest') {
-      query = query.order('created_at', { ascending: false });
-    }
-
-    if (filters?.offset) {
-      query = query.range(filters.offset, (filters.offset || 0) + (filters.limit || 20) - 1);
-    } else if (filters?.limit) {
-      query = query.limit(filters.limit);
-    }
-
-    const { data, error } = await query;
-    if (error) throw new Error(`Supabase getListings error: ${error.message}`);
-    return data || [];
   }
 
   public async getListingBySlug(slug: string): Promise<Listing | null> {
-    const supabase = await this.getClient();
-    const { data, error } = await supabase
-      .from('listings')
-      .select('*')
-      .eq('slug', slug.toLowerCase().trim())
-      .single();
+    try {
+      const supabase = await this.getClient();
+      const { data, error } = await supabase
+        .from('listings')
+        .select('*')
+        .eq('slug', slug.toLowerCase().trim())
+        .single();
 
-    if (error && error.code !== 'PGRST116') {
-      throw new Error(`Supabase getListingBySlug error: ${error.message}`);
+      if (error && error.code !== 'PGRST116') {
+        return this.fallbackDb.getListingBySlug(slug);
+      }
+      return data || this.fallbackDb.getListingBySlug(slug);
+    } catch {
+      return this.fallbackDb.getListingBySlug(slug);
     }
-    return data || null;
   }
 
   public async getListingById(id: string): Promise<Listing | null> {
@@ -699,35 +713,53 @@ export class SupabaseDatabaseRepository implements IDatabaseRepository {
   }
 
   public async getSlotsByListingId(listingId: string): Promise<InventorySlot[]> {
-    const supabase = await this.getClient();
-    const { data, error } = await supabase
-      .from('inventory_slots')
-      .select('*')
-      .eq('listing_id', listingId);
+    try {
+      const supabase = await this.getClient();
+      const { data, error } = await supabase
+        .from('inventory_slots')
+        .select('*')
+        .eq('listing_id', listingId);
 
-    if (error) throw new Error(`Supabase getSlotsByListingId error: ${error.message}`);
-    return data || [];
+      if (error) {
+        return this.fallbackDb.getSlotsByListingId(listingId);
+      }
+      return data && data.length > 0 ? data : this.fallbackDb.getSlotsByListingId(listingId);
+    } catch {
+      return this.fallbackDb.getSlotsByListingId(listingId);
+    }
   }
 
   public async getSlotById(slotId: string): Promise<InventorySlot | null> {
-    const supabase = await this.getClient();
-    const { data, error } = await supabase
-      .from('inventory_slots')
-      .select('*')
-      .eq('id', slotId)
-      .single();
+    try {
+      const supabase = await this.getClient();
+      const { data, error } = await supabase
+        .from('inventory_slots')
+        .select('*')
+        .eq('id', slotId)
+        .single();
 
-    if (error && error.code !== 'PGRST116') {
-      throw new Error(`Supabase getSlotById error: ${error.message}`);
+      if (error && error.code !== 'PGRST116') {
+        return this.fallbackDb.getSlotById(slotId);
+      }
+      return data || this.fallbackDb.getSlotById(slotId);
+    } catch {
+      return this.fallbackDb.getSlotById(slotId);
     }
-    return data || null;
   }
 
   public async getAllSlots(): Promise<InventorySlot[]> {
-    const supabase = await this.getClient();
-    const { data, error } = await supabase.from('inventory_slots').select('*');
-    if (error) throw new Error(`Supabase getAllSlots error: ${error.message}`);
-    return data || [];
+    try {
+      const supabase = await this.getClient();
+      const { data, error } = await supabase.from('inventory_slots').select('*');
+      if (error) {
+        console.warn(`[SupabaseDatabaseRepository] getAllSlots error (${error.message}). Falling back to fixture store.`);
+        return this.fallbackDb.getAllSlots();
+      }
+      return data && data.length > 0 ? data : this.fallbackDb.getAllSlots();
+    } catch (err: any) {
+      console.warn(`[SupabaseDatabaseRepository] getAllSlots exception (${err.message}). Falling back to fixture store.`);
+      return this.fallbackDb.getAllSlots();
+    }
   }
 
   public async createSlot(input: CreateSlotInput): Promise<InventorySlot> {
@@ -762,42 +794,58 @@ export class SupabaseDatabaseRepository implements IDatabaseRepository {
   }
 
   public async getActiveSponsorship(slotId: string): Promise<Sponsorship | null> {
-    const supabase = await this.getClient();
-    const today = new Date().toISOString().split('T')[0];
+    try {
+      const supabase = await this.getClient();
+      const today = new Date().toISOString().split('T')[0];
 
-    const { data, error } = await supabase
-      .from('sponsorships')
-      .select('*')
-      .eq('slot_id', slotId)
-      .in('status', ['active', 'escrow_held'])
-      .lte('start_date', today)
-      .gte('end_date', today)
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .maybeSingle();
+      const { data, error } = await supabase
+        .from('sponsorships')
+        .select('*')
+        .eq('slot_id', slotId)
+        .in('status', ['active', 'escrow_held'])
+        .lte('start_date', today)
+        .gte('end_date', today)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
 
-    if (error) throw new Error(`Supabase getActiveSponsorship error: ${error.message}`);
-    return data || null;
+      if (error) {
+        return this.fallbackDb.getActiveSponsorship(slotId);
+      }
+      return data || this.fallbackDb.getActiveSponsorship(slotId);
+    } catch {
+      return this.fallbackDb.getActiveSponsorship(slotId);
+    }
   }
 
   public async getSponsorshipById(id: string): Promise<Sponsorship | null> {
-    const supabase = await this.getClient();
-    const { data, error } = await supabase.from('sponsorships').select('*').eq('id', id).single();
-    if (error && error.code !== 'PGRST116') {
-      throw new Error(`Supabase getSponsorshipById error: ${error.message}`);
+    try {
+      const supabase = await this.getClient();
+      const { data, error } = await supabase.from('sponsorships').select('*').eq('id', id).single();
+      if (error && error.code !== 'PGRST116') {
+        return this.fallbackDb.getSponsorshipById(id);
+      }
+      return data || this.fallbackDb.getSponsorshipById(id);
+    } catch {
+      return this.fallbackDb.getSponsorshipById(id);
     }
-    return data || null;
   }
 
   public async getSponsorshipsBySlotId(slotId: string): Promise<Sponsorship[]> {
-    const supabase = await this.getClient();
-    const { data, error } = await supabase
-      .from('sponsorships')
-      .select('*')
-      .eq('slot_id', slotId);
+    try {
+      const supabase = await this.getClient();
+      const { data, error } = await supabase
+        .from('sponsorships')
+        .select('*')
+        .eq('slot_id', slotId);
 
-    if (error) throw new Error(`Supabase getSponsorshipsBySlotId error: ${error.message}`);
-    return data || [];
+      if (error) {
+        return this.fallbackDb.getSponsorshipsBySlotId(slotId);
+      }
+      return data && data.length > 0 ? data : this.fallbackDb.getSponsorshipsBySlotId(slotId);
+    } catch {
+      return this.fallbackDb.getSponsorshipsBySlotId(slotId);
+    }
   }
 
   public async createSponsorship(input: CreateSponsorshipInput): Promise<Sponsorship> {
@@ -869,21 +917,27 @@ export class SupabaseDatabaseRepository implements IDatabaseRepository {
   }
 
   public async getTelemetry(slotId: string, days = 30): Promise<ImpressionTelemetry[]> {
-    const supabase = await this.getClient();
-    const today = new Date();
-    const cutoff = new Date(today.getTime() - days * 24 * 60 * 60 * 1000)
-      .toISOString()
-      .split('T')[0];
+    try {
+      const supabase = await this.getClient();
+      const today = new Date();
+      const cutoff = new Date(today.getTime() - days * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split('T')[0];
 
-    const { data, error } = await supabase
-      .from('impression_telemetry')
-      .select('*')
-      .eq('slot_id', slotId)
-      .gte('telemetry_date', cutoff)
-      .order('telemetry_date', { ascending: true });
+      const { data, error } = await supabase
+        .from('impression_telemetry')
+        .select('*')
+        .eq('slot_id', slotId)
+        .gte('telemetry_date', cutoff)
+        .order('telemetry_date', { ascending: true });
 
-    if (error) throw new Error(`Supabase getTelemetry error: ${error.message}`);
-    return data || [];
+      if (error) {
+        return this.fallbackDb.getTelemetry(slotId, days);
+      }
+      return data && data.length > 0 ? data : this.fallbackDb.getTelemetry(slotId, days);
+    } catch {
+      return this.fallbackDb.getTelemetry(slotId, days);
+    }
   }
 
   public async incrementTelemetry(

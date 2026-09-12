@@ -34,3 +34,5 @@ next-env.d.ts
 .agents/*
 !.agents/skills/
 !.agents/skills/**
+.vercel
+.env*
