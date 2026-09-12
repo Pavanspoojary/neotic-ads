@@ -41,26 +41,26 @@ export default async function DashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-[#090a0f] text-zinc-100 flex flex-col selection:bg-indigo-500 selection:text-white">
       <Navbar />
 
       <main id="main-content" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 outline-none">
         {/* Page Header */}
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold mb-3">
-            <BarChart2 className="h-3.5 w-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-medium mb-3 shadow-inner-border">
+            <BarChart2 className="h-3.5 w-3.5 text-indigo-400" />
             <span>Platform Telemetry & Ad Delivery Engine</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-3xl font-extrabold text-white tracking-tight">
             Analytics & Verification Dashboard
           </h1>
-          <p className="mt-1 text-sm text-slate-600 max-w-3xl">
+          <p className="mt-1 text-xs sm:text-sm text-zinc-400 max-w-3xl leading-relaxed">
             Real-time telemetry aggregated directly from client-side pings without storing PII.
             Monitor impression volume, click conversions, and active escrow contracts.
           </p>
         </div>
 
-        {/* Dashboard Client Area */}
+        {/* Client Interactive Dashboard */}
         <DashboardClient
           initialSlots={allSlots}
           initialListings={allListings}

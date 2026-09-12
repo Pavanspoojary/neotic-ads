@@ -123,9 +123,9 @@ async function fetchSponsorSlot() {
   };
 
   return (
-    <div className="w-full text-slate-100 space-y-4">
+    <div className="w-full text-zinc-100 space-y-4">
       {/* Header Context */}
-      <div className="flex items-start justify-between gap-4 pb-3 border-b border-slate-800">
+      <div className="flex items-start justify-between gap-4 pb-3 border-b border-white/[0.08]">
         <div>
           <div className="flex items-center gap-2">
             <Code className="h-5 w-5 text-indigo-400" />
@@ -133,19 +133,19 @@ async function fetchSponsorSlot() {
               Integration Snippets for {slot.slot_name}
             </h3>
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-zinc-400 mt-0.5">
             Embed via Client SDK script or fetch directly using the Headless JSON API.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-slate-300 border border-slate-700">
+          <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-white/[0.04] text-zinc-300 border border-white/[0.08]">
             Format: {slot.slot_type}
           </span>
           {onClose && (
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors"
               title="Close Snippet Generator"
             >
               <X className="h-4 w-4" />
@@ -155,14 +155,14 @@ async function fetchSponsorSlot() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-800 text-xs sm:text-sm font-medium">
+      <div className="flex items-center gap-2 border-b border-white/[0.08] text-xs sm:text-sm font-medium">
         <button
           type="button"
           onClick={() => setActiveTab('client_sdk')}
-          className={`pb-2.5 px-1 border-b-2 transition-all flex items-center gap-2 ${
+          className={`pb-2.5 px-2 border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'client_sdk'
               ? 'border-indigo-500 text-indigo-400 font-semibold'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              : 'border-transparent text-zinc-400 hover:text-zinc-200'
           }`}
         >
           <Sparkles className="h-4 w-4" />
@@ -175,15 +175,15 @@ async function fetchSponsorSlot() {
         <button
           type="button"
           onClick={() => setActiveTab('headless_api')}
-          className={`pb-2.5 px-1 border-b-2 transition-all flex items-center gap-2 ${
+          className={`pb-2.5 px-2 border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'headless_api'
               ? 'border-indigo-500 text-indigo-400 font-semibold'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              : 'border-transparent text-zinc-400 hover:text-zinc-200'
           }`}
         >
           <Code className="h-4 w-4" />
           <span>Headless JSON API</span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.08]">
             React / MV3
           </span>
         </button>
@@ -191,10 +191,10 @@ async function fetchSponsorSlot() {
         <button
           type="button"
           onClick={() => setActiveTab('curl')}
-          className={`pb-2.5 px-1 border-b-2 transition-all flex items-center gap-2 ${
+          className={`pb-2.5 px-2 border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'curl'
               ? 'border-indigo-500 text-indigo-400 font-semibold'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              : 'border-transparent text-zinc-400 hover:text-zinc-200'
           }`}
         >
           <Terminal className="h-4 w-4" />
@@ -203,7 +203,7 @@ async function fetchSponsorSlot() {
       </div>
 
       {/* Code Block Box with Copy Button */}
-      <div className="relative rounded-xl border border-slate-800 bg-slate-950 p-4 font-mono text-xs text-slate-200 shadow-inner">
+      <div className="relative rounded-xl border border-white/[0.08] bg-[#090a0f] p-4 font-mono text-xs text-zinc-200 shadow-inner">
         {/* Copy Button */}
         <div className="absolute top-3 right-3 z-10">
           <button
@@ -212,7 +212,7 @@ async function fetchSponsorSlot() {
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all shadow-sm ${
               copiedKey === activeTab
                 ? 'bg-emerald-600 text-white'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700'
+                : 'bg-white/[0.06] text-zinc-300 hover:bg-white/[0.1] hover:text-white border border-white/[0.08]'
             }`}
           >
             {copiedKey === activeTab ? (
@@ -236,20 +236,20 @@ async function fetchSponsorSlot() {
       </div>
 
       {/* Architecture Guidance Callout */}
-      <div className="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs text-slate-300 space-y-1.5">
+      <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-xs text-zinc-300 space-y-1.5">
         <div className="font-semibold text-white flex items-center gap-1.5">
           <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
           <span>Architecture & Runtime Behavior</span>
         </div>
-        <ul className="list-disc list-inside space-y-1 text-slate-400 pl-1 text-[11px] leading-relaxed">
+        <ul className="list-disc list-inside space-y-1 text-zinc-400 pl-1 text-[11px] leading-relaxed">
           <li>
-            <strong className="text-slate-300">Shadow DOM Isolation:</strong> <code className="text-indigo-300">embed.js</code> mounts into an open shadow root to prevent global CSS clashes.
+            <strong className="text-zinc-300">Shadow DOM Isolation:</strong> <code className="text-indigo-300">embed.js</code> mounts into an open shadow root to prevent global CSS clashes.
           </li>
           <li>
-            <strong className="text-slate-300">Unfilled Fallback:</strong> If the slot is vacant, it automatically renders a viral sponsor referral banner (<code className="text-indigo-300">⚡ Place your product here via SponsorSlot</code>).
+            <strong className="text-zinc-300">Unfilled Fallback:</strong> If the slot is vacant, it automatically renders a viral sponsor referral banner (<code className="text-indigo-300">⚡ Place your product here via SponsorSlot</code>).
           </li>
           <li>
-            <strong className="text-slate-300">Zero-PII Telemetry:</strong> Impressions and clicks trigger atomic counters on the Edge without collecting user IP, cookies, or personal identifiers.
+            <strong className="text-zinc-300">Zero-PII Telemetry:</strong> Impressions and clicks trigger atomic counters on the Edge without collecting user IP, cookies, or personal identifiers.
           </li>
         </ul>
       </div>

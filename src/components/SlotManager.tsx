@@ -250,16 +250,16 @@ export function SlotManager({
       )}
 
       {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
         <div>
-          <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-            <Layers className="h-5 w-5 text-indigo-600" />
+          <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+            <Layers className="h-4 w-4 text-indigo-400" />
             <span>Inventory Slots</span>
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/[0.05] text-zinc-300 border border-white/[0.08]">
               {slots.length} Total
             </span>
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs text-zinc-400 mt-1">
             Standardized in-app placements configured for flat-rate 30-day recurring terms with automated 15%/85% escrow split.
           </p>
         </div>
@@ -268,20 +268,20 @@ export function SlotManager({
           <button
             type="button"
             onClick={() => setIsFormOpen(!isFormOpen)}
-            className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all shadow-xs ${
+            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-xs ${
               isFormOpen
-                ? 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
-                : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                ? 'bg-white/[0.05] text-zinc-300 hover:bg-white/[0.08] border border-white/[0.1]'
+                : 'bg-indigo-600 text-white hover:bg-indigo-500 shadow-glow-indigo'
             }`}
           >
             {isFormOpen ? (
               <>
-                <X className="h-4 w-4" />
+                <X className="h-3.5 w-3.5" />
                 <span>Cancel</span>
               </>
             ) : (
               <>
-                <Plus className="h-4 w-4" />
+                <Plus className="h-3.5 w-3.5" />
                 <span>Add Inventory Slot</span>
               </>
             )}
@@ -293,27 +293,27 @@ export function SlotManager({
       {isFormOpen && !readOnly && (
         <form
           onSubmit={handleCreateSlot}
-          className="bg-white rounded-2xl border-2 border-indigo-100 p-6 sm:p-8 shadow-md space-y-6"
+          className="bg-[#0c0e17] rounded-2xl border border-white/[0.1] p-6 sm:p-8 shadow-inner-border space-y-6"
         >
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-indigo-600" />
+          <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
+            <h3 className="text-base font-bold text-white flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-indigo-400" />
               <span>Configure New Inventory Slot</span>
             </h3>
-            <span className="text-xs text-slate-400">All fields strictly validated</span>
+            <span className="text-xs text-zinc-500">All fields strictly validated</span>
           </div>
 
           {formError && (
-            <div className="p-3.5 rounded-lg bg-rose-50 border border-rose-200 text-xs sm:text-sm text-rose-700 flex items-center gap-2">
-              <AlertCircle className="h-4 w-4 text-rose-600 shrink-0" />
+            <div className="p-3.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs sm:text-sm text-rose-300 flex items-center gap-2">
+              <AlertCircle className="h-4 w-4 text-rose-400 shrink-0" />
               <span>{formError}</span>
             </div>
           )}
 
           {/* 1. Slot Name */}
           <div className="space-y-1.5">
-            <label className="block text-xs sm:text-sm font-semibold text-slate-800">
-              Slot Name <span className="text-rose-500">*</span>
+            <label className="block text-xs font-semibold text-zinc-300">
+              Slot Name <span className="text-rose-400">*</span>
             </label>
             <input
               type="text"
@@ -322,17 +322,17 @@ export function SlotManager({
               value={slotName}
               onChange={(e) => setSlotName(e.target.value)}
               placeholder="e.g. Main Navigation Header Pill, Empty Search Canvas"
-              className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-slate-400"
+              className="w-full px-3.5 py-2 rounded-lg border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 placeholder-zinc-500"
             />
-            <p className="text-[11px] text-slate-500">
+            <p className="text-[11px] text-zinc-500">
               A clear, descriptive label identifying where this ad format appears in your app.
             </p>
           </div>
 
           {/* 2. Standardized Format Selection (4 Cards) */}
           <div className="space-y-2">
-            <label className="block text-xs sm:text-sm font-semibold text-slate-800">
-              Standardized Placement Format <span className="text-rose-500">*</span>
+            <label className="block text-xs font-semibold text-zinc-300">
+              Standardized Placement Format <span className="text-rose-400">*</span>
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {(Object.keys(STANDARDIZED_SLOT_FORMATS) as SlotType[]).map((type) => {
@@ -345,34 +345,34 @@ export function SlotManager({
                     key={type}
                     type="button"
                     onClick={() => setSlotType(type)}
-                    className={`text-left p-3.5 rounded-xl border-2 transition-all flex flex-col justify-between ${
+                    className={`text-left p-3.5 rounded-xl border transition-all flex flex-col justify-between ${
                       isSelected
-                        ? 'border-indigo-600 bg-indigo-50/50 shadow-xs'
-                        : 'border-slate-200 bg-white hover:border-slate-300'
+                        ? 'border-indigo-500 bg-indigo-500/10 shadow-glow-indigo'
+                        : 'border-white/[0.08] bg-white/[0.02] hover:border-white/[0.16]'
                     }`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span
                           className={`p-1.5 rounded-lg ${
-                            isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
+                            isSelected ? 'bg-indigo-600 text-white' : 'bg-white/[0.05] text-zinc-400'
                           }`}
                         >
                           <Icon className="h-4 w-4" />
                         </span>
-                        <span className="text-[11px] font-bold text-slate-400 font-mono">
+                        <span className="text-[10px] font-bold text-zinc-500 font-mono">
                           {format.dimensions}
                         </span>
                       </div>
-                      <h4 className="text-sm font-bold text-slate-900">{format.label}</h4>
-                      <p className="text-[11px] text-slate-500 line-clamp-2 mt-1 leading-relaxed">
+                      <h4 className="text-xs font-bold text-white">{format.label}</h4>
+                      <p className="text-[11px] text-zinc-400 line-clamp-2 mt-1 leading-relaxed">
                         {format.description}
                       </p>
                     </div>
 
-                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
-                      <span className="text-slate-500">Max copy:</span>
-                      <span className="font-bold text-indigo-700">{format.charLimit} chars</span>
+                    <div className="mt-3 pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px]">
+                      <span className="text-zinc-500">Max copy:</span>
+                      <span className="font-bold text-indigo-400">{format.charLimit} chars</span>
                     </div>
                   </button>
                 );
@@ -382,15 +382,15 @@ export function SlotManager({
 
           {/* 3. Monthly Rental Rate & Real-Time Escrow Split Preview */}
           <div className="space-y-3">
-            <label className="block text-xs sm:text-sm font-semibold text-slate-800">
-              Monthly Rental Rate (30-day lease) <span className="text-rose-500">*</span>
+            <label className="block text-xs font-semibold text-zinc-300">
+              Monthly Rental Rate (30-day lease) <span className="text-rose-400">*</span>
             </label>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Input */}
               <div>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-500">
                     <DollarSign className="h-4 w-4" />
                   </div>
                   <input
@@ -402,47 +402,47 @@ export function SlotManager({
                     value={priceDollars}
                     onChange={(e) => setPriceDollars(e.target.value)}
                     placeholder="150.00"
-                    className="w-full pl-9 pr-3.5 py-2 rounded-lg border border-slate-300 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold"
+                    className="w-full pl-9 pr-3.5 py-2 rounded-lg border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 font-semibold"
                   />
                 </div>
-                <div className="flex items-center justify-between text-[11px] text-slate-500 mt-1.5">
+                <div className="flex items-center justify-between text-[11px] text-zinc-500 mt-1.5">
                   <span>Range: $50.00 – $1,000.00 / month</span>
                   <span className="font-mono">5,000 – 100,000 cents</span>
                 </div>
               </div>
 
               {/* Instant Real-Time Escrow Split Breakdown Preview */}
-              <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-3.5 space-y-2">
-                <div className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center justify-between">
+              <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3.5 space-y-2">
+                <div className="text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center justify-between">
                   <span>Escrow Allocation Preview</span>
-                  <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                  <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
                     Zero Penny Leakage
                   </span>
                 </div>
 
                 {escrowBreakdown.valid && escrowBreakdown.split ? (
                   <div className="space-y-1.5 text-xs">
-                    <div className="flex items-center justify-between text-slate-600">
+                    <div className="flex items-center justify-between text-zinc-400">
                       <span>Gross Rate:</span>
-                      <span className="font-semibold text-slate-900">
+                      <span className="font-semibold text-white">
                         {formatCentsToUsd(escrowBreakdown.split.monthly_amount_cents)}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-500">
+                    <div className="flex items-center justify-between text-zinc-500">
                       <span>SponsorSlot Fee (15%):</span>
-                      <span className="font-semibold text-slate-600">
+                      <span className="font-semibold text-zinc-400">
                         -{formatCentsToUsd(escrowBreakdown.split.platform_fee_cents)}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-emerald-700 font-bold pt-1 border-t border-slate-200">
+                    <div className="flex items-center justify-between text-emerald-400 font-bold pt-1 border-t border-white/[0.06]">
                       <span>Creator Net Earnings (85%):</span>
-                      <span className="text-sm">
+                      <span className="text-xs">
                         +{formatCentsToUsd(escrowBreakdown.split.creator_payout_cents)} / mo
                       </span>
                     </div>
                   </div>
                 ) : (
-                  <div className="text-xs text-rose-600 flex items-center gap-1.5 py-1">
+                  <div className="text-xs text-rose-400 flex items-center gap-1.5 py-1">
                     <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                     <span>{escrowBreakdown.error}</span>
                   </div>
@@ -454,12 +454,12 @@ export function SlotManager({
           {/* 4. Sponsor Guidelines */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="block text-xs sm:text-sm font-semibold text-slate-800">
+              <label className="block text-xs font-semibold text-zinc-300">
                 Sponsor Guidelines & Acceptable Verticals
               </label>
               <span
                 className={`text-[11px] font-mono ${
-                  guidelines.length > 1000 ? 'text-rose-600 font-bold' : 'text-slate-400'
+                  guidelines.length > 1000 ? 'text-rose-400 font-bold' : 'text-zinc-500'
                 }`}
               >
                 {guidelines.length} / 1,000 characters
@@ -471,18 +471,18 @@ export function SlotManager({
               value={guidelines}
               onChange={(e) => setGuidelines(e.target.value)}
               placeholder="e.g. Developer tools, SaaS, and AI developer utilities only. No crypto, gambling, or adult content."
-              className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-slate-400"
+              className="w-full px-3.5 py-2 rounded-lg border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 placeholder-zinc-500"
             />
-            <p className="text-[11px] text-slate-500">
+            <p className="text-[11px] text-zinc-500">
               Guidance displayed to prospective advertisers on checkout to ensure high-relevance creative submissions.
             </p>
           </div>
 
           {/* 5. Availability Switch */}
-          <div className="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50/50">
+          <div className="flex items-center justify-between p-3.5 rounded-xl border border-white/[0.08] bg-white/[0.02]">
             <div>
-              <div className="text-xs sm:text-sm font-semibold text-slate-800">Initial Availability</div>
-              <div className="text-[11px] text-slate-500">
+              <div className="text-xs sm:text-sm font-semibold text-zinc-200">Initial Availability</div>
+              <div className="text-[11px] text-zinc-500">
                 Make this slot immediately open for booking by marketplace advertisers.
               </div>
             </div>
@@ -490,7 +490,7 @@ export function SlotManager({
               type="button"
               onClick={() => setIsAvailable(!isAvailable)}
               className={`p-1 text-2xl transition-colors ${
-                isAvailable ? 'text-indigo-600' : 'text-slate-400'
+                isAvailable ? 'text-indigo-400' : 'text-zinc-600'
               }`}
             >
               {isAvailable ? <ToggleRight className="h-7 w-7" /> : <ToggleLeft className="h-7 w-7" />}
@@ -498,18 +498,18 @@ export function SlotManager({
           </div>
 
           {/* Submit Action */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/[0.06]">
             <button
               type="button"
               onClick={() => setIsFormOpen(false)}
-              className="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-colors"
+              className="px-4 py-2 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white hover:bg-white/[0.04] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting || !escrowBreakdown.valid}
-              className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-xs"
+              className="inline-flex items-center justify-center gap-1.5 px-5 py-2 rounded-lg text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-glow-indigo"
             >
               {isSubmitting ? (
                 <>
@@ -526,7 +526,7 @@ export function SlotManager({
 
       {/* Snippet Generator View (Expandable Drawer / Modal) */}
       {selectedSlotForSnippet && (
-        <div className="bg-slate-900 rounded-2xl p-6 shadow-xl border border-slate-800 animate-fadeIn">
+        <div className="bg-[#090a0f] rounded-2xl p-6 shadow-xl border border-white/[0.08] animate-fadeIn">
           <SnippetGenerator
             slot={selectedSlotForSnippet}
             listingSlug={listingSlug}
@@ -538,21 +538,21 @@ export function SlotManager({
 
       {/* Existing Slots Inventory Grid */}
       {slots.length === 0 ? (
-        <div className="p-12 text-center bg-white rounded-2xl border border-dashed border-slate-300">
-          <div className="w-12 h-12 mx-auto rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3">
-            <Layers className="h-6 w-6" />
+        <div className="p-12 text-center bg-white/[0.02] rounded-2xl border border-dashed border-white/[0.08]">
+          <div className="w-10 h-10 mx-auto rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-3">
+            <Layers className="h-5 w-5" />
           </div>
-          <h3 className="text-base font-bold text-slate-900 mb-1">No Inventory Slots Configured</h3>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-5">
+          <h3 className="text-sm font-bold text-white mb-1">No Inventory Slots Configured</h3>
+          <p className="text-xs text-zinc-400 max-w-md mx-auto mb-5">
             Define your first in-app placement to start receiving flat-rate 30-day sponsor bookings.
           </p>
           {!readOnly && (
             <button
               type="button"
               onClick={() => setIsFormOpen(true)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 shadow-xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-glow-indigo transition-all"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-3.5 w-3.5" />
               <span>Add Your First Slot</span>
             </button>
           )}
@@ -576,17 +576,17 @@ export function SlotManager({
             return (
               <div
                 key={slot.id}
-                className={`bg-white rounded-xl border transition-all duration-200 p-5 shadow-xs flex flex-col justify-between ${
-                  isSnippetActive ? 'border-indigo-600 ring-2 ring-indigo-100' : 'border-slate-200 hover:border-slate-300'
+                className={`bg-white/[0.02] rounded-xl border transition-all duration-200 p-5 shadow-inner-border flex flex-col justify-between ${
+                  isSnippetActive ? 'border-indigo-500 ring-1 ring-indigo-500/50' : 'border-white/[0.08] hover:border-white/[0.16]'
                 }`}
               >
                 <div>
                   {/* Top Bar: Badges & Availability Toggle */}
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                      <Icon className="h-3.5 w-3.5 text-indigo-600" />
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/[0.04] text-zinc-300 border border-white/[0.06]">
+                      <Icon className="h-3.5 w-3.5 text-indigo-400" />
                       <span>{format.label}</span>
-                      <span className="text-slate-400 font-normal">({format.dimensions})</span>
+                      <span className="text-zinc-500 font-normal">({format.dimensions})</span>
                     </span>
 
                     {/* Availability Switch */}
@@ -596,14 +596,14 @@ export function SlotManager({
                       onClick={() => handleToggleAvailability(slot)}
                       className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold border transition-colors ${
                         slot.is_available
-                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
-                          : 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100'
+                          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20'
+                          : 'bg-zinc-800 text-zinc-400 border-zinc-700 hover:bg-zinc-700'
                       }`}
                       title={slot.is_available ? 'Click to mark occupied/paused' : 'Click to make available'}
                     >
                       <span
-                        className={`w-2 h-2 rounded-full ${
-                          slot.is_available ? 'bg-emerald-500' : 'bg-amber-500'
+                        className={`w-1.5 h-1.5 rounded-full ${
+                          slot.is_available ? 'bg-emerald-400' : 'bg-amber-400'
                         }`}
                       />
                       <span>{slot.is_available ? 'Available' : 'Occupied'}</span>
@@ -611,40 +611,40 @@ export function SlotManager({
                   </div>
 
                   {/* Slot Name */}
-                  <h3 className="text-base font-bold text-slate-900 line-clamp-1">{slot.slot_name}</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">{format.description}</p>
+                  <h3 className="text-sm sm:text-base font-bold text-white line-clamp-1">{slot.slot_name}</h3>
+                  <p className="text-xs text-zinc-400 mt-0.5">{format.description}</p>
 
                   {/* Financial Breakdown */}
-                  <div className="mt-4 p-3 rounded-lg bg-slate-50 border border-slate-100 space-y-1 text-xs">
+                  <div className="mt-4 p-3 rounded-lg bg-white/[0.02] border border-white/[0.06] space-y-1 text-xs">
                     <div className="flex items-baseline justify-between">
-                      <span className="text-slate-500">Monthly Rental Rate:</span>
-                      <span className="text-base font-extrabold text-slate-900">
+                      <span className="text-zinc-400">Monthly Rental Rate:</span>
+                      <span className="text-sm sm:text-base font-extrabold text-white tabular-nums">
                         {formatCentsToUsd(slot.monthly_price_cents)}
-                        <span className="text-[11px] font-normal text-slate-500"> / 30d</span>
+                        <span className="text-[10px] font-normal text-zinc-500"> / 30d</span>
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-500 pt-1 border-t border-slate-200/60">
+                    <div className="flex items-center justify-between text-zinc-500 pt-1 border-t border-white/[0.06]">
                       <span>Platform Fee (15%):</span>
-                      <span>-{formatCentsToUsd(split.platform_fee_cents)}</span>
+                      <span className="tabular-nums">-{formatCentsToUsd(split.platform_fee_cents)}</span>
                     </div>
-                    <div className="flex items-center justify-between font-semibold text-emerald-700">
+                    <div className="flex items-center justify-between font-semibold text-emerald-400">
                       <span>Creator Net Payout (85%):</span>
-                      <span>+{formatCentsToUsd(split.creator_payout_cents)}</span>
+                      <span className="tabular-nums">+{formatCentsToUsd(split.creator_payout_cents)}</span>
                     </div>
                   </div>
 
                   {/* Guidelines Snippet */}
                   {slot.guidelines && (
-                    <div className="mt-3 text-xs text-slate-600 bg-slate-50/50 p-2.5 rounded-lg border border-slate-200">
-                      <span className="font-semibold text-slate-700">Guidelines: </span>
+                    <div className="mt-3 text-xs text-zinc-400 bg-white/[0.02] p-2.5 rounded-lg border border-white/[0.06]">
+                      <span className="font-semibold text-zinc-300">Guidelines: </span>
                       <span className="line-clamp-2">{slot.guidelines}</span>
                     </div>
                   )}
                 </div>
 
                 {/* Footer Actions */}
-                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-[11px] font-mono text-slate-400 truncate max-w-[140px]" title={slot.id}>
+                <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-zinc-500 truncate max-w-[140px]" title={slot.id}>
                     ID: {slot.id.slice(0, 8)}...
                   </span>
 
@@ -653,13 +653,13 @@ export function SlotManager({
                     onClick={() =>
                       setSelectedSlotForSnippet((current) => (current?.id === slot.id ? null : slot))
                     }
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${
                       isSnippetActive
-                        ? 'bg-slate-900 text-white'
-                        : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200'
+                        ? 'bg-indigo-600 text-white shadow-glow-indigo'
+                        : 'bg-white/[0.05] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.08]'
                     }`}
                   >
-                    <Code2 className="h-3.5 w-3.5" />
+                    <Code2 className="h-3 w-3" />
                     <span>{isSnippetActive ? 'Hide Snippet' : 'Integration Code'}</span>
                   </button>
                 </div>
