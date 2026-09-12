@@ -19,10 +19,7 @@ Always adhere to `/ponytail` skills and senior engineering principles across thi
   - [`sponsorslot-integration`](file:///.agents/skills/sponsorslot-integration/SKILL.md): Standard integration rules for in-app ad slots, embed SDK, and telemetry.
   - [`wikiskill`](file:///.agents/skills/wikiskill/SKILL.md): Repository architecture wiki, LLM knowledge management, and link drift linting via `docs/wiki/`.
 
-## 3. Persistent Rule: Continuous Vercel Deployment & GitHub Sync
-- **Continuous Deployment Directive**: Until explicitly told otherwise by the user, for every modification, enhancement, or fix implemented in the repository, automatically:
-  1. Verify changes locally with tests (`node --import tsx --test 'tests/**/*.test.ts'`) and type checking (`npx tsc --noEmit`).
-  2. Commit and push directly to GitHub (`git push origin main`).
-  3. Deploy to production on Vercel immediately (`PATH="/opt/homebrew/bin:$PATH" npx --yes vercel --prod`).
-  4. Perform live health checks (`curl -sI https://neotic-ads.vercel.app` & `curl -sI https://www.neotic.app`).
+## 3. Persistent Rule: NO Autonomous Vercel Deployment
+- **Strict User Directive**: DO NOT deploy to Vercel on your own. Never run `vercel --prod` or deploy automatically without explicit instruction from the user.
+- **Workflow Boundary**: Changes should be verified locally with tests (`node --import tsx --test 'tests/**/*.test.ts'`) and type checking (`npx tsc --noEmit`). Deploy to Vercel ONLY when the user explicitly prompts to deploy.
 
