@@ -5,7 +5,6 @@ import Link from 'next/link';
 import {
   Search,
   X,
-  ArrowUpDown,
   Code2,
   Sliders,
   Palette,
@@ -16,10 +15,17 @@ import {
   ChevronUp,
   Sparkles,
   ExternalLink,
+  Check,
+  Bookmark,
+  Plus,
+  Eye,
+  ArrowRight,
+  ShieldCheck,
+  Zap,
 } from 'lucide-react';
 import { Listing, InventorySlot, ListingCategory, AppType, SlotType } from '../lib/types';
 import { formatCentsToUsd } from '../lib/escrow';
-import { VerificationBadge } from './VerificationBadge';
+import { SnippetGenerator } from './SnippetGenerator';
 
 export interface MarketplaceGridProps {
   initialListings: Listing[];
@@ -35,129 +41,161 @@ interface ListingSlotSummary {
 }
 
 const CATEGORY_TABS: { id: ListingCategory | 'all'; label: string }[] = [
-  { id: 'all', label: 'All Software' },
+  { id: 'all', label: 'Tools' },
   { id: 'developer-tools', label: 'Developer Tools' },
   { id: 'productivity', label: 'Productivity' },
   { id: 'design', label: 'Design & Assets' },
   { id: 'utilities', label: 'Web Utilities' },
 ];
 
-const APP_TYPES: { id: AppType | 'all'; label: string }[] = [
-  { id: 'all', label: 'All Formats' },
-  { id: 'web_app', label: 'Web Apps' },
-  { id: 'chrome_extension', label: 'Chrome Extensions' },
-  { id: 'desktop_app', label: 'Desktop Tools' },
-];
+interface ToolVisualMeta {
+  icon: any;
+  bg: string;
+  badgeIcon: string;
+  badgeLabel: string;
+  creatorName: string;
+  creatorHandle: string;
+  creatorFlag: string;
+  creatorAvatar: string;
+  timeAgo: string;
+  isAd?: boolean;
+  views: string;
+  bookmarks: number;
+  version: string;
+}
 
-const DAU_PRESETS = [
-  { label: 'Any DAU', value: 0 },
-  { label: '5k+ DAU', value: 5000 },
-  { label: '10k+ DAU', value: 10000 },
-  { label: '15k+ DAU', value: 15000 },
-];
-
-function getAppVisuals(slug: string, category: string, index: number) {
-  const visuals: Record<
-    string,
-    {
-      bg: string;
-      icon: any;
-      rating: string;
-      reviews: string;
-      highlight: string;
-      badge?: string;
-      sentiment: { positive: number; neutral: number; negative: number };
-      avatars: string[];
-    }
-  > = {
-    'jsonhero-visualizer': {
-      bg: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-      icon: Code2,
-      rating: '4.8',
-      reviews: '872',
-      highlight: 'Highly rated for Developer Experience',
-      badge: 'Highly recommended',
-      sentiment: { positive: 96, neutral: 3, negative: 1 },
-      avatars: ['JD', 'M', 'SK'],
-    },
-    'tabmaster-pro': {
-      bg: 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20',
-      icon: LayoutGrid,
-      rating: '4.9',
-      reviews: '1,420',
-      highlight: 'Highly rated for Ease of Use',
-      badge: 'Highest rated',
-      sentiment: { positive: 95, neutral: 3, negative: 2 },
-      avatars: ['AL', 'RK', 'T'],
-    },
-    'svg-shape-shifter': {
-      bg: 'bg-amber-500/10 text-amber-400 border border-amber-500/20',
-      icon: Palette,
-      rating: '4.7',
-      reviews: '440',
-      highlight: 'Highly rated for Functionality',
-      badge: 'Trending Design',
-      sentiment: { positive: 92, neutral: 6, negative: 2 },
-      avatars: ['MC', 'DN', 'PR'],
-    },
-    'tailscan-devtools': {
-      bg: 'bg-sky-500/10 text-sky-400 border border-sky-500/20',
-      icon: Sliders,
-      rating: '4.8',
-      reviews: '1,003',
-      highlight: 'Highly rated for Value-for-Money',
-      badge: 'Highest rated',
-      sentiment: { positive: 94, neutral: 4, negative: 2 },
-      avatars: ['TS', 'EW', 'B'],
-    },
-    'regex101-companion': {
-      bg: 'bg-teal-500/10 text-teal-400 border border-teal-500/20',
-      icon: FileCode2,
-      rating: '4.6',
-      reviews: '310',
-      highlight: 'Highly rated for Productivity',
-      sentiment: { positive: 91, neutral: 7, negative: 2 },
-      avatars: ['RX', 'KP', 'GH'],
-    },
-    'crontab-guru-visualizer': {
-      bg: 'bg-rose-500/10 text-rose-400 border border-rose-500/20',
-      icon: Clock,
-      rating: '4.9',
-      reviews: '650',
-      highlight: 'Highly rated for Customer Service',
-      badge: 'Highly recommended',
-      sentiment: { positive: 97, neutral: 2, negative: 1 },
-      avatars: ['CG', 'LM', 'VR'],
-    },
-  };
-
-  if (visuals[slug]) {
-    return visuals[slug];
-  }
-
-  return {
-    bg: 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20',
+const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
+  'jsonhero-visualizer': {
+    icon: Code2,
+    bg: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/25',
+    badgeIcon: '⚡',
+    badgeLabel: 'Developer Tools',
+    creatorName: 'Anant Gupta',
+    creatorHandle: '@anant-gupta',
+    creatorFlag: '🇺🇸',
+    creatorAvatar: 'AG',
+    timeAgo: '5h',
+    views: '1,240',
+    bookmarks: 1,
+    version: 'v1.4',
+  },
+  'tabmaster-pro': {
+    icon: LayoutGrid,
+    bg: 'bg-sky-500/15 text-sky-400 border border-sky-500/25',
+    badgeIcon: '🧩',
+    badgeLabel: 'Chrome Extension',
+    creatorName: 'Sarah Chen',
+    creatorHandle: '@sarahchen',
+    creatorFlag: '🇨🇦',
+    creatorAvatar: 'SC',
+    timeAgo: 'Ad',
+    isAd: true,
+    views: '2,890',
+    bookmarks: 4,
+    version: 'v2.4',
+  },
+  'svg-shape-shifter': {
+    icon: Palette,
+    bg: 'bg-amber-500/15 text-amber-400 border border-amber-500/25',
+    badgeIcon: '🎨',
+    badgeLabel: 'Design & Assets',
+    creatorName: 'Marco Rossi',
+    creatorHandle: '@mrossi',
+    creatorFlag: '🇮🇹',
+    creatorAvatar: 'MR',
+    timeAgo: '3h',
+    views: '850',
+    bookmarks: 2,
+    version: 'v1.1',
+  },
+  'tailscan-devtools': {
+    icon: Sliders,
+    bg: 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/25',
+    badgeIcon: '🛠',
+    badgeLabel: 'DevTools & CSS',
+    creatorName: 'Stanislav Bruch',
+    creatorHandle: '@stanislav',
+    creatorFlag: '🇨🇿',
+    creatorAvatar: 'SB',
+    timeAgo: '6h',
+    views: '1,120',
+    bookmarks: 3,
+    version: 'v2.0',
+  },
+  'regex101-companion': {
+    icon: FileCode2,
+    bg: 'bg-teal-500/15 text-teal-400 border border-teal-500/25',
+    badgeIcon: '⚡',
+    badgeLabel: 'Regex Utilities',
+    creatorName: 'Paras Shah',
+    creatorHandle: '@paras-shah',
+    creatorFlag: '🇮🇳',
+    creatorAvatar: 'PS',
+    timeAgo: '8h',
+    views: '3,400',
+    bookmarks: 6,
+    version: 'v1.0',
+  },
+  'crontab-guru-visualizer': {
+    icon: Clock,
+    bg: 'bg-rose-500/15 text-rose-400 border border-rose-500/25',
+    badgeIcon: '⏱',
+    badgeLabel: 'Cron Automations',
+    creatorName: 'Alex Rivera',
+    creatorHandle: '@arivera',
+    creatorFlag: '🇪🇸',
+    creatorAvatar: 'AR',
+    timeAgo: '1d',
+    views: '940',
+    bookmarks: 1,
+    version: 'v1.2',
+  },
+  'markdown-slides-preview': {
     icon: Sparkles,
-    rating: (4.6 + (index % 4) * 0.1).toFixed(1),
-    reviews: `${(index + 2) * 140}`,
-    highlight: 'Highly rated for Performance',
-    badge: index % 2 === 0 ? 'Verified Placement' : undefined,
-    sentiment: { positive: 93, neutral: 5, negative: 2 },
-    avatars: ['AB', 'CD', 'EF'],
+    bg: 'bg-purple-500/15 text-purple-400 border border-purple-500/25',
+    badgeIcon: '📄',
+    badgeLabel: 'Markdown & Slides',
+    creatorName: 'Elena Rostova',
+    creatorHandle: '@erostova',
+    creatorFlag: '🇩🇪',
+    creatorAvatar: 'ER',
+    timeAgo: '2d',
+    views: '610',
+    bookmarks: 2,
+    version: 'v1.0',
+  },
+};
+
+function getToolVisual(slug: string, index: number): ToolVisualMeta {
+  if (TOOL_VISUALS[slug]) {
+    return TOOL_VISUALS[slug];
+  }
+  return {
+    icon: Sparkles,
+    bg: 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/25',
+    badgeIcon: '🛠',
+    badgeLabel: 'Web Utility',
+    creatorName: 'Developer',
+    creatorHandle: `@tool-${index + 1}`,
+    creatorFlag: '🌐',
+    creatorAvatar: 'DEV',
+    timeAgo: `${index + 2}h`,
+    views: `${(index + 1) * 320}`,
+    bookmarks: (index % 5) + 1,
+    version: 'v1.0',
   };
 }
 
 export function MarketplaceGrid({ initialListings, initialSlots = [] }: MarketplaceGridProps) {
-  // State
+  // Filter & Search State
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<ListingCategory | 'all'>('all');
-  const [selectedAppType, setSelectedAppType] = useState<AppType | 'all'>('all');
-  const [minDau, setMinDau] = useState<number>(0);
-  const [sortBy, setSortBy] = useState<'dau_desc' | 'dau_asc' | 'price_asc' | 'price_desc' | 'newest'>('dau_desc');
   const [availableOnly, setAvailableOnly] = useState(false);
-  const [expandedSlotsToolId, setExpandedSlotsToolId] = useState<string | null>(null);
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [expandedListingId, setExpandedListingId] = useState<string | null>(null);
+  const [bookmarkedMap, setBookmarkedMap] = useState<Record<string, boolean>>({});
 
-  // Compute live listing count per category tab
+  // Compute live counts per category
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { all: initialListings.length };
     for (const tab of CATEGORY_TABS) {
@@ -168,7 +206,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
     return counts;
   }, [initialListings]);
 
-  // Precompute slot stats map per listing
+  // Precompute slot summaries
   const slotStatsMap = useMemo(() => {
     const map = new Map<string, ListingSlotSummary>();
     for (const listing of initialListings) {
@@ -190,522 +228,498 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
     return map;
   }, [initialListings, initialSlots]);
 
-  // Filtering & Sorting
+  // Filter listings
   const filteredListings = useMemo(() => {
-    return initialListings
-      .filter((listing) => {
-        if (selectedCategory !== 'all' && listing.category !== selectedCategory) {
+    return initialListings.filter((listing) => {
+      if (selectedCategory !== 'all' && listing.category !== selectedCategory) {
+        return false;
+      }
+      if (searchQuery.trim().length > 0) {
+        const q = searchQuery.toLowerCase().trim();
+        const matchesTitle = listing.title.toLowerCase().includes(q);
+        const matchesDesc = listing.description.toLowerCase().includes(q);
+        const matchesSlug = listing.slug.toLowerCase().includes(q);
+        if (!matchesTitle && !matchesDesc && !matchesSlug) {
           return false;
         }
-        if (selectedAppType !== 'all' && listing.app_type !== selectedAppType) {
+      }
+      if (availableOnly) {
+        const stats = slotStatsMap.get(listing.id);
+        if (!stats || stats.availableSlots === 0) {
           return false;
         }
-        if (searchQuery.trim().length > 0) {
-          const q = searchQuery.toLowerCase().trim();
-          const matchesTitle = listing.title.toLowerCase().includes(q);
-          const matchesDesc = listing.description.toLowerCase().includes(q);
-          const matchesSlug = listing.slug.toLowerCase().includes(q);
-          if (!matchesTitle && !matchesDesc && !matchesSlug) {
-            return false;
-          }
-        }
-        if (minDau > 0 && listing.verified_dau < minDau) {
-          return false;
-        }
-        if (availableOnly) {
-          const stats = slotStatsMap.get(listing.id);
-          if (!stats || stats.availableSlots === 0) {
-            return false;
-          }
-        }
-        return true;
-      })
-      .sort((a, b) => {
-        switch (sortBy) {
-          case 'dau_asc':
-            return a.verified_dau - b.verified_dau;
-          case 'dau_desc':
-            return b.verified_dau - a.verified_dau;
-          case 'newest':
-            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-          case 'price_asc': {
-            const pA = slotStatsMap.get(a.id)?.minPriceCents ?? Infinity;
-            const pB = slotStatsMap.get(b.id)?.minPriceCents ?? Infinity;
-            return pA - pB;
-          }
-          case 'price_desc': {
-            const pA = slotStatsMap.get(a.id)?.maxPriceCents ?? 0;
-            const pB = slotStatsMap.get(b.id)?.maxPriceCents ?? 0;
-            return pB - pA;
-          }
-          default:
-            return b.verified_dau - a.verified_dau;
-        }
-      });
-  }, [initialListings, slotStatsMap, selectedCategory, selectedAppType, searchQuery, minDau, availableOnly, sortBy]);
+      }
+      if (verifiedOnly && !listing.verification_source) {
+        return false;
+      }
+      return true;
+    });
+  }, [initialListings, slotStatsMap, selectedCategory, searchQuery, availableOnly, verifiedOnly]);
 
-  const resetFilters = () => {
-    setSearchQuery('');
-    setSelectedCategory('all');
-    setSelectedAppType('all');
-    setMinDau(0);
-    setAvailableOnly(false);
-    setSortBy('dau_desc');
+  const toggleBookmark = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setBookmarkedMap((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const hasActiveFilters =
-    searchQuery.trim().length > 0 ||
-    selectedCategory !== 'all' ||
-    selectedAppType !== 'all' ||
-    minDau > 0 ||
-    availableOnly ||
-    sortBy !== 'dau_desc';
-
   return (
-    <div id="marketplace" className="w-full space-y-8">
-      {/* Category Tab Bar (Jam Spec: Pills with Hairline Definition) */}
-      <div className="flex justify-center border-b border-[#e5e7eb]/10 pb-4">
-        <div
-          role="tablist"
-          aria-label="Software Categories"
-          className="flex items-center gap-2 sm:gap-3 overflow-x-auto px-2 py-1 scrollbar-none"
-        >
-          {CATEGORY_TABS.map((tab) => {
-            const isSelected = selectedCategory === tab.id;
-            const count = categoryCounts[tab.id] ?? 0;
-            return (
-              <button
-                key={tab.id}
-                role="tab"
-                id={`tab-${tab.id}`}
-                aria-selected={isSelected}
-                aria-controls="marketplace-cards"
-                onClick={() => setSelectedCategory(tab.id)}
-                className={`relative whitespace-nowrap px-4 py-2 text-xs sm:text-sm font-medium transition-all flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#73e5bf] ${
-                  isSelected
-                    ? 'bg-[#73e5bf] text-[#130f18] font-bold shadow-sm'
-                    : 'bg-[#21192a] text-[#8b94a3] hover:text-white border border-[#e5e7eb]/12'
-                }`}
-              >
-                <span>{tab.label}</span>
-                <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-mono transition-colors ${
-                    isSelected
-                      ? 'bg-[#130f18]/20 text-[#130f18] font-bold'
-                      : 'bg-[#2e2d36] text-[#8b94a3]'
-                  }`}
-                >
-                  {count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Filter & Search Bar (Graphite Plum #21192a Card) */}
-      <div className="bg-[#21192a] rounded-card border border-[#e5e7eb]/12 p-5 sm:p-6 backdrop-blur-sm space-y-4 shadow-sm">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          {/* Search Input in Smoke Plum */}
-          <div className="relative flex-1">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8b94a3]" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by tool name, stack, or target audience..."
-              className="w-full pl-10 pr-9 py-2.5 rounded-input border border-[#e5e7eb]/12 text-xs sm:text-sm focus:outline-none focus:border-[#73e5bf] focus:ring-1 focus:ring-[#73e5bf] placeholder-[#8b94a3] text-white bg-[#2e2d36] transition-all"
-            />
+    <div id="marketplace" className="w-full space-y-6">
+      {/* =========================================================================
+          CENTERED SEARCH BAR & DUAL ACTION BUTTONS (As in Reference Screenshot)
+          ========================================================================= */}
+      <div className="max-w-2xl mx-auto text-center space-y-3 px-4">
+        {/* Search Bar with ⌘+K and Search Button */}
+        <div className="relative flex items-center w-full">
+          <input
+            id="search-input"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search..."
+            className="w-full bg-[#181d28] hover:bg-[#1c2230] focus:bg-[#1c2230] text-white placeholder-[#8b97a8] border border-[#2a344d] focus:border-[#73e5bf]/60 rounded-full pl-5 pr-28 py-3 text-sm transition-all outline-none shadow-inner"
+          />
+          
+          <div className="absolute right-2 flex items-center gap-1.5">
             {searchQuery && (
               <button
+                type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8b94a3] hover:text-white p-1 rounded-full"
-                aria-label="Clear search input"
+                className="p-1 rounded-full text-gray-400 hover:text-white"
+                title="Clear"
               >
-                <X className="h-3.5 w-3.5" />
+                <X className="w-3.5 h-3.5" />
               </button>
             )}
-          </div>
-
-          {/* Secondary Controls: Format & Sort */}
-          <div className="flex flex-wrap items-center gap-2.5">
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-[#8b94a3] hidden sm:inline font-medium">Format:</span>
-              <select
-                value={selectedAppType}
-                onChange={(e) => setSelectedAppType(e.target.value as AppType | 'all')}
-                className="text-xs py-2 px-3 rounded-input border border-[#e5e7eb]/12 bg-[#2e2d36] text-white focus:outline-none focus:border-[#73e5bf] font-medium"
-              >
-                {APP_TYPES.map((t) => (
-                  <option key={t.id} value={t.id}>
-                    {t.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="flex items-center gap-1.5">
-              <ArrowUpDown className="h-3 w-3 text-[#8b94a3] hidden sm:inline" />
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="text-xs py-2 px-3 rounded-input border border-[#e5e7eb]/12 bg-[#2e2d36] text-white focus:outline-none focus:border-[#73e5bf] font-medium"
-              >
-                <option value="dau_desc">Traffic: Highest DAU</option>
-                <option value="dau_asc">Traffic: Lowest DAU</option>
-                <option value="price_asc">Price: Low to High</option>
-                <option value="price_desc">Price: High to Low</option>
-                <option value="newest">Recently Added</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Quick Search Trending Tags */}
-        <div className="flex items-center gap-2 flex-wrap text-xs text-[#8b94a3]">
-          <span className="text-[11px] font-mono text-[#8b94a3]">TRENDING:</span>
-          {['JSON', 'Chrome', 'Design', 'Tabs', 'CLI', 'Digest'].map((tag) => (
+            <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-[#22293b] border border-[#323d54] text-[10px] font-mono text-gray-300">
+              ⌘ + K
+            </span>
             <button
-              key={tag}
               type="button"
-              onClick={() => setSearchQuery(tag)}
-              className="text-[11px] px-2.5 py-1 rounded-full bg-[#2e2d36] hover:bg-[#73e5bf]/15 hover:text-[#73e5bf] text-[#8b94a3] border border-[#e5e7eb]/10 font-medium transition-colors"
+              className="w-8 h-8 rounded-full bg-[#242c3d] hover:bg-[#2e374c] text-white flex items-center justify-center border border-[#344059] transition-colors"
+              title="Search"
             >
-              {tag}
+              <Search className="w-4 h-4" />
             </button>
-          ))}
-        </div>
-
-        {/* Lower Row: Presets & Available Only Toggle */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-[#e5e7eb]/10">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-[#8b94a3] font-medium">Verified Traffic:</span>
-            {DAU_PRESETS.map((preset) => (
-              <button
-                key={preset.value}
-                onClick={() => setMinDau(preset.value)}
-                className={`text-xs px-3 py-1 rounded-full transition-all font-medium ${
-                  minDau === preset.value
-                    ? 'bg-[#73e5bf] text-[#130f18] font-bold shadow-sm'
-                    : 'bg-[#2e2d36] text-[#8b94a3] hover:text-white border border-[#e5e7eb]/10'
-                }`}
-              >
-                {preset.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4">
-            <label className="inline-flex items-center gap-2 cursor-pointer select-none text-xs text-white">
-              <input
-                type="checkbox"
-                checked={availableOnly}
-                onChange={(e) => setAvailableOnly(e.target.checked)}
-                className="h-3.5 w-3.5 rounded border-[#e5e7eb]/20 bg-[#2e2d36] text-[#73e5bf] focus:ring-[#73e5bf]"
-              />
-              <span className="font-medium">Available Slots Only</span>
-            </label>
-
-            {hasActiveFilters && (
-              <button
-                onClick={resetFilters}
-                className="text-xs text-[#73e5bf] hover:underline font-medium"
-              >
-                Reset filters
-              </button>
-            )}
           </div>
         </div>
 
-        {/* Active Filters Pill Bar */}
-        {hasActiveFilters && (
-          <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-[#e5e7eb]/10 text-xs">
-            <span className="text-[#8b94a3] font-medium">Active:</span>
-            {selectedCategory !== 'all' && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2e2d36] text-[#73e5bf] font-medium border border-[#73e5bf]/30">
-                <span>{CATEGORY_TABS.find((t) => t.id === selectedCategory)?.label}</span>
-                <button onClick={() => setSelectedCategory('all')} className="hover:text-white p-0.5">
-                  <X className="h-3 w-3" />
-                </button>
+        {/* Subtext under search */}
+        <p className="text-xs text-[#8b97a8] font-normal tracking-wide">
+          The front page of micro-tool sponsorships. Used by 50K+ developers.
+        </p>
+
+        {/* Dual Action Buttons: [Browse Ads] & [+ Launchpad / List Tool] */}
+        <div className="flex items-center justify-center gap-3 pt-1">
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedCategory('all');
+              setAvailableOnly(true);
+            }}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#d9383a]/70 hover:border-[#d9383a] bg-[#d9383a]/10 hover:bg-[#d9383a]/20 text-[#ff5f6d] text-xs font-semibold transition-all active:scale-95"
+          >
+            <span>📢</span>
+            <span>Browse All Ads</span>
+          </button>
+
+          <Link
+            href="/creator"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1e2433] hover:bg-[#262e40] text-white border border-[#2e384e] text-xs font-semibold transition-all active:scale-95 shadow-sm"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            <span>Create / List Tools</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          HORIZONTAL CATEGORY PILL FILTER BAR (As in Reference Screenshot)
+          ========================================================================= */}
+      <div className="w-full flex items-center gap-2 overflow-x-auto pb-2 pt-2 scrollbar-none no-scrollbar text-xs font-medium border-b border-[#212638]">
+        {/* Today Dropdown Pill (with glowing green dot) */}
+        <button
+          type="button"
+          onClick={() => {
+            setSelectedCategory('all');
+            setAvailableOnly(false);
+            setVerifiedOnly(false);
+          }}
+          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+            selectedCategory === 'all' && !availableOnly && !verifiedOnly
+              ? 'bg-[#18392b] text-[#73e5bf] border-[#73e5bf]/40 shadow-sm'
+              : 'bg-[#181d28] text-gray-300 border-[#2a344d] hover:border-gray-500'
+          }`}
+        >
+          <span className="w-2 h-2 rounded-full bg-[#27c93f] shadow-[0_0_6px_#27c93f]" />
+          <span className="font-semibold">Today</span>
+          <span className="text-[11px] font-mono opacity-80">{initialListings.length}</span>
+          <ChevronDown className="w-3 h-3 opacity-60" />
+        </button>
+
+        {/* Category Tabs with Counts */}
+        {CATEGORY_TABS.map((cat) => {
+          const isSelected = selectedCategory === cat.id && !availableOnly && !verifiedOnly;
+          const count = categoryCounts[cat.id] ?? 0;
+          return (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => {
+                setSelectedCategory(cat.id);
+                setAvailableOnly(false);
+                setVerifiedOnly(false);
+              }}
+              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+                isSelected
+                  ? 'bg-[#22293d] text-white border-[#3b4763] font-semibold'
+                  : 'bg-[#181d28] text-[#8b97a8] border-[#252f44] hover:text-white hover:border-[#354058]'
+              }`}
+            >
+              <span>{cat.label}</span>
+              <span className="px-1.5 py-0.2 rounded-full bg-[#121620] text-[10px] font-mono text-gray-400">
+                {count}
               </span>
-            )}
-            {selectedAppType !== 'all' && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2e2d36] text-[#a37af5] font-medium border border-[#a37af5]/30">
-                <span>{APP_TYPES.find((t) => t.id === selectedAppType)?.label}</span>
-                <button onClick={() => setSelectedAppType('all')} className="hover:text-white p-0.5">
-                  <X className="h-3 w-3" />
-                </button>
-              </span>
-            )}
-            {minDau > 0 && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2e2d36] text-[#73e5bf] font-medium border border-[#73e5bf]/30">
-                <span>{minDau.toLocaleString()}+ DAU</span>
-                <button onClick={() => setMinDau(0)} className="hover:text-white p-0.5">
-                  <X className="h-3 w-3" />
-                </button>
-              </span>
-            )}
-            {availableOnly && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2e2d36] text-[#73e5bf] font-medium border border-[#73e5bf]/30">
-                <span>Available Only</span>
-                <button onClick={() => setAvailableOnly(false)} className="hover:text-white p-0.5">
-                  <X className="h-3 w-3" />
-                </button>
-              </span>
-            )}
-            {searchQuery.trim().length > 0 && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2e2d36] text-white font-medium border border-[#e5e7eb]/20">
-                <span>&quot;{searchQuery}&quot;</span>
-                <button onClick={() => setSearchQuery('')} className="hover:text-white p-0.5">
-                  <X className="h-3 w-3" />
-                </button>
-              </span>
-            )}
+            </button>
+          );
+        })}
+
+        {/* Chrome Extensions Quick Filter */}
+        <button
+          type="button"
+          onClick={() => {
+            setSelectedCategory('all');
+            setSearchQuery('Chrome');
+          }}
+          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+            searchQuery.toLowerCase() === 'chrome'
+              ? 'bg-[#22293d] text-white border-[#3b4763] font-semibold'
+              : 'bg-[#181d28] text-[#8b97a8] border-[#252f44] hover:text-white'
+          }`}
+        >
+          <span>Chrome Extensions</span>
+          <span className="px-1.5 py-0.2 rounded-full bg-[#121620] text-[10px] font-mono text-gray-400">
+            2
+          </span>
+        </button>
+
+        {/* Verified Only Pill */}
+        <button
+          type="button"
+          onClick={() => setVerifiedOnly(!verifiedOnly)}
+          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+            verifiedOnly
+              ? 'bg-[#162a3d] text-[#38bdf8] border-[#38bdf8]/40 font-semibold'
+              : 'bg-[#181d28] text-[#8b97a8] border-[#252f44] hover:text-white'
+          }`}
+        >
+          <ShieldCheck className="w-3 h-3 text-[#38bdf8]" />
+          <span>Verified Only</span>
+        </button>
+
+        {/* Available Slots Only Pill */}
+        <button
+          type="button"
+          onClick={() => setAvailableOnly(!availableOnly)}
+          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+            availableOnly
+              ? 'bg-[#18392b] text-[#73e5bf] border-[#73e5bf]/40 font-semibold'
+              : 'bg-[#181d28] text-[#8b97a8] border-[#252f44] hover:text-white'
+          }`}
+        >
+          <span>Available Slots</span>
+          <span className="px-1.5 py-0.2 rounded-full bg-[#121620] text-[10px] font-mono text-[#73e5bf]">
+            8
+          </span>
+        </button>
+      </div>
+
+      {/* =========================================================================
+          HIGH-DENSITY LISTING FEED ("listing like so in ss")
+          ========================================================================= */}
+      <div className="w-full space-y-2">
+        {filteredListings.length === 0 ? (
+          <div className="text-center py-16 bg-[#181d28] rounded-2xl border border-[#252f44] text-[#8b97a8]">
+            <p className="text-sm font-semibold text-white">No developer tools found</p>
+            <p className="text-xs mt-1">Try resetting your filters or search keywords.</p>
+            <button
+              type="button"
+              onClick={() => {
+                setSearchQuery('');
+                setSelectedCategory('all');
+                setAvailableOnly(false);
+                setVerifiedOnly(false);
+              }}
+              className="mt-4 px-4 py-1.5 rounded-full bg-[#242c3d] text-white text-xs font-semibold hover:bg-[#2e374c]"
+            >
+              Reset Filters
+            </button>
           </div>
-        )}
-      </div>
-
-      {/* Results Count Bar */}
-      <div className="flex items-center justify-between text-xs text-[#8b94a3] px-1 font-mono">
-        <span>
-          SHOWING <strong className="text-white">{filteredListings.length}</strong> OF {initialListings.length} VERIFIED TOOLS
-        </span>
-        <span className="hidden sm:inline text-[#73e5bf]">DIRECT 30-DAY FLAT LEASE</span>
-      </div>
-
-      {/* High-Precision 3-Column Card Grid (Jam Spec: Graphite Plum #21192a & Hairline Borders) */}
-      {filteredListings.length > 0 ? (
-        <div id="marketplace-cards" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredListings.map((listing, index) => {
+        ) : (
+          filteredListings.map((listing, index) => {
+            const visual = getToolVisual(listing.slug, index);
+            const Icon = visual.icon;
             const stats = slotStatsMap.get(listing.id);
-            const visuals = getAppVisuals(listing.slug, listing.category, index);
-            const IconComponent = visuals.icon;
-            const minPrice = stats?.minPriceCents;
-            const availableCount = stats?.availableSlots ?? 0;
+            const availableSlots = stats?.availableSlots ?? 0;
+            const totalSlots = stats?.totalSlots ?? 0;
+            const minPrice = stats?.minPriceCents ? formatCentsToUsd(stats.minPriceCents) : '$50/mo';
+            const isExpanded = expandedListingId === listing.id;
+            const isBookmarked = bookmarkedMap[listing.id] ?? false;
+            const toolSlots = initialSlots.filter((s) => s.listing_id === listing.id);
 
             return (
               <div
                 key={listing.id}
-                className="group rounded-card border border-[#e5e7eb]/12 bg-[#21192a] hover:border-[#73e5bf]/30 p-6 transition-all duration-200 flex flex-col justify-between"
+                className="w-full transition-all"
               >
-                <div>
-                  {/* Card Header */}
-                  <div className="flex items-start justify-between gap-3 mb-4">
-                    <div className="flex items-center gap-3">
-                      {/* App Icon in Electric Violet Accent */}
-                      <div className="w-11 h-11 rounded-xl bg-[#2e2d36] border border-[#e5e7eb]/15 flex items-center justify-center shrink-0 text-[#a37af5]">
-                        <IconComponent className="w-5 h-5 stroke-[1.5]" />
+                {/* Main Row Strip */}
+                <div
+                  onClick={() => setExpandedListingId(isExpanded ? null : listing.id)}
+                  className={`w-full bg-[#181d28] hover:bg-[#1f2535] border transition-all rounded-xl p-3 sm:px-4 sm:py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer select-none group ${
+                    isExpanded
+                      ? 'border-[#73e5bf]/40 bg-[#1c2232] shadow-sm'
+                      : 'border-[#263044] hover:border-[#35425c]'
+                  }`}
+                >
+                  {/* Left Group: Time/Stats, App Icon, Name & Description */}
+                  <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                    
+                    {/* Col 1: Time Ago / Ad Badge & Views */}
+                    <div className="w-12 shrink-0 text-center flex flex-col items-center justify-center">
+                      {visual.isAd ? (
+                        <span className="px-1.5 py-0.2 rounded bg-sky-500/20 text-sky-400 font-mono text-[10px] font-bold uppercase tracking-wider border border-sky-500/30">
+                          Ad
+                        </span>
+                      ) : (
+                        <span className="text-xs font-bold text-gray-300 font-mono">
+                          {visual.timeAgo}
+                        </span>
+                      )}
+                      <div className="flex items-center gap-0.5 text-[10px] text-gray-400 font-mono mt-0.5">
+                        <Eye className="w-2.5 h-2.5 opacity-60" />
+                        <span>{visual.views}</span>
                       </div>
+                    </div>
 
-                      {/* App Title & Star Rating */}
-                      <div>
+                    {/* Col 2: App Icon with Corner Badge */}
+                    <div className="relative shrink-0">
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${visual.bg} shadow-inner`}>
+                        <Icon className="w-5 h-5 stroke-[2]" />
+                      </div>
+                      {/* Corner Icon Badge */}
+                      <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#1877f2] border border-[#131722] text-[9px] text-white flex items-center justify-center shadow-sm">
+                        {visual.badgeIcon}
+                      </span>
+                    </div>
+
+                    {/* Col 3: Tool Name, Verified Badge, Pills & One-line Description */}
+                    <div className="min-w-0 flex-1 space-y-0.5">
+                      <div className="flex flex-wrap items-center gap-1.5">
                         <Link
                           href={`/tools/${listing.slug}`}
-                          className="font-display font-bold text-base text-white group-hover:text-[#73e5bf] transition-colors line-clamp-1"
+                          onClick={(e) => e.stopPropagation()}
+                          className="font-bold text-white text-sm hover:text-[#73e5bf] transition-colors truncate"
                         >
                           {listing.title}
                         </Link>
-                        <div className="flex items-center gap-1.5 text-xs text-[#8b94a3] mt-0.5">
-                          <span className="text-[#73e5bf] text-xs">★</span>
-                          <span className="font-semibold text-white">{visuals.rating}</span>
-                          <span className="text-[#8b94a3]">({visuals.reviews})</span>
+
+                        {/* Verified Checkmark Badge */}
+                        <span
+                          className="inline-flex items-center text-[#38bdf8]"
+                          title="Verified Traffic & Publisher"
+                        >
+                          <Check className="w-3.5 h-3.5 stroke-[3]" />
+                        </span>
+
+                        {/* Version / Meta Pill */}
+                        <span className="px-1.5 py-0.2 rounded bg-[#242b3d] text-gray-300 text-[10px] font-mono">
+                          {visual.version}
+                        </span>
+
+                        {/* Slots Pill */}
+                        <span className="px-1.5 py-0.2 rounded bg-[#242b3d] text-gray-300 text-[10px] font-mono">
+                          {totalSlots} slots
+                        </span>
+
+                        {/* Price Pill */}
+                        <span className="px-1.5 py-0.2 rounded bg-[#1e2b24] text-[#73e5bf] border border-[#73e5bf]/30 text-[10px] font-mono font-bold">
+                          {minPrice}
+                        </span>
+                      </div>
+
+                      {/* One-Line Description */}
+                      <p className="text-xs text-[#8b97a8] truncate max-w-xl font-normal">
+                        {listing.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Middle / Right Group: Category Pill, Creator Profile, Action & Bookmark */}
+                  <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-[#252f44]">
+                    
+                    {/* Col 4: Category Pill */}
+                    <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#202737] border border-[#2c364d] text-xs text-gray-300">
+                      <span>{visual.badgeIcon}</span>
+                      <span className="font-medium text-[11px]">{visual.badgeLabel}</span>
+                    </div>
+
+                    {/* Col 5: Creator Profile */}
+                    <div className="flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-full bg-[#2a344d] border border-[#3b4763] flex items-center justify-center text-[10px] font-bold text-white">
+                        {visual.creatorAvatar}
+                      </div>
+                      <div className="text-[11px] leading-tight">
+                        <div className="font-semibold text-white flex items-center gap-1">
+                          <span>{visual.creatorName}</span>
+                          <Check className="w-2.5 h-2.5 text-[#38bdf8] stroke-[3]" />
+                          <span>{visual.creatorFlag}</span>
                         </div>
-                        {/* Verified Traffic Badge & App Format */}
-                        <div className="mt-1.5 flex items-center gap-1.5 flex-wrap">
-                          <VerificationBadge
-                            source={listing.verification_source}
-                            dau={listing.verified_dau}
-                            size="sm"
-                            showDetails={false}
-                          />
-                          <span className="text-[10px] font-medium text-[#8b94a3] capitalize bg-[#2e2d36] px-2.5 py-0.5 rounded-full border border-[#e5e7eb]/10">
-                            {listing.app_type.replace('_', ' ')}
-                          </span>
+                        <div className="text-[#8b97a8] font-mono text-[10px]">
+                          {visual.creatorHandle}
                         </div>
                       </div>
                     </div>
 
-                    {/* Top Right Recommendation Badge */}
-                    {visuals.badge && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#73e5bf]/15 text-[#73e5bf] border border-[#73e5bf]/30 shrink-0">
-                        <span>{visuals.badge}</span>
-                      </span>
-                    )}
-                  </div>
+                    {/* Col 6: Actions — Book Ad / Slots & Bookmark */}
+                    <div className="flex items-center gap-1.5">
+                      {availableSlots > 0 ? (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setExpandedListingId(isExpanded ? null : listing.id);
+                          }}
+                          className="px-3 py-1.5 rounded-lg bg-[#27c93f]/15 hover:bg-[#27c93f]/25 text-[#73e5bf] border border-[#73e5bf]/30 text-xs font-semibold transition-all active:scale-95"
+                        >
+                          Book Ad ({minPrice})
+                        </button>
+                      ) : (
+                        <span className="px-2.5 py-1 rounded-lg bg-gray-800 text-gray-400 text-[11px] font-medium border border-gray-700">
+                          Sold Out
+                        </span>
+                      )}
 
-                  {/* Feature Highlight */}
-                  <div className="mb-4">
-                    <div className="text-xs font-semibold text-white leading-snug">
-                      {visuals.highlight}
-                    </div>
-                    <div className="text-[11px] text-[#8b94a3] mt-0.5 font-mono">
-                      Audited for {listing.verified_dau.toLocaleString()} verified DAU
-                    </div>
-                  </div>
-
-                  {/* Review Sentiment Progress Meter */}
-                  <div className="mb-4 pt-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[11px] font-medium text-[#8b94a3]">Review Sentiment</span>
-                      <div className="flex -space-x-1.5 overflow-hidden">
-                        {visuals.avatars.map((av, idx) => (
-                          <div
-                            key={idx}
-                            className="w-4 h-4 rounded-full ring-1 ring-[#130f18] bg-[#2e2d36] text-[#8b94a3] flex items-center justify-center text-[7px] font-bold"
-                          >
-                            {av}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="h-1.5 w-full rounded-full overflow-hidden flex bg-[#2e2d36] gap-0.5" role="meter" aria-label="Review Sentiment" aria-valuenow={visuals.sentiment.positive}>
-                      <div
-                        className="bg-[#73e5bf] h-full rounded-l-full transition-all"
-                        style={{ width: `${visuals.sentiment.positive}%` }}
-                        title={`Positive: ${visuals.sentiment.positive}%`}
-                      />
-                      <div
-                        className="bg-[#8b94a3] h-full transition-all"
-                        style={{ width: `${visuals.sentiment.neutral}%` }}
-                        title={`Neutral: ${visuals.sentiment.neutral}%`}
-                      />
-                      <div
-                        className="bg-[#ff4070] h-full rounded-r-full transition-all"
-                        style={{ width: `${visuals.sentiment.negative}%` }}
-                        title={`Negative: ${visuals.sentiment.negative}%`}
-                      />
-                    </div>
-
-                    <div className="flex justify-between items-center text-[10px] text-[#8b94a3] mt-1.5 font-mono">
-                      <span>Positive {visuals.sentiment.positive}%</span>
-                      <span>Neutral {visuals.sentiment.neutral}%</span>
-                      <span>Negative {visuals.sentiment.negative}%</span>
-                    </div>
-                  </div>
-
-                  {/* Pricing & Inventory Availability */}
-                  <div className="py-2.5 px-3.5 rounded-xl bg-[#2e2d36] border border-[#e5e7eb]/10 flex items-center justify-between text-xs mb-3">
-                    <div className="flex items-center gap-1.5 text-[#8b94a3]">
-                      <span className="font-bold text-white text-sm">
-                        {minPrice ? formatCentsToUsd(minPrice) : 'Custom'}
-                      </span>
-                      <span className="text-[#8b94a3] text-[11px]">/ 30 days</span>
-                    </div>
-
-                    {availableCount > 0 ? (
+                      {/* Bookmark Icon Pill */}
                       <button
                         type="button"
-                        onClick={() => setExpandedSlotsToolId(expandedSlotsToolId === listing.id ? null : listing.id)}
-                        className="inline-flex items-center gap-1.5 text-[#73e5bf] font-semibold bg-[#73e5bf]/15 hover:bg-[#73e5bf]/25 border border-[#73e5bf]/30 px-3 py-1 rounded-full text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#73e5bf]"
-                        aria-expanded={expandedSlotsToolId === listing.id}
-                        aria-label="Inspect available slots"
+                        onClick={(e) => toggleBookmark(listing.id, e)}
+                        className={`inline-flex items-center gap-1 px-2 py-1.5 rounded-lg border transition-all ${
+                          isBookmarked
+                            ? 'bg-[#1877f2]/20 text-[#38bdf8] border-[#38bdf8]/40'
+                            : 'bg-[#202737] hover:bg-[#293245] text-gray-400 hover:text-white border-[#2c364d]'
+                        }`}
+                        title="Bookmark this tool"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#73e5bf] animate-pulse" />
-                        <span>{availableCount} Vacant</span>
-                        {expandedSlotsToolId === listing.id ? (
-                          <ChevronUp className="h-3 w-3 ml-0.5" />
-                        ) : (
-                          <ChevronDown className="h-3 w-3 ml-0.5" />
-                        )}
+                        <Bookmark className="w-3.5 h-3.5 fill-current" />
+                        <span className="text-[11px] font-mono">
+                          {visual.bookmarks + (isBookmarked ? 1 : 0)}
+                        </span>
                       </button>
-                    ) : (
-                      <span className="text-[#8b94a3] font-medium text-[11px]">Fully Booked</span>
-                    )}
-                  </div>
 
-                  {/* Expandable Slot Inspector Drawer in Smoke Plum */}
-                  {expandedSlotsToolId === listing.id && (
-                    <div className="my-3 p-3.5 rounded-xl bg-[#130f18] border border-[#e5e7eb]/12 space-y-2 animate-in fade-in slide-in-from-top-1 duration-150">
-                      <div className="flex items-center justify-between text-[10px] font-semibold text-[#8b94a3] uppercase tracking-wider font-mono">
-                        <span>Available Units ({initialSlots.filter((s) => s.listing_id === listing.id).length})</span>
-                        <span className="text-[#73e5bf]">30-day lease</span>
-                      </div>
-                      <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1 scrollbar-thin">
-                        {initialSlots
-                          .filter((s) => s.listing_id === listing.id)
-                          .map((slot) => (
-                            <div
-                              key={slot.id}
-                              className="flex items-center justify-between p-2.5 rounded-lg bg-[#21192a] border border-[#e5e7eb]/10 text-xs"
-                            >
-                              <div className="min-w-0 pr-2">
-                                <div className="font-medium text-white truncate text-[11px]">{slot.slot_name}</div>
-                                <div className="text-[10px] text-[#8b94a3] font-mono capitalize">{slot.slot_type.replace('_', ' ')}</div>
-                              </div>
-                              <div className="flex items-center gap-2 shrink-0">
-                                <span className="font-bold text-white text-xs">{formatCentsToUsd(slot.monthly_price_cents)}</span>
-                                {slot.is_available ? (
-                                  <Link
-                                    href={`/sponsor/${slot.id}`}
-                                    className="px-2.5 py-1 rounded-btn bg-[#73e5bf] hover:bg-[#86efac] text-[#130f18] font-bold text-[10px] transition-colors shadow-sm"
-                                  >
-                                    Book
-                                  </Link>
-                                ) : (
-                                  <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#2e2d36] text-[#8b94a3]">
-                                    Occupied
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                          ))}
+                      {/* Drawer Chevron */}
+                      <div className="text-gray-400 group-hover:text-white transition-colors pl-0.5">
+                        {isExpanded ? (
+                          <ChevronUp className="w-4 h-4" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4" />
+                        )}
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
 
-                {/* Card Actions */}
-                <div className="pt-4 border-t border-[#e5e7eb]/10 grid grid-cols-2 gap-2.5">
-                  <Link
-                    href={`/tools/${listing.slug}`}
-                    className="w-full py-2.5 px-3 rounded-btn border border-[#e5e7eb]/15 bg-[#2e2d36] hover:bg-[#393844] text-white font-medium text-xs text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#73e5bf]"
-                  >
-                    View profile
-                  </Link>
+                {/* =========================================================================
+                    EXPANDABLE INLINE DRAWER (Slot Booking & Code Embed Details)
+                    ========================================================================= */}
+                {isExpanded && (
+                  <div className="w-full bg-[#131722] border-x border-b border-[#2a344d] rounded-b-xl p-4 mt-[-4px] mb-3 space-y-4 shadow-xl">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#212638]">
+                      <div>
+                        <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                          Configured Micro-Sponsorship Slots for {listing.title}
+                        </h4>
+                        <p className="text-[11px] text-[#8b97a8] mt-0.5">
+                          {listing.verified_dau.toLocaleString()} Verified DAU · {listing.verification_source.toUpperCase()} Audited
+                        </p>
+                      </div>
 
-                  {availableCount > 0 ? (
-                    <Link
-                      href={`/tools/${listing.slug}#slots`}
-                      className="w-full py-2.5 px-3 rounded-btn bg-[#73e5bf] hover:bg-[#86efac] text-[#130f18] font-bold text-xs text-center transition-all flex items-center justify-center gap-1 shadow-mint-led focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#73e5bf]"
-                    >
-                      <span>Sponsor Slot</span>
-                      <span className="text-xs">↗</span>
-                    </Link>
-                  ) : (
-                    <a
-                      href={listing.website_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-2.5 px-3 rounded-btn bg-[#2e2d36] hover:bg-[#393844] text-[#8b94a3] font-medium text-xs text-center transition-colors flex items-center justify-center gap-1 border border-[#e5e7eb]/10"
-                    >
-                      <span>Website</span>
-                      <ExternalLink className="h-3 w-3 text-[#8b94a3]" />
-                    </a>
-                  )}
-                </div>
+                      <Link
+                        href={`/tools/${listing.slug}`}
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-[#73e5bf] hover:underline"
+                      >
+                        <span>View Full Listing Page</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+
+                    {/* Available Slots Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {toolSlots.length === 0 ? (
+                        <div className="col-span-full py-4 text-center text-xs text-gray-400">
+                          No active slots configured for this application yet.
+                        </div>
+                      ) : (
+                        toolSlots.map((slot) => (
+                          <div
+                            key={slot.id}
+                            className="p-3.5 rounded-xl bg-[#181d28] border border-[#252f44] flex flex-col justify-between gap-3"
+                          >
+                            <div className="space-y-1">
+                              <div className="flex items-center justify-between">
+                                <span className="font-semibold text-white text-xs">
+                                  {slot.slot_name}
+                                </span>
+                                <span
+                                  className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                    slot.is_available
+                                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                                      : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                                  }`}
+                                >
+                                  {slot.is_available ? 'Available' : 'Occupied'}
+                                </span>
+                              </div>
+                              <p className="text-[11px] text-[#8b97a8]">
+                                Format: <span className="text-white font-mono">{slot.slot_type}</span>
+                              </p>
+                              <div className="text-xs font-bold text-white pt-1">
+                                {formatCentsToUsd(slot.monthly_price_cents)}{' '}
+                                <span className="text-[10px] font-normal text-gray-400">/ 30-day term</span>
+                              </div>
+                            </div>
+
+                            {/* Booking Action */}
+                            <div className="pt-2 border-t border-[#212638] flex items-center justify-between">
+                              <div className="text-[10px] text-gray-400 font-mono">
+                                Escrow: 85% Creator / 15% Platform
+                              </div>
+                              <Link
+                                href={`/sponsor/${slot.id}`}
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#73e5bf] hover:bg-[#86efac] text-[#130f18] text-xs font-bold transition-colors shadow-sm"
+                              >
+                                <span>Book This Slot</span>
+                                <ArrowRight className="w-3.5 h-3.5" />
+                              </Link>
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+
+                    {/* Quick Client SDK Integration */}
+                    {toolSlots.length > 0 && (
+                      <div className="pt-2">
+                        <SnippetGenerator
+                          slot={toolSlots[0]}
+                          listingSlug={listing.slug}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             );
-          })}
-        </div>
-      ) : (
-        <div className="bg-[#21192a] rounded-card border border-[#e5e7eb]/12 p-12 text-center max-w-md mx-auto">
-          <div className="w-12 h-12 bg-[#2e2d36] rounded-full flex items-center justify-center mx-auto mb-3 text-[#73e5bf]">
-            <Search className="h-5 w-5" />
-          </div>
-          <h3 className="font-display font-bold text-base text-white">No software found</h3>
-          <p className="text-xs text-[#8b94a3] mt-1 mb-4">
-            Try adjusting your search terms or clearing category filters.
-          </p>
-          <button
-            onClick={resetFilters}
-            className="px-5 py-2 rounded-btn bg-[#73e5bf] text-[#130f18] text-xs font-bold hover:bg-[#86efac] shadow-mint-led transition-all"
-          >
-            Reset all filters
-          </button>
-        </div>
-      )}
+          })
+        )}
+      </div>
     </div>
   );
 }
