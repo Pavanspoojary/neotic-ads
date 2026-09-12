@@ -87,30 +87,30 @@ export default async function ToolDetailPage({ params }: PageProps) {
   const appTypeMeta = APP_TYPE_LABELS[listing.app_type] || { label: listing.app_type, icon: '⚙️' };
 
   return (
-    <div className="min-h-screen bg-[#130f18] text-[#8b94a3] flex flex-col selection:bg-[#73e5bf] selection:text-[#130f18]">
+    <div className="min-h-screen bg-[#0b0e14] text-[#8b97a8] flex flex-col selection:bg-[#73e5bf] selection:text-[#0b0e14]">
       {/* Global Navigation */}
       <Navbar />
 
       <main id="main-content" tabIndex={-1} className="flex-1 max-w-[1200px] w-full mx-auto px-4 sm:px-6 py-10 outline-none">
         {/* Top Navigation / Breadcrumbs */}
-        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-[#8b94a3]">
+        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-[#8b97a8]">
           <Link href="/" className="inline-flex items-center gap-1 hover:text-white transition-colors">
             <ArrowLeft className="h-3.5 w-3.5 text-[#73e5bf]" />
             <span>Marketplace</span>
           </Link>
-          <span className="text-[#e5e7eb]/20">/</span>
-          <span className="text-[#8b94a3] capitalize">{listing.category.replace('-', ' ')}</span>
-          <span className="text-[#e5e7eb]/20">/</span>
+          <span className="text-white/20">/</span>
+          <span className="text-[#8b97a8] capitalize">{listing.category.replace('-', ' ')}</span>
+          <span className="text-white/20">/</span>
           <span className="text-white font-medium">{listing.title}</span>
         </nav>
 
-        {/* Hero Listing Card (Graphite Plum #21192a) */}
-        <header className="bg-[#21192a] rounded-card border border-[#e5e7eb]/15 p-6 sm:p-8 backdrop-blur-sm mb-8 shadow-sm">
+        {/* Hero Listing Card */}
+        <header className="glass-panel rounded-2xl p-6 sm:p-8 backdrop-blur-xl mb-8 shadow-sm">
           <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#73e5bf]/15 text-[#73e5bf] border border-[#73e5bf]/30">
               {CATEGORY_NAMES[listing.category] || listing.category}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#2e2d36] text-white border border-[#e5e7eb]/10">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/[0.04] text-white border border-white/[0.08]">
               <span>{appTypeMeta.icon}</span>
               <span>{appTypeMeta.label}</span>
             </span>
@@ -127,7 +127,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
               <h1 className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight">
                 {listing.title}
               </h1>
-              <p className="text-sm sm:text-base text-[#8b94a3] mt-3 leading-relaxed">
+              <p className="text-sm sm:text-base text-[#8b97a8] mt-3 leading-relaxed">
                 {listing.description}
               </p>
             </div>
@@ -137,7 +137,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 href={listing.website_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-btn text-xs font-semibold text-white bg-[#2e2d36] hover:bg-[#393844] border border-[#e5e7eb]/15 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] transition-all"
               >
                 <span>Visit Website</span>
                 <ExternalLink className="h-3.5 w-3.5 text-[#8b94a3]" />
@@ -192,9 +192,9 @@ export default async function ToolDetailPage({ params }: PageProps) {
           </div>
 
           {slots.length === 0 ? (
-            <div className="p-12 text-center bg-[#21192a] rounded-card border border-[#e5e7eb]/12">
-              <p className="text-[#8b94a3] font-medium text-sm">No inventory slots are configured for this tool yet.</p>
-              <p className="text-xs text-[#8b94a3]/70 mt-1">Check back later or explore other developer tools.</p>
+            <div className="p-12 text-center glass-panel rounded-2xl border border-white/[0.08]">
+              <p className="text-[#8b97a8] font-medium text-sm">No inventory slots are configured for this tool yet.</p>
+              <p className="text-xs text-[#8b97a8]/70 mt-1">Check back later or explore other developer tools.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -209,13 +209,13 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 return (
                   <div
                     key={slot.id}
-                    className="bg-[#21192a] rounded-card border border-[#e5e7eb]/15 hover:border-[#73e5bf]/30 transition-all flex flex-col justify-between overflow-hidden shadow-sm"
+                    className="glass-panel rounded-2xl border border-white/[0.08] hover:border-[#73e5bf]/30 transition-all flex flex-col justify-between overflow-hidden shadow-sm"
                   >
                     <div className="p-6">
                       {/* Header: Name + Badges */}
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div>
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-mono text-[#a37af5] bg-[#2e2d36] border border-[#a37af5]/20 mb-2">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-mono text-purple-300 bg-white/[0.04] border border-white/[0.08] mb-2">
                             {formatMeta.label} • Max {copyLimit} chars
                           </span>
                           <h3 className="font-display font-bold text-lg text-white">{slot.slot_name}</h3>
@@ -227,25 +227,25 @@ export default async function ToolDetailPage({ params }: PageProps) {
                             <span>Vacant</span>
                           </span>
                         ) : (
-                          <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#2e2d36] text-[#8b94a3] border border-[#e5e7eb]/10">
+                          <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/[0.04] text-[#8b97a8] border border-white/[0.08]">
                             <span>Occupied</span>
                           </span>
                         )}
                       </div>
 
-                      <p className="text-xs text-[#8b94a3] mb-4">{formatMeta.description}</p>
+                      <p className="text-xs text-[#8b97a8] mb-4">{formatMeta.description}</p>
 
                       {/* Pricing */}
-                      <div className="mb-4 pb-4 border-b border-[#e5e7eb]/10 flex items-baseline gap-2">
+                      <div className="mb-4 pb-4 border-b border-white/[0.08] flex items-baseline gap-2">
                         <span className="font-display font-black text-3xl text-white tabular-nums">
                           {formatCentsToUsd(slot.monthly_price_cents)}
                         </span>
-                        <span className="text-xs text-[#8b94a3]">/ 30 days (flat rate)</span>
+                        <span className="text-xs text-[#8b97a8]">/ 30 days (flat rate)</span>
                       </div>
 
                       {/* Creator Guidelines */}
                       {slot.guidelines && (
-                        <div className="mb-4 p-3.5 rounded-xl bg-[#2e2d36] border border-[#e5e7eb]/10 text-xs text-[#8b94a3]">
+                        <div className="mb-4 p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-xs text-[#8b97a8]">
                           <span className="font-semibold text-white">Sponsor Guidelines: </span>
                           {slot.guidelines}
                         </div>
@@ -259,22 +259,22 @@ export default async function ToolDetailPage({ params }: PageProps) {
                     </div>
 
                     {/* Card CTA Footer */}
-                    <div className="p-4 bg-[#2e2d36]/60 border-t border-[#e5e7eb]/10 flex items-center justify-between">
-                      <div className="text-[11px] text-[#8b94a3] font-mono">
+                    <div className="p-4 bg-white/[0.02] border-t border-white/[0.08] flex items-center justify-between">
+                      <div className="text-[11px] text-[#8b97a8] font-mono">
                         {slot.is_available ? 'Instant booking via escrow' : 'Term active · unavailable'}
                       </div>
 
                       {slot.is_available ? (
                         <Link
                           href={`/sponsor/${slot.id}`}
-                          className="inline-flex items-center justify-center px-5 py-2.5 rounded-btn text-xs font-bold text-[#130f18] bg-[#73e5bf] hover:bg-[#86efac] shadow-mint-led transition-all active:scale-[0.98]"
+                          className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs font-bold text-[#0b0e14] bg-[#73e5bf] hover:bg-[#86efac] shadow-sm transition-all active:scale-[0.98]"
                         >
                           Book This Slot →
                         </Link>
                       ) : (
                         <button
                           disabled
-                          className="inline-flex items-center justify-center px-4 py-2 rounded-btn text-xs font-medium text-[#8b94a3] bg-[#2e2d36] border border-[#e5e7eb]/10 cursor-not-allowed"
+                          className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs font-medium text-[#8b97a8] bg-white/[0.04] border border-white/[0.08] cursor-not-allowed"
                         >
                           Currently Leased
                         </button>
@@ -288,9 +288,9 @@ export default async function ToolDetailPage({ params }: PageProps) {
         </section>
 
         {/* Creator Callout Footer */}
-        <footer className="mt-16 p-6 rounded-card border border-[#e5e7eb]/15 bg-[#21192a] text-center backdrop-blur-sm">
+        <footer className="mt-16 p-6 rounded-2xl border border-white/[0.08] glass-panel text-center backdrop-blur-xl">
           <h4 className="font-display font-bold text-base text-white">Do you own or maintain {listing.title}?</h4>
-          <p className="text-xs text-[#8b94a3] mt-1 max-w-xl mx-auto">
+          <p className="text-xs text-[#8b97a8] mt-1 max-w-xl mx-auto">
             Manage your inventory slots, adjust monthly pricing, review sponsor submissions, or retrieve embed snippets in the Creator Portal.
           </p>
           <Link

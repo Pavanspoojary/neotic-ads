@@ -45,26 +45,26 @@ export default async function CreatorPage() {
   const totalDau = listings.reduce((sum, l) => sum + (l.verified_dau || 0), 0);
 
   return (
-    <div className="min-h-screen bg-[#130f18] text-[#8b94a3] flex flex-col selection:bg-[#73e5bf] selection:text-[#130f18]">
+    <div className="min-h-screen bg-[#0b0e14] text-[#8b97a8] flex flex-col selection:bg-[#73e5bf] selection:text-[#0b0e14]">
       {/* Global Navigation */}
       <Navbar />
 
       <main id="main-content" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 outline-none">
         {/* Creator Portal Header Banner */}
         <div className="mb-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#e5e7eb]/10 pb-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.08] pb-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#21192a] border border-[#e5e7eb]/12 text-xs font-semibold text-[#73e5bf] mb-3.5 shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-semibold text-[#73e5bf] mb-3.5 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#73e5bf] shadow-[0_0_8px_#73e5bf] animate-pulse" />
                 <Sparkles className="h-3.5 w-3.5 text-[#73e5bf]" />
                 <span>Creator Monetization Console</span>
-                <span className="text-[#8b94a3]/40">•</span>
-                <span className="text-zinc-300">85% Net Payout Guarantee</span>
+                <span className="text-white/20">•</span>
+                <span className="text-gray-300">85% Net Payout Guarantee</span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black tracking-[-0.03em] text-white">
                 Creator Inventory & Tool Management
               </h1>
-              <p className="mt-3 text-sm sm:text-base text-[#8b94a3] max-w-3xl leading-relaxed tracking-[-0.025em]">
+              <p className="mt-3 text-sm sm:text-base text-[#8b97a8] max-w-3xl leading-relaxed tracking-[-0.025em]">
                 Onboard your developer utilities and Chrome extensions, configure standardized in-app ad slots,
                 and connect with high-intent B2B sponsors on automated 30-day terms.
               </p>
@@ -74,31 +74,31 @@ export default async function CreatorPage() {
           {/* Top Summary Metrics Cards (4-Column Grid) */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {/* Card 1: Registered Tools */}
-            <div className="bg-[#21192a] rounded-[24px] p-6 border border-[#e5e7eb]/12 transition-all hover:border-[#e5e7eb]/20">
+            <div className="glass-panel rounded-2xl p-6 transition-all hover:border-white/[0.16]">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[#8b94a3] uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-[#8b97a8] uppercase tracking-wider">
                   Registered Tools
                 </span>
-                <div className="p-2 rounded-xl bg-[#2e2d36] text-[#a37af5] border border-[#e5e7eb]/10">
+                <div className="p-2 rounded-xl bg-white/[0.04] text-purple-400 border border-white/[0.08]">
                   <Layers className="h-4 w-4" />
                 </div>
               </div>
               <div className="mt-3 flex items-baseline gap-2">
                 <span className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight tabular-nums">{totalTools}</span>
-                <span className="text-xs text-[#8b94a3] font-medium">active apps</span>
+                <span className="text-xs text-[#8b97a8] font-medium">active apps</span>
               </div>
-              <p className="mt-2 text-xs text-[#8b94a3]/80">
+              <p className="mt-2 text-xs text-[#8b97a8]/80">
                 Live across developer, productivity, and utility categories
               </p>
             </div>
 
             {/* Card 2: Configured Slots */}
-            <div className="bg-[#21192a] rounded-[24px] p-6 border border-[#e5e7eb]/12 transition-all hover:border-[#e5e7eb]/20">
+            <div className="glass-panel rounded-2xl p-6 transition-all hover:border-white/[0.16]">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[#8b94a3] uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-[#8b97a8] uppercase tracking-wider">
                   Configured Slots
                 </span>
-                <div className="p-2 rounded-xl bg-[#2e2d36] text-[#73e5bf] border border-[#e5e7eb]/10">
+                <div className="p-2 rounded-xl bg-white/[0.04] text-[#73e5bf] border border-white/[0.08]">
                   <CheckCircle2 className="h-4 w-4" />
                 </div>
               </div>
@@ -108,22 +108,22 @@ export default async function CreatorPage() {
                   {vacantSlots} bookable
                 </span>
               </div>
-              <div className="mt-2 flex items-center gap-2 text-xs text-[#8b94a3]">
+              <div className="mt-2 flex items-center gap-2 text-xs text-[#8b97a8]">
                 <span className="inline-block w-2 h-2 rounded-full bg-[#73e5bf] shadow-[0_0_6px_#73e5bf]"></span>
-                <span className="text-zinc-300 font-medium">{vacantSlots} vacant</span>
-                <span className="text-[#8b94a3]/40">•</span>
-                <span className="inline-block w-2 h-2 rounded-full bg-[#a37af5]"></span>
+                <span className="text-gray-300 font-medium">{vacantSlots} vacant</span>
+                <span className="text-white/20">•</span>
+                <span className="inline-block w-2 h-2 rounded-full bg-purple-400"></span>
                 <span>{occupiedSlots} sponsored</span>
               </div>
             </div>
 
             {/* Card 3: Potential Monthly Revenue */}
-            <div className="bg-[#21192a] rounded-[24px] p-6 border border-[#e5e7eb]/12 transition-all hover:border-[#e5e7eb]/20">
+            <div className="glass-panel rounded-2xl p-6 transition-all hover:border-white/[0.16]">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[#8b94a3] uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-[#8b97a8] uppercase tracking-wider">
                   Net Monthly Potential
                 </span>
-                <div className="p-2 rounded-xl bg-[#2e2d36] text-[#73e5bf] border border-[#e5e7eb]/10">
+                <div className="p-2 rounded-xl bg-white/[0.04] text-[#73e5bf] border border-white/[0.08]">
                   <DollarSign className="h-4 w-4" />
                 </div>
               </div>
@@ -131,21 +131,21 @@ export default async function CreatorPage() {
                 <span className="text-3xl sm:text-4xl font-display font-black text-[#73e5bf] tracking-tight tabular-nums">
                   {formatCentsToUsd(netPotentialCents)}
                 </span>
-                <span className="text-xs font-semibold text-[#8b94a3]">/mo</span>
+                <span className="text-xs font-semibold text-[#8b97a8]">/mo</span>
               </div>
-              <div className="mt-2 flex items-center justify-between text-xs text-[#8b94a3]">
+              <div className="mt-2 flex items-center justify-between text-xs text-[#8b97a8]">
                 <span>Gross: {formatCentsToUsd(grossPotentialCents)}/mo</span>
                 <span className="text-[10px] text-[#73e5bf] font-semibold">85% Share</span>
               </div>
             </div>
 
             {/* Card 4: Verified Audience Reach */}
-            <div className="bg-[#21192a] rounded-[24px] p-6 border border-[#e5e7eb]/12 transition-all hover:border-[#e5e7eb]/20">
+            <div className="glass-panel rounded-2xl p-6 transition-all hover:border-white/[0.16]">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[#8b94a3] uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-[#8b97a8] uppercase tracking-wider">
                   Verified Audience Reach
                 </span>
-                <div className="p-2 rounded-xl bg-[#2e2d36] text-[#a37af5] border border-[#e5e7eb]/10">
+                <div className="p-2 rounded-xl bg-white/[0.04] text-purple-400 border border-white/[0.08]">
                   <Users className="h-4 w-4" />
                 </div>
               </div>
@@ -153,9 +153,9 @@ export default async function CreatorPage() {
                 <span className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight tabular-nums">
                   {totalDau.toLocaleString('en-US')}
                 </span>
-                <span className="text-xs text-[#8b94a3] font-medium">DAU</span>
+                <span className="text-xs text-[#8b97a8] font-medium">DAU</span>
               </div>
-              <p className="mt-2 text-xs text-[#8b94a3]/80">
+              <p className="mt-2 text-xs text-[#8b97a8]/80">
                 Audited daily active users across registered applications
               </p>
             </div>

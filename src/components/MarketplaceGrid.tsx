@@ -192,6 +192,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
   const [selectedCategory, setSelectedCategory] = useState<ListingCategory | 'all'>('all');
   const [availableOnly, setAvailableOnly] = useState(false);
   const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [sortBy, setSortBy] = useState<'today' | 'dau' | 'price' | 'views'>('today');
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [expandedListingId, setExpandedListingId] = useState<string | null>(null);
   const [bookmarkedMap, setBookmarkedMap] = useState<Record<string, boolean>>({});
 
@@ -230,7 +232,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
 
   // Filter listings
   const filteredListings = useMemo(() => {
-    return initialListings.filter((listing) => {
+    const list = initialListings.filter((listing) => {
       if (selectedCategory !== 'all' && listing.category !== selectedCategory) {
         return false;
       }
@@ -254,7 +256,26 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
       }
       return true;
     });
-  }, [initialListings, slotStatsMap, selectedCategory, searchQuery, availableOnly, verifiedOnly]);
+
+    // Apply sorting
+    return list.sort((a, b) => {
+      if (sortBy === 'dau') {
+        return (b.verified_dau || 0) - (a.verified_dau || 0);
+      }
+      if (sortBy === 'price') {
+        const priceA = slotStatsMap.get(a.id)?.minPriceCents ?? 999999;
+        const priceB = slotStatsMap.get(b.id)?.minPriceCents ?? 999999;
+        return priceA - priceB;
+      }
+      if (sortBy === 'views') {
+        const viewsA = parseInt(TOOL_VISUALS[a.slug]?.views.replace(/,/g, '') || '0', 10);
+        const viewsB = parseInt(TOOL_VISUALS[b.slug]?.views.replace(/,/g, '') || '0', 10);
+        return viewsB - viewsA;
+      }
+      // 'today' default
+      return 0;
+    });
+  }, [initialListings, slotStatsMap, selectedCategory, searchQuery, availableOnly, verifiedOnly, sortBy]);
 
   const toggleBookmark = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -282,8 +303,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 }
               }
             }}
-            placeholder="Search verified developer tools, extensions, categories..."
-            className="w-full bg-white/[0.03] hover:bg-white/[0.05] focus:bg-white/[0.06] text-white placeholder-[#8b97a8] border border-white/[0.1] focus:border-[#73e5bf]/50 rounded-full pl-5 pr-28 py-3 text-sm transition-all outline-none shadow-inner"
+            placeholder="Search..."
+            className="w-full bg-[#0e131d]/90 hover:bg-[#111723] focus:bg-[#131b29] text-white placeholder-[#8b97a8]/70 border border-white/[0.1] focus:border-[#73e5bf]/50 rounded-full pl-5 pr-28 py-3 text-sm transition-all outline-none shadow-inner"
           />
           
           <div className="absolute right-2 flex items-center gap-1.5">
@@ -298,7 +319,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
               </button>
             )}
             <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-black/40 border border-white/10 text-[10px] font-mono text-gray-400">
-              ⌘K
+              ⌘ + K
             </span>
             <button
               type="button"
@@ -321,7 +342,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           The front page of micro-tool sponsorships. Used by 50K+ developers.
         </p>
 
-        {/* Dual Action Buttons: [Browse All Ads] & [+ List Your Tool] */}
+        {/* Dual Action Buttons: [Browse All Ads] & [+ Create / List Tools] */}
         <div className="flex items-center justify-center gap-2.5 pt-1">
           <button
             type="button"
@@ -335,7 +356,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
             }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.03] hover:bg-white/[0.07] text-gray-300 hover:text-white text-xs font-semibold transition-all active:scale-95"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.03] hover:bg-white/[0.07] text-gray-300 hover:text-white text-xs font-semibold transition-all active:scale-95 shadow-sm"
           >
             <span>📢</span>
             <span>Browse All Ads</span>
@@ -343,66 +364,200 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
 
           <Link
             href="/creator"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.03] hover:bg-white/[0.07] text-gray-300 hover:text-white border border-white/10 hover:border-white/20 text-xs font-semibold transition-all active:scale-95 shadow-sm"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/[0.03] hover:bg-white/[0.07] text-gray-300 hover:text-white border border-white/10 hover:border-white/20 text-xs font-semibold transition-all active:scale-95 shadow-sm"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>List Your Tool (85% Payout)</span>
+            <span>Create / List Tools</span>
           </Link>
         </div>
       </div>
 
       {/* =========================================================================
-          HORIZONTAL CATEGORY PILL FILTER BAR
+          HORIZONTAL CATEGORY PILL FILTER BAR (Exactly as in Reference Screenshot)
           ========================================================================= */}
       <div className="w-full flex items-center gap-2 overflow-x-auto pb-2 pt-2 scrollbar-none no-scrollbar text-xs font-medium border-b border-white/[0.08]">
-        {/* Today Dropdown Pill (with glowing green dot) */}
+        {/* 1. Today Dropdown Pill (with glowing green dot) */}
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
+            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+              sortBy === 'today'
+                ? 'bg-[#73e5bf]/15 text-[#73e5bf] border-[#73e5bf]/30 shadow-sm font-semibold'
+                : 'bg-white/[0.03] text-gray-300 border-white/[0.08] hover:border-white/[0.15]'
+            }`}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#73e5bf] shadow-[0_0_6px_#73e5bf]" />
+            <span>Today</span>
+            <span className="text-[10px] font-mono opacity-80">{initialListings.length}</span>
+            <ChevronDown className={`w-3 h-3 opacity-60 transition-transform ${sortDropdownOpen ? 'rotate-180' : ''}`} />
+          </button>
+
+          {/* Sort Dropdown Menu */}
+          {sortDropdownOpen && (
+            <div className="absolute top-full left-0 mt-2 w-48 rounded-xl glass-panel p-1.5 shadow-2xl z-40">
+              <button
+                type="button"
+                onClick={() => {
+                  setSortBy('today');
+                  setSortDropdownOpen(false);
+                }}
+                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between ${
+                  sortBy === 'today' ? 'bg-white/[0.1] text-white font-semibold' : 'text-[#8b97a8] hover:text-white hover:bg-white/[0.04]'
+                }`}
+              >
+                <span>Today (Recent)</span>
+                {sortBy === 'today' && <Check className="w-3 h-3 text-[#73e5bf]" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSortBy('dau');
+                  setSortDropdownOpen(false);
+                }}
+                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between ${
+                  sortBy === 'dau' ? 'bg-white/[0.1] text-white font-semibold' : 'text-[#8b97a8] hover:text-white hover:bg-white/[0.04]'
+                }`}
+              >
+                <span>Highest DAU</span>
+                {sortBy === 'dau' && <Check className="w-3 h-3 text-[#73e5bf]" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSortBy('price');
+                  setSortDropdownOpen(false);
+                }}
+                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between ${
+                  sortBy === 'price' ? 'bg-white/[0.1] text-white font-semibold' : 'text-[#8b97a8] hover:text-white hover:bg-white/[0.04]'
+                }`}
+              >
+                <span>Lowest Price</span>
+                {sortBy === 'price' && <Check className="w-3 h-3 text-[#73e5bf]" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSortBy('views');
+                  setSortDropdownOpen(false);
+                }}
+                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between ${
+                  sortBy === 'views' ? 'bg-white/[0.1] text-white font-semibold' : 'text-[#8b97a8] hover:text-white hover:bg-white/[0.04]'
+                }`}
+              >
+                <span>Most Views</span>
+                {sortBy === 'views' && <Check className="w-3 h-3 text-[#73e5bf]" />}
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* 2. Tools Tab */}
         <button
           type="button"
           onClick={() => {
             setSelectedCategory('all');
             setAvailableOnly(false);
             setVerifiedOnly(false);
+            setSearchQuery('');
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
-            selectedCategory === 'all' && !availableOnly && !verifiedOnly
-              ? 'bg-[#73e5bf]/15 text-[#73e5bf] border-[#73e5bf]/30 shadow-sm font-semibold'
-              : 'bg-white/[0.03] text-gray-300 border-white/[0.08] hover:border-white/[0.15]'
+            selectedCategory === 'all' && !availableOnly && !verifiedOnly && searchQuery === ''
+              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
+              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
           }`}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#73e5bf] shadow-[0_0_6px_#73e5bf]" />
-          <span>All Software</span>
-          <span className="text-[10px] font-mono opacity-60">{initialListings.length}</span>
-          <ChevronDown className="w-3 h-3 opacity-60" />
+          <span>Tools</span>
+          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+            {initialListings.length}
+          </span>
         </button>
 
-        {/* Category Tabs with Counts */}
-        {CATEGORY_TABS.map((cat) => {
-          const isSelected = selectedCategory === cat.id && !availableOnly && !verifiedOnly;
-          const count = categoryCounts[cat.id] ?? 0;
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => {
-                setSelectedCategory(cat.id);
-                setAvailableOnly(false);
-                setVerifiedOnly(false);
-              }}
-              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
-                isSelected
-                  ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
-                  : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
-              }`}
-            >
-              <span>{cat.label}</span>
-              <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
-                {count}
-              </span>
-            </button>
-          );
-        })}
+        {/* 3. Developer Tools */}
+        <button
+          type="button"
+          onClick={() => {
+            setSelectedCategory('developer-tools');
+            setAvailableOnly(false);
+            setVerifiedOnly(false);
+            setSearchQuery('');
+          }}
+          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+            selectedCategory === 'developer-tools' && !availableOnly && !verifiedOnly
+              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
+              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
+          }`}
+        >
+          <span>Developer Tools</span>
+          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+            {categoryCounts['developer-tools'] ?? 2}
+          </span>
+        </button>
 
-        {/* Chrome Extensions Quick Filter */}
+        {/* 4. Productivity */}
+        <button
+          type="button"
+          onClick={() => {
+            setSelectedCategory('productivity');
+            setAvailableOnly(false);
+            setVerifiedOnly(false);
+            setSearchQuery('');
+          }}
+          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+            selectedCategory === 'productivity' && !availableOnly && !verifiedOnly
+              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
+              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
+          }`}
+        >
+          <span>Productivity</span>
+          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+            {categoryCounts['productivity'] ?? 2}
+          </span>
+        </button>
+
+        {/* 5. Design & Assets */}
+        <button
+          type="button"
+          onClick={() => {
+            setSelectedCategory('design');
+            setAvailableOnly(false);
+            setVerifiedOnly(false);
+            setSearchQuery('');
+          }}
+          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+            selectedCategory === 'design' && !availableOnly && !verifiedOnly
+              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
+              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
+          }`}
+        >
+          <span>Design & Assets</span>
+          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+            {categoryCounts['design'] ?? 2}
+          </span>
+        </button>
+
+        {/* 6. Web Utilities */}
+        <button
+          type="button"
+          onClick={() => {
+            setSelectedCategory('utilities');
+            setAvailableOnly(false);
+            setVerifiedOnly(false);
+            setSearchQuery('');
+          }}
+          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
+            selectedCategory === 'utilities' && !availableOnly && !verifiedOnly
+              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
+              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
+          }`}
+        >
+          <span>Web Utilities</span>
+          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+            {categoryCounts['utilities'] ?? 1}
+          </span>
+        </button>
+
+        {/* 7. Chrome Extensions */}
         <button
           type="button"
           onClick={() => {
@@ -421,7 +576,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           </span>
         </button>
 
-        {/* Verified Only Pill */}
+        {/* 8. Verified Only Pill */}
         <button
           type="button"
           onClick={() => setVerifiedOnly(!verifiedOnly)}
@@ -435,7 +590,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           <span>Verified Only</span>
         </button>
 
-        {/* Available Slots Only Pill */}
+        {/* 9. Available Slots Only Pill */}
         <button
           type="button"
           onClick={() => setAvailableOnly(!availableOnly)}
@@ -457,7 +612,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           ========================================================================= */}
       <div id="marketplace-feed" className="w-full space-y-2">
         {filteredListings.length === 0 ? (
-          <div className="text-center py-16 bg-[#181d28] rounded-2xl border border-[#252f44] text-[#8b97a8]">
+          <div className="text-center py-16 bg-[#101522]/80 rounded-2xl border border-white/[0.08] text-[#8b97a8]">
             <p className="text-sm font-semibold text-white">No developer tools found</p>
             <p className="text-xs mt-1">Try resetting your filters or search keywords.</p>
             <button
@@ -468,7 +623,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 setAvailableOnly(false);
                 setVerifiedOnly(false);
               }}
-              className="mt-4 px-4 py-1.5 rounded-full bg-[#242c3d] text-white text-xs font-semibold hover:bg-[#2e374c]"
+              className="mt-4 px-4 py-1.5 rounded-full bg-white/[0.06] text-white text-xs font-semibold hover:bg-white/[0.12] border border-white/[0.1]"
             >
               Reset Filters
             </button>
@@ -480,7 +635,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             const stats = slotStatsMap.get(listing.id);
             const availableSlots = stats?.availableSlots ?? 0;
             const totalSlots = stats?.totalSlots ?? 0;
-            const minPrice = stats?.minPriceCents ? formatCentsToUsd(stats.minPriceCents) : '$50/mo';
+            const minPrice = stats?.minPriceCents ? formatCentsToUsd(stats.minPriceCents) : '$50.00';
             const isExpanded = expandedListingId === listing.id;
             const isBookmarked = bookmarkedMap[listing.id] ?? false;
             const toolSlots = initialSlots.filter((s) => s.listing_id === listing.id);
@@ -494,10 +649,10 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 {/* Main Row Strip */}
                 <div
                   onClick={() => setExpandedListingId(isExpanded ? null : listing.id)}
-                  className={`w-full bg-[#0f131c]/80 hover:bg-[#141924] border transition-all rounded-xl p-3 sm:px-4 sm:py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer select-none group ${
+                  className={`w-full glass-row transition-all rounded-xl p-3 sm:px-4 sm:py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer select-none group ${
                     isExpanded
-                      ? 'border-[#73e5bf]/40 bg-[#121722] shadow-md'
-                      : 'border-white/[0.06] hover:border-white/[0.14]'
+                      ? 'border-[#73e5bf]/40 bg-[#141b27] shadow-lg'
+                      : ''
                   }`}
                 >
                   {/* Left Group: Time/Stats, App Icon, Name & Description */}
@@ -507,7 +662,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                     <div className="w-12 shrink-0 text-center flex flex-col items-center justify-center">
                       {visual.isAd ? (
                         <span className="px-1.5 py-0.2 rounded bg-sky-500/15 text-sky-400 font-mono text-[10px] font-bold uppercase tracking-wider border border-sky-500/25">
-                          Ad
+                          AD
                         </span>
                       ) : (
                         <span className="text-xs font-semibold text-gray-300 font-mono">
@@ -599,13 +754,13 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                       </div>
                     </div>
 
-                    {/* Col 6: Actions — Direct Book Ad link / Slots & Bookmark */}
+                    {/* Col 6: Actions — Terminal-grade emerald Book Ad button & Bookmark */}
                     <div className="flex items-center gap-2">
                       {firstAvailableSlot ? (
                         <Link
                           href={`/sponsor/${firstAvailableSlot.id}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="px-3.5 py-1.5 rounded-lg bg-[#73e5bf] hover:bg-[#8bf2ce] text-[#0d1017] text-xs font-bold transition-all active:scale-95 shadow-sm"
+                          className="px-3.5 py-1.5 rounded-lg bg-[#143d2e] hover:bg-[#1a4f3c] text-[#73e5bf] border border-[#73e5bf]/35 text-xs font-bold transition-all active:scale-95 shadow-sm"
                           title="Directly book this slot"
                         >
                           Book Ad ({minPrice})
@@ -620,7 +775,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                       <button
                         type="button"
                         onClick={(e) => toggleBookmark(listing.id, e)}
-                        className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border transition-all ${
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-all ${
                           isBookmarked
                             ? 'bg-[#1877f2]/20 text-[#38bdf8] border-[#38bdf8]/40'
                             : 'bg-white/[0.03] hover:bg-white/[0.07] text-gray-400 hover:text-white border-white/[0.08]'

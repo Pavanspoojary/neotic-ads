@@ -41,13 +41,13 @@ export default async function DashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#130f18] text-[#8b94a3] flex flex-col selection:bg-[#73e5bf] selection:text-[#130f18]">
+    <div className="min-h-screen bg-[#0b0e14] text-[#8b97a8] flex flex-col selection:bg-[#73e5bf] selection:text-[#0b0e14]">
       <Navbar />
 
       <main id="main-content" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 outline-none">
         {/* Page Header */}
         <div className="mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#21192a] border border-[#e5e7eb]/12 text-[#73e5bf] text-xs font-bold mb-3.5 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-[#73e5bf] text-xs font-bold mb-3.5 shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-[#73e5bf] shadow-[0_0_8px_#73e5bf] animate-pulse" />
             <BarChart2 className="h-3.5 w-3.5 text-[#73e5bf]" />
             <span>Platform Telemetry & Ad Delivery Engine</span>
@@ -55,7 +55,7 @@ export default async function DashboardPage() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white tracking-[-0.03em]">
             Analytics & Verification Dashboard
           </h1>
-          <p className="mt-3 text-sm sm:text-base text-[#8b94a3] max-w-3xl leading-relaxed tracking-[-0.025em]">
+          <p className="mt-3 text-sm sm:text-base text-[#8b97a8] max-w-3xl leading-relaxed tracking-[-0.025em]">
             Real-time telemetry aggregated directly from client-side pings without storing PII.
             Monitor impression volume, click conversions, and active escrow contracts.
           </p>
