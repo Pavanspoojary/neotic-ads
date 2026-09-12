@@ -23,9 +23,36 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successResult, setSuccessResult] = useState<any | null>(null);
+  const [previewFormat, setPreviewFormat] = useState<SlotType>(slot.slot_type);
 
   const charCount = creativeText.length;
   const isOverLimit = charCount > maxChars;
+  const charPercent = Math.min(100, Math.round((charCount / maxChars) * 100));
+
+  const sampleCopies = [
+    {
+      name: 'Cloud / DevTools',
+      text: `Deploy modern serverless Postgres & Auth with Supabase in seconds`,
+      url: 'https://supabase.com?utm_source=sponsorslot',
+    },
+    {
+      name: 'Observability',
+      text: `Real-time Next.js application logs & exception tracing with LogFast`,
+      url: 'https://logfast.io?utm_source=sponsorslot',
+    },
+    {
+      name: 'Productivity',
+      text: `SuperTask AI turns messy browser tabs into automated action plans`,
+      url: 'https://supertask.app?utm_source=sponsorslot',
+    },
+  ];
+
+  const applySampleCopy = (sample: { text: string; url: string }) => {
+    setCreativeText(sample.text.slice(0, maxChars));
+    setTargetUrl(sample.url);
+    if (!sponsorName) setSponsorName('Acme Dev Corp');
+    if (!sponsorEmail) setSponsorEmail('growth@acmedev.io');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -134,6 +161,26 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
           Submit your non-intrusive in-app creative. Once confirmed, your creative goes live on edge immediately.
         </p>
 
+        {/* Quick Sample Copy Inserter */}
+        <div className="mb-6 p-3 rounded-xl bg-indigo-50/70 border border-indigo-100 flex items-center justify-between flex-wrap gap-2 text-xs">
+          <span className="font-semibold text-indigo-900 flex items-center gap-1.5">
+            <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
+            <span>Fill sample copy:</span>
+          </span>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {sampleCopies.map((sample) => (
+              <button
+                key={sample.name}
+                type="button"
+                onClick={() => applySampleCopy(sample)}
+                className="px-2.5 py-1 rounded-md bg-white border border-indigo-200 hover:border-indigo-400 text-indigo-700 text-[11px] font-medium shadow-3xs transition-colors"
+              >
+                {sample.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {error && (
           <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium">
             {error}
@@ -176,7 +223,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               </label>
               <span
                 className={`text-[11px] font-mono ${
-                  isOverLimit ? 'text-rose-600 font-bold' : 'text-slate-400'
+                  isOverLimit ? 'text-rose-600 font-bold' : charPercent > 80 ? 'text-amber-600 font-semibold' : 'text-slate-400'
                 }`}
               >
                 {charCount} / {maxChars} chars
@@ -194,6 +241,15 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
                   : 'border-slate-300 focus:ring-indigo-500'
               }`}
             />
+            {/* Live Character Progress Gauge */}
+            <div className="w-full bg-slate-100 rounded-full h-1 mt-1.5 overflow-hidden">
+              <div
+                className={`h-full transition-all ${
+                  isOverLimit ? 'bg-rose-500' : charPercent > 80 ? 'bg-amber-500' : 'bg-indigo-500'
+                }`}
+                style={{ width: `${charPercent}%` }}
+              />
+            </div>
           </div>
 
           <div>
@@ -239,14 +295,28 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               <Sparkles className="h-3.5 w-3.5 text-indigo-500" />
               <span>Live In-App Native Preview</span>
             </h3>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 uppercase">
-              {slot.slot_type}
-            </span>
+            {/* Format Selector Pills */}
+            <div className="flex items-center gap-1">
+              {(['header_pill', 'empty_state', 'footer_badge', 'email_footer'] as SlotType[]).map((fmt) => (
+                <button
+                  key={fmt}
+                  type="button"
+                  onClick={() => setPreviewFormat(fmt)}
+                  className={`text-[9px] font-mono px-1.5 py-0.5 rounded uppercase font-semibold transition-colors ${
+                    previewFormat === fmt
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                  }`}
+                >
+                  {fmt.split('_')[0]}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Render Mock Container */}
-          <div className="p-4 rounded-xl bg-slate-100/70 border border-slate-200 min-h-[120px] flex items-center justify-center">
-            {slot.slot_type === 'header_pill' && (
+          <div className="p-4 rounded-xl bg-slate-100/70 border border-slate-200 min-h-[130px] flex items-center justify-center">
+            {previewFormat === 'header_pill' && (
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-2xs text-xs text-slate-800">
                 <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700">
                   Sponsored
@@ -257,7 +327,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               </div>
             )}
 
-            {slot.slot_type === 'empty_state' && (
+            {previewFormat === 'empty_state' && (
               <div className="w-full max-w-[320px] p-4 rounded-xl bg-white border border-slate-200 shadow-xs text-left">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700">
@@ -274,7 +344,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               </div>
             )}
 
-            {slot.slot_type === 'footer_badge' && (
+            {previewFormat === 'footer_badge' && (
               <div className="inline-flex items-center gap-2 px-3 py-1 text-xs text-slate-600">
                 <span className="font-semibold text-slate-700">Infrastructure Partner:</span>
                 <span className="text-indigo-600 font-medium">
@@ -283,7 +353,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               </div>
             )}
 
-            {slot.slot_type === 'email_footer' && (
+            {previewFormat === 'email_footer' && (
               <div className="w-full p-3 rounded-lg bg-white border border-dashed border-slate-300 text-left text-xs text-slate-600 font-mono">
                 [Digest Footer] Report powered by {listing.title}. Sponsored by{' '}
                 <span className="text-indigo-600 font-semibold">
@@ -325,6 +395,30 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
             </div>
           </div>
 
+          {/* Visual Take-Rate Split Bar */}
+          <div className="mt-4 pt-3 border-t border-slate-100">
+            <div className="flex justify-between text-[11px] font-semibold mb-1.5">
+              <span className="text-slate-600">Take-Rate Allocation</span>
+              <span className="text-slate-900">85% Creator • 15% Platform</span>
+            </div>
+            <div className="h-2.5 w-full rounded-full overflow-hidden flex bg-slate-100 gap-0.5">
+              <div
+                className="bg-emerald-500 h-full rounded-l-full"
+                style={{ width: '85%' }}
+                title="85% Creator Direct Net Payout"
+              />
+              <div
+                className="bg-indigo-600 h-full rounded-r-full"
+                style={{ width: '15%' }}
+                title="15% Platform Escrow Fee"
+              />
+            </div>
+            <div className="flex justify-between text-[10px] text-slate-500 mt-1 font-medium">
+              <span className="text-emerald-700 font-bold">{formatCentsToUsd(split.creator_payout_cents)} (Creator Net)</span>
+              <span className="text-indigo-700 font-bold">{formatCentsToUsd(split.platform_fee_cents)} (SponsorSlot)</span>
+            </div>
+          </div>
+
           <div className="mt-4 p-3 rounded-lg bg-emerald-50/70 border border-emerald-200 text-[11px] text-emerald-800 leading-relaxed">
             Funds remain held in escrow. Payout is released to the creator after uptime verification ensures your creative was served faithfully for the term.
           </div>
@@ -333,3 +427,5 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
     </div>
   );
 }
+
+

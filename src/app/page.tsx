@@ -25,7 +25,7 @@ export default async function HomePage() {
       {/* Global Navigation */}
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
         {/* Hero Section */}
         <section className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-white via-indigo-50/30 to-slate-50 pt-16 pb-12 sm:pt-20 sm:pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

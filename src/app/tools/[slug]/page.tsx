@@ -91,7 +91,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
       {/* Global Navigation */}
       <Navbar />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10">
+      <main id="main-content" tabIndex={-1} className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 outline-none">
         {/* Top Navigation / Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-sm text-slate-500">
           <Link href="/" className="inline-flex items-center gap-1 hover:text-indigo-600 transition-colors">
@@ -176,7 +176,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
         </header>
 
         {/* Inventory Slot Showcase Section */}
-        <section aria-labelledby="inventory-heading" className="space-y-6">
+        <section id="slots" aria-labelledby="inventory-heading" className="space-y-6 scroll-mt-24">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <h2 id="inventory-heading" className="text-2xl font-bold text-slate-900 tracking-tight">

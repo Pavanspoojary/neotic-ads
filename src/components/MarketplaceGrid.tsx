@@ -20,9 +20,14 @@ import {
   Clock,
   LayoutGrid,
   FileCode2,
+  ChevronDown,
+  ChevronUp,
+  Info,
+  Check,
 } from 'lucide-react';
 import { Listing, InventorySlot, ListingCategory, AppType, SlotType } from '../lib/types';
 import { formatCentsToUsd } from '../lib/escrow';
+import { VerificationBadge } from './VerificationBadge';
 
 export interface MarketplaceGridProps {
   initialListings: Listing[];
@@ -160,8 +165,21 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
   const [minDau, setMinDau] = useState<number>(0);
   const [sortBy, setSortBy] = useState<'dau_desc' | 'dau_asc' | 'price_asc' | 'price_desc' | 'newest'>('dau_desc');
   const [availableOnly, setAvailableOnly] = useState(false);
+  const [expandedSlotsToolId, setExpandedSlotsToolId] = useState<string | null>(null);
+
+  // Compute live listing count per category tab
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: initialListings.length };
+    for (const tab of CATEGORY_TABS) {
+      if (tab.id !== 'all') {
+        counts[tab.id] = initialListings.filter((l) => l.category === tab.id).length;
+      }
+    }
+    return counts;
+  }, [initialListings]);
 
   // Precompute slot stats map per listing
+
   const slotStatsMap = useMemo(() => {
     const map = new Map<string, ListingSlotSummary>();
     for (const listing of initialListings) {
@@ -267,21 +285,40 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
       </div>
 
       {/* Horizontal Category Tab Bar with Blue Underline Indicator */}
+      {/* Horizontal Category Tab Bar with Blue Underline Indicator & Counts */}
       <div className="flex justify-center border-b border-slate-200">
-        <div className="flex items-center gap-8 overflow-x-auto px-4 scrollbar-none">
+        <div
+          role="tablist"
+          aria-label="Software Categories"
+          className="flex items-center gap-6 sm:gap-8 overflow-x-auto px-4 scrollbar-none"
+        >
           {CATEGORY_TABS.map((tab) => {
             const isSelected = selectedCategory === tab.id;
+            const count = categoryCounts[tab.id] ?? 0;
             return (
               <button
                 key={tab.id}
+                role="tab"
+                id={`tab-${tab.id}`}
+                aria-selected={isSelected}
+                aria-controls="marketplace-cards"
                 onClick={() => setSelectedCategory(tab.id)}
-                className={`relative whitespace-nowrap pb-3.5 text-sm sm:text-base transition-colors ${
+                className={`relative whitespace-nowrap pb-3.5 text-sm sm:text-base transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-t-lg ${
                   isSelected
                     ? 'text-slate-900 font-bold'
                     : 'text-slate-500 hover:text-slate-900 font-medium'
                 }`}
               >
                 <span>{tab.label}</span>
+                <span
+                  className={`text-xs px-2 py-0.5 rounded-full font-semibold transition-colors ${
+                    isSelected
+                      ? 'bg-blue-100 text-blue-800'
+                      : 'bg-slate-100 text-slate-500'
+                  }`}
+                >
+                  {count}
+                </span>
                 {isSelected && (
                   <span className="absolute bottom-0 left-0 right-0 h-1 bg-blue-600 rounded-full" />
                 )}
@@ -307,7 +344,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 rounded-full focus-visible:ring-2 focus-visible:ring-blue-600"
+                aria-label="Clear search input"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -346,6 +384,21 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
               </select>
             </div>
           </div>
+        </div>
+
+        {/* Quick Search Suggestions */}
+        <div className="flex items-center gap-2 flex-wrap text-xs text-slate-500">
+          <span className="text-[11px] font-semibold text-slate-400">Trending:</span>
+          {['JSON', 'Chrome', 'Design', 'Tabs', 'CLI', 'Digest'].map((tag) => (
+            <button
+              key={tag}
+              type="button"
+              onClick={() => setSearchQuery(tag)}
+              className="text-[11px] px-2.5 py-0.5 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 font-medium transition-colors"
+            >
+              {tag}
+            </button>
+          ))}
         </div>
 
         {/* Lower Row: Presets & Instant Book Toggle */}
@@ -390,7 +443,83 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             )}
           </div>
         </div>
+
+        {/* Active Filters Pill Bar */}
+        {hasActiveFilters && (
+          <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-slate-100 text-xs">
+            <span className="font-semibold text-slate-500">Active:</span>
+            {selectedCategory !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-semibold border border-blue-200">
+                <span>{CATEGORY_TABS.find((t) => t.id === selectedCategory)?.label}</span>
+                <button
+                  onClick={() => setSelectedCategory('all')}
+                  className="hover:text-blue-900 p-0.5"
+                  aria-label="Remove category filter"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </span>
+            )}
+            {selectedAppType !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-semibold border border-blue-200">
+                <span>{APP_TYPES.find((t) => t.id === selectedAppType)?.label}</span>
+                <button
+                  onClick={() => setSelectedAppType('all')}
+                  className="hover:text-blue-900 p-0.5"
+                  aria-label="Remove format filter"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </span>
+            )}
+            {minDau > 0 && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-semibold border border-blue-200">
+                <span>{minDau.toLocaleString()}+ DAU</span>
+                <button
+                  onClick={() => setMinDau(0)}
+                  className="hover:text-blue-900 p-0.5"
+                  aria-label="Remove DAU filter"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </span>
+            )}
+            {availableOnly && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
+                <span>Available Only</span>
+                <button
+                  onClick={() => setAvailableOnly(false)}
+                  className="hover:text-emerald-900 p-0.5"
+                  aria-label="Remove available only filter"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </span>
+            )}
+            {searchQuery.trim().length > 0 && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-semibold border border-blue-200">
+                <span>&quot;{searchQuery}&quot;</span>
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="hover:text-blue-900 p-0.5"
+                  aria-label="Clear search text"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </span>
+            )}
+          </div>
+        )}
       </div>
+
+      {/* Result Count Status */}
+      <div className="flex items-center justify-between text-xs text-slate-500 px-1">
+        <span>
+          Showing <strong className="text-slate-800">{filteredListings.length}</strong> of {initialListings.length} verified software tools
+        </span>
+        <span className="hidden sm:inline">Single-tenant 30-day escrow terms</span>
+      </div>
+
 
       {/* 3-Column Card Grid (Matching User's Screenshot Exactly) */}
       {filteredListings.length > 0 ? (
@@ -430,6 +559,18 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                           <span className="text-amber-500 text-sm leading-none">★</span>
                           <span className="font-bold text-slate-900">{visuals.rating}</span>
                           <span className="text-slate-500 font-medium">({visuals.reviews})</span>
+                        </div>
+                        {/* Verified Traffic Badge & App Format */}
+                        <div className="mt-1.5 flex items-center gap-1.5 flex-wrap">
+                          <VerificationBadge
+                            source={listing.verification_source}
+                            dau={listing.verified_dau}
+                            size="sm"
+                            showDetails={false}
+                          />
+                          <span className="text-[10px] font-medium text-slate-500 capitalize bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
+                            {listing.app_type.replace('_', ' ')}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -471,19 +612,19 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                     </div>
 
                     {/* 3-Part Progress Bar */}
-                    <div className="h-2 w-full rounded-full overflow-hidden flex bg-slate-100 gap-0.5">
+                    <div className="h-2 w-full rounded-full overflow-hidden flex bg-slate-100 gap-0.5" role="meter" aria-label="Review Sentiment Breakdown" aria-valuenow={visuals.sentiment.positive}>
                       <div
-                        className="bg-[#22c55e] h-full rounded-l-full"
+                        className="bg-[#22c55e] h-full rounded-l-full transition-all"
                         style={{ width: `${visuals.sentiment.positive}%` }}
                         title={`Positive: ${visuals.sentiment.positive}%`}
                       />
                       <div
-                        className="bg-[#94a3b8] h-full"
+                        className="bg-[#94a3b8] h-full transition-all"
                         style={{ width: `${visuals.sentiment.neutral}%` }}
                         title={`Neutral: ${visuals.sentiment.neutral}%`}
                       />
                       <div
-                        className="bg-[#ef4444] h-full rounded-r-full"
+                        className="bg-[#ef4444] h-full rounded-r-full transition-all"
                         style={{ width: `${visuals.sentiment.negative}%` }}
                         title={`Negative: ${visuals.sentiment.negative}%`}
                       />
@@ -516,21 +657,72 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                     </div>
 
                     {availableCount > 0 ? (
-                      <span className="inline-flex items-center gap-1 text-emerald-700 font-bold bg-emerald-100/70 px-2 py-0.5 rounded-full text-[11px]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <button
+                        type="button"
+                        onClick={() => setExpandedSlotsToolId(expandedSlotsToolId === listing.id ? null : listing.id)}
+                        className="inline-flex items-center gap-1 text-emerald-700 hover:text-emerald-800 font-bold bg-emerald-100/70 hover:bg-emerald-200/70 px-2.5 py-1 rounded-full text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                        aria-expanded={expandedSlotsToolId === listing.id}
+                        aria-label="Inspect available inventory slots"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                         <span>{availableCount} Vacant</span>
-                      </span>
+                        {expandedSlotsToolId === listing.id ? (
+                          <ChevronUp className="h-3 w-3 ml-0.5 text-emerald-700" />
+                        ) : (
+                          <ChevronDown className="h-3 w-3 ml-0.5 text-emerald-700" />
+                        )}
+                      </button>
                     ) : (
                       <span className="text-slate-400 font-medium text-[11px]">Fully Booked</span>
                     )}
                   </div>
+
+                  {/* Expandable Quick Slot Inspector Drawer */}
+                  {expandedSlotsToolId === listing.id && (
+                    <div className="my-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 animate-in fade-in slide-in-from-top-1 duration-150">
+                      <div className="flex items-center justify-between text-[11px] font-bold text-slate-700 uppercase tracking-wider">
+                        <span>Available Units ({initialSlots.filter((s) => s.listing_id === listing.id).length})</span>
+                        <span className="text-slate-400 font-normal">30-day lease</span>
+                      </div>
+                      <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1 scrollbar-thin">
+                        {initialSlots
+                          .filter((s) => s.listing_id === listing.id)
+                          .map((slot) => (
+                            <div
+                              key={slot.id}
+                              className="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-200 text-xs shadow-3xs"
+                            >
+                              <div className="min-w-0 pr-2">
+                                <div className="font-semibold text-slate-900 truncate text-[11px]">{slot.slot_name}</div>
+                                <div className="text-[10px] text-slate-500 font-mono capitalize">{slot.slot_type.replace('_', ' ')}</div>
+                              </div>
+                              <div className="flex items-center gap-1.5 shrink-0">
+                                <span className="font-bold text-slate-900 text-xs">{formatCentsToUsd(slot.monthly_price_cents)}</span>
+                                {slot.is_available ? (
+                                  <Link
+                                    href={`/sponsor/${slot.id}`}
+                                    className="px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 shadow-2xs"
+                                  >
+                                    Book
+                                  </Link>
+                                ) : (
+                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-400">
+                                    Occupied
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Card Actions: View Profile (Outline) & Visit Website / Sponsor (Filled Blue Pill) */}
                 <div className="pt-4 border-t border-slate-100 grid grid-cols-2 gap-3">
                   <Link
                     href={`/tools/${listing.slug}`}
-                    className="w-full py-2.5 px-4 rounded-full border border-blue-600 text-blue-600 hover:bg-blue-50 font-bold text-xs text-center transition-colors shadow-2xs"
+                    className="w-full py-2.5 px-4 rounded-full border border-blue-600 text-blue-600 hover:bg-blue-50 font-bold text-xs text-center transition-colors shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                   >
                     View profile
                   </Link>
@@ -538,7 +730,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   {availableCount > 0 ? (
                     <Link
                       href={`/tools/${listing.slug}#slots`}
-                      className="w-full py-2.5 px-4 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition-colors flex items-center justify-center gap-1 shadow-2xs"
+                      className="w-full py-2.5 px-4 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition-colors flex items-center justify-center gap-1 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                     >
                       <span>Sponsor Slot</span>
                       <span className="text-xs">↗</span>
@@ -548,7 +740,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                       href={listing.website_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-2.5 px-4 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition-colors flex items-center justify-center gap-1 shadow-2xs"
+                      className="w-full py-2.5 px-4 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition-colors flex items-center justify-center gap-1 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                     >
                       <span>Visit Website</span>
                       <span className="text-xs">↗</span>
