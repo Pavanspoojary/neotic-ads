@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { InventorySlot, Listing, SlotType, SLOT_COPY_LIMITS } from '../lib/types';
 import { calculateEscrowSplit, calculateTermDates, formatCentsToUsd } from '../lib/escrow';
-import { ShieldCheck, Sparkles, CheckCircle2, ArrowRight, ExternalLink, Lock } from 'lucide-react';
+import { ShieldCheck, FileText, Eye, CheckCircle2, ArrowRight, ExternalLink, Lock } from 'lucide-react';
 
 interface SponsorBookingClientProps {
   slot: InventorySlot;
@@ -164,7 +164,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
         {/* Quick Sample Copy Inserter */}
         <div className="mb-5 p-3 rounded-lg bg-zinc-50/60 border border-black/[0.06] flex items-center justify-between flex-wrap gap-2 text-xs">
           <span className="font-medium text-zinc-700 flex items-center gap-1.5">
-            <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+            <FileText className="h-3.5 w-3.5 text-zinc-600" />
             <span>Fill sample copy:</span>
           </span>
           <div className="flex items-center gap-1.5 flex-wrap">
@@ -292,7 +292,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
         <div className="bg-white rounded-xl border border-black/[0.06] shadow-2xs p-5">
           <div className="flex items-center justify-between mb-3.5">
             <h3 className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+              <Eye className="h-3.5 w-3.5 text-zinc-600" />
               <span>Live In-App Native Preview</span>
             </h3>
             {/* Format Selector Pills */}

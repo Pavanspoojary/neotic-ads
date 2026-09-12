@@ -23,3 +23,16 @@ Always adhere to `/ponytail` skills and senior engineering principles across thi
 - **Strict User Directive**: DO NOT deploy to Vercel on your own. Never run `vercel --prod` or deploy automatically without explicit instruction from the user.
 - **Workflow Boundary**: Changes should be verified locally with tests (`node --import tsx --test 'tests/**/*.test.ts'`) and type checking (`npx tsc --noEmit`). Deploy to Vercel ONLY when the user explicitly prompts to deploy.
 
+## 4. Persistent Rule: UI Taste, Craft & Anti-Vibe-Coding Standard
+Always adhere to [`.agents/rules/UI_TASTE.md`](file:///.agents/rules/UI_TASTE.md) and [`docs/ui-taste-and-craft.md`](file:///docs/ui-taste-and-craft.md) across all frontend development:
+- **No Vibe-Coded Clichés**: Emojis in headings, generic Sparkles on non-AI features, oversaturated gradients, cartoonish `rounded-3xl` blobs, loose display kerning, and low-density floaty cards are strictly forbidden.
+- **High-Craft Invariants**:
+  - Sub-pixel hairline alpha borders (`border-black/[0.06]`, `hover:border-black/[0.12]`, `border-black/[0.04]`).
+  - Strict negative tracking on headlines (`tracking-[-0.035em]`, `tracking-tight`).
+  - Monochromatic neutral canvas (`#fafafa` / `#09090b`) with a single functional status accent (`#10b981` emerald).
+  - Solid obsidian action triggers (`bg-zinc-950 hover:bg-black text-white shadow-2xs`).
+  - Multi-tier ambient micro-shadows (`shadow-2xs`).
+  - Tabular numerals (`tabular-nums font-mono`) for all financials, quantities, metrics, and timestamps.
+  - Complete 5-state interaction lifecycle (idle, hover, active with -0.5px translate, focus-visible ring, disabled) and explicit `cursor-pointer`.
+
+

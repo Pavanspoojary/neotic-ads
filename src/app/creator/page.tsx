@@ -6,7 +6,6 @@ import { CreatorDashboardClient } from '../../components/CreatorDashboardClient'
 import { formatCentsToUsd } from '../../lib/escrow';
 import {
   Layers,
-  Sparkles,
   DollarSign,
   Users,
   CheckCircle2,
@@ -56,7 +55,7 @@ export default async function CreatorPage() {
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-500/20 text-xs font-medium text-emerald-800 mb-3 shadow-2xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+                <Layers className="h-3.5 w-3.5 text-emerald-600" />
                 <span>Creator Monetization Console</span>
                 <span className="text-zinc-300">•</span>
                 <span className="text-zinc-600 font-mono text-[11px]">85% Net Payout</span>
@@ -74,7 +73,7 @@ export default async function CreatorPage() {
           {/* Top Summary Metrics Cards (4-Column Grid) */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {/* Card 1: Registered Tools */}
-            <div className="bg-white border border-black/[0.06] rounded-2xl p-6 shadow-2xs hover:border-black/[0.12] transition-all">
+            <div className="bg-white border border-black/[0.06] rounded-xl p-6 shadow-2xs hover:border-black/[0.12] transition-all">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
                   Registered Tools
@@ -93,7 +92,7 @@ export default async function CreatorPage() {
             </div>
 
             {/* Card 2: Configured Slots */}
-            <div className="bg-white border border-black/[0.06] rounded-2xl p-6 shadow-2xs hover:border-black/[0.12] transition-all">
+            <div className="bg-white border border-black/[0.06] rounded-xl p-6 shadow-2xs hover:border-black/[0.12] transition-all">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
                   Configured Slots
@@ -118,7 +117,7 @@ export default async function CreatorPage() {
             </div>
 
             {/* Card 3: Potential Monthly Revenue */}
-            <div className="bg-white border border-black/[0.06] rounded-2xl p-6 shadow-2xs hover:border-black/[0.12] transition-all">
+            <div className="bg-white border border-black/[0.06] rounded-xl p-6 shadow-2xs hover:border-black/[0.12] transition-all">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
                   Net Monthly Potential
@@ -140,7 +139,7 @@ export default async function CreatorPage() {
             </div>
 
             {/* Card 4: Verified Audience Reach */}
-            <div className="bg-white border border-black/[0.06] rounded-2xl p-6 shadow-2xs hover:border-black/[0.12] transition-all">
+            <div className="bg-white border border-black/[0.06] rounded-xl p-6 shadow-2xs hover:border-black/[0.12] transition-all">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
                   Verified Audience Reach

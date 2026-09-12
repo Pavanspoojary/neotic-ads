@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 import { getDb } from '../lib/db';
 import { MarketplaceGrid } from '../components/MarketplaceGrid';
 import { Navbar } from '../components/Navbar';
@@ -51,7 +51,7 @@ export default async function HomePage() {
                 FEATURED SPONSOR CARD — Pristine Minimal White Card
                 ===================================================================== */}
             <div className="pt-3 pb-2">
-              <div className="max-w-2xl mx-auto relative rounded-2xl bg-white border border-black/[0.06] hover:border-black/[0.12] p-4 sm:px-5 sm:py-4 text-left shadow-[0_1px_2px_rgba(0,0,0,0.02),0_8px_24px_rgba(0,0,0,0.03)] transition-all group">
+              <div className="max-w-2xl mx-auto relative rounded-xl bg-white border border-black/[0.06] hover:border-black/[0.12] p-4 sm:px-5 sm:py-4 text-left shadow-[0_1px_2px_rgba(0,0,0,0.02),0_8px_24px_rgba(0,0,0,0.03)] transition-all group">
                 {/* Floating "SPONSOR" Pill on top border */}
                 <div className="absolute -top-2.5 left-1/2 -translate-x-1/2">
                   <span className="px-2.5 py-0.5 rounded-full bg-white border border-black/[0.08] text-[9px] font-mono font-bold text-emerald-700 uppercase tracking-widest shadow-2xs">

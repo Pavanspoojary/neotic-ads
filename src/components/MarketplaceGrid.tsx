@@ -13,7 +13,6 @@ import {
   FileCode2,
   ChevronDown,
   ChevronUp,
-  Sparkles,
   ExternalLink,
   Check,
   Bookmark,
@@ -137,8 +136,8 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
     version: 'v1.2',
   },
   'markdown-slides-preview': {
-    icon: Sparkles,
-    bg: 'bg-purple-50 text-purple-700 border border-purple-200/80',
+    icon: FileCode2,
+    bg: 'bg-zinc-100 text-zinc-700 border border-black/[0.06]',
     badgeLabel: 'Markdown & Slides',
     creatorName: 'Elena Rostova',
     creatorHandle: '@erostova',
@@ -155,8 +154,8 @@ function getToolVisual(slug: string, index: number): ToolVisualMeta {
     return TOOL_VISUALS[slug];
   }
   return {
-    icon: Sparkles,
-    bg: 'bg-zinc-100 text-zinc-700 border border-zinc-200/80',
+    icon: Code2,
+    bg: 'bg-zinc-100 text-zinc-700 border border-black/[0.06]',
     badgeLabel: 'Web Utility',
     creatorName: 'Developer',
     creatorHandle: `@tool-${index + 1}`,
@@ -376,7 +375,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
 
           {/* Sort Dropdown Menu */}
           {sortDropdownOpen && (
-            <div className="absolute top-full left-0 mt-2 w-48 rounded-xl bg-white border border-zinc-200 p-1.5 shadow-xl z-40">
+            <div className="absolute top-full left-0 mt-1.5 w-44 rounded-xl bg-white border border-black/[0.08] p-1 shadow-[0_4px_16px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)] z-40">
               <button
                 type="button"
                 onClick={() => {
@@ -619,9 +618,9 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           ========================================================================= */}
       <div id="marketplace-feed" className="w-full space-y-2">
         {filteredListings.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-2xl border border-zinc-200 text-zinc-500 shadow-xs">
-            <p className="text-sm font-semibold text-zinc-900">No developer tools found</p>
-            <p className="text-xs mt-1">Try resetting your filters or search keywords.</p>
+          <div className="text-center py-14 bg-white rounded-xl border border-black/[0.06] text-zinc-500 shadow-2xs">
+            <p className="text-xs font-semibold text-zinc-950">No developer tools found</p>
+            <p className="text-xs text-zinc-400 mt-0.5">Try resetting your filters or search keywords.</p>
             <button
               type="button"
               onClick={() => {
@@ -630,7 +629,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 setAvailableOnly(false);
                 setVerifiedOnly(false);
               }}
-              className="mt-4 px-4 py-1.5 rounded-full bg-zinc-900 text-white text-xs font-semibold hover:bg-black border border-zinc-900 shadow-xs"
+              className="mt-3.5 px-3.5 py-1.5 rounded-lg bg-zinc-950 text-white text-xs font-medium hover:bg-black shadow-2xs transition-all cursor-pointer"
             >
               Reset Filters
             </button>

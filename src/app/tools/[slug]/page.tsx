@@ -7,7 +7,7 @@ import { SLOT_COPY_LIMITS, SlotType, ListingCategory, AppType } from '../../../l
 import { VerificationBadge } from '../../../components/VerificationBadge';
 import { TelemetryChart } from '../../../components/TelemetryChart';
 import { Navbar } from '../../../components/Navbar';
-import { Sparkles, ArrowLeft, ExternalLink, Globe, Puzzle, Monitor, Settings } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Globe, Puzzle, Monitor, Settings } from 'lucide-react';
 
 interface PageProps {
   params: { slug: string } | Promise<{ slug: string }>;
@@ -106,7 +106,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
         </nav>
 
         {/* Hero Listing Card */}
-        <header className="bg-white border border-black/[0.06] rounded-2xl p-6 sm:p-8 mb-8 shadow-2xs">
+        <header className="bg-white border border-black/[0.06] rounded-xl p-6 sm:p-8 mb-8 shadow-2xs">
           <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-500/20">
               {CATEGORY_NAMES[listing.category] || listing.category}
@@ -193,7 +193,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
           </div>
 
           {slots.length === 0 ? (
-            <div className="p-12 text-center bg-white rounded-2xl border border-black/[0.06] shadow-2xs">
+            <div className="p-12 text-center bg-white rounded-xl border border-black/[0.06] shadow-2xs">
               <p className="text-zinc-600 font-medium text-sm">No inventory slots are configured for this tool yet.</p>
               <p className="text-xs text-zinc-400 mt-1">Check back later or explore other developer tools.</p>
             </div>
@@ -210,7 +210,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 return (
                   <div
                     key={slot.id}
-                    className="bg-white rounded-2xl border border-black/[0.06] hover:border-black/[0.12] transition-all flex flex-col justify-between overflow-hidden shadow-2xs"
+                    className="bg-white rounded-xl border border-black/[0.06] hover:border-black/[0.12] transition-all flex flex-col justify-between overflow-hidden shadow-2xs"
                   >
                     <div className="p-6">
                       {/* Header: Name + Badges */}
@@ -289,7 +289,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
         </section>
 
         {/* Creator Callout Footer */}
-        <footer className="mt-16 p-6 rounded-2xl border border-black/[0.06] bg-white text-center shadow-2xs">
+        <footer className="mt-16 p-6 rounded-xl border border-black/[0.06] bg-white text-center shadow-2xs">
           <h4 className="font-display font-bold text-base text-zinc-950">Do you own or maintain {listing.title}?</h4>
           <p className="text-xs text-zinc-600 mt-1 max-w-xl mx-auto">
             Manage your inventory slots, adjust monthly pricing, review sponsor submissions, or retrieve embed snippets in the Creator Portal.

@@ -22,7 +22,6 @@ import {
 } from '../lib/types';
 import { VerificationBadge } from './VerificationBadge';
 import {
-  Sparkles,
   CheckCircle,
   AlertCircle,
   Link as LinkIcon,
@@ -265,12 +264,12 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
     VERIFICATION_SOURCES.find((s) => s.id === verificationSource) || VERIFICATION_SOURCES[0];
 
   return (
-    <div className="bg-white rounded-2xl border border-black/[0.06] shadow-2xs overflow-hidden">
+    <div className="bg-white rounded-xl border border-black/[0.06] shadow-2xs overflow-hidden">
       {/* Form Header */}
       <div className="bg-white p-6 sm:p-8 border-b border-black/[0.05] text-zinc-950">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-500/20 text-emerald-800 text-xs font-medium uppercase tracking-wider mb-2">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+          <PlusCircle className="h-3.5 w-3.5 text-emerald-600" />
           <span>New Tool Onboarding Flow</span>
         </div>
         <h2 className="text-2xl font-display font-bold tracking-tight text-zinc-950">Register Your Micro-Tool</h2>

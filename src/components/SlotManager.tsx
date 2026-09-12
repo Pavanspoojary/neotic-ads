@@ -28,7 +28,6 @@ import {
   SquareCode,
   PanelBottom,
   Mail,
-  Sparkles,
 } from 'lucide-react';
 import { InventorySlot, SlotType, SLOT_COPY_LIMITS } from '../lib/types';
 import {
@@ -297,7 +296,7 @@ export function SlotManager({
         >
           <div className="flex items-center justify-between pb-3 border-b border-black/[0.04]">
             <h3 className="text-sm font-semibold text-zinc-950 flex items-center gap-2 font-display">
-              <Sparkles className="h-4 w-4 text-emerald-600" />
+              <Layers className="h-4 w-4 text-emerald-600" />
               <span>Configure New Inventory Slot</span>
             </h3>
             <span className="text-[11px] text-zinc-400">All fields strictly validated</span>

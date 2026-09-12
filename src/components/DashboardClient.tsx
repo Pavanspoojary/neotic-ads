@@ -10,7 +10,7 @@ import {
   ExternalLink,
   Eye,
   MousePointer,
-  Sparkles,
+  Layers,
   Zap,
   Play,
   CheckCircle2,
@@ -88,7 +88,7 @@ export function DashboardClient({
           <div className="flex items-center justify-between text-zinc-500 mb-2.5">
             <span className="text-[10px] font-medium uppercase tracking-wider">Active Inventory</span>
             <div className="p-1.5 rounded-lg bg-zinc-100 text-zinc-600 border border-black/[0.06]">
-              <Sparkles className="h-3.5 w-3.5" />
+              <Layers className="h-3.5 w-3.5" />
             </div>
           </div>
           <div className="text-2xl sm:text-3xl font-display font-semibold text-zinc-950 tabular-nums tracking-tight">{initialSlots.length} Slots</div>

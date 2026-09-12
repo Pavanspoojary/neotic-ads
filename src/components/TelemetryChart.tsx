@@ -29,7 +29,7 @@ export function TelemetryChart({
 
   if (telemetry.length === 0) {
     return (
-      <div className={`p-5 rounded-2xl bg-zinc-50 border border-black/[0.06] text-center ${className}`}>
+      <div className={`p-5 rounded-xl bg-zinc-50 border border-black/[0.06] text-center ${className}`}>
         <p className="text-xs text-zinc-600 font-medium">No 30-day telemetry history recorded yet.</p>
         <p className="text-[11px] text-zinc-400 mt-0.5">Telemetry begins logging upon slot activation.</p>
       </div>
@@ -37,7 +37,7 @@ export function TelemetryChart({
   }
 
   return (
-    <div className={`rounded-2xl bg-zinc-50/50 border border-black/[0.06] p-4 sm:p-5 ${className}`}>
+    <div className={`rounded-xl bg-zinc-50/50 border border-black/[0.06] p-4 sm:p-5 ${className}`}>
       {/* Metric summary banner */}
       <div className="grid grid-cols-3 gap-3 mb-4 text-center">
         <div className="bg-white rounded-xl p-3 border border-black/[0.06] shadow-2xs">

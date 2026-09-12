@@ -16,7 +16,7 @@ import {
   Terminal,
   X,
   ShieldCheck,
-  Sparkles,
+  FileCode2,
 } from 'lucide-react';
 import { InventorySlot } from '../lib/types';
 
@@ -165,7 +165,7 @@ async function fetchSponsorSlot() {
               : 'border-transparent text-zinc-500 hover:text-zinc-950'
           }`}
         >
-          <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+          <FileCode2 className="h-3.5 w-3.5 text-emerald-600" />
           <span>Client SDK Script</span>
           <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-500/[0.08] text-emerald-800 border border-emerald-500/20">
             Zero-Code
