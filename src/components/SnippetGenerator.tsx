@@ -123,29 +123,29 @@ async function fetchSponsorSlot() {
   };
 
   return (
-    <div className="w-full text-zinc-100 space-y-4">
+    <div className="w-full text-[#8b94a3] space-y-4">
       {/* Header Context */}
-      <div className="flex items-start justify-between gap-4 pb-3 border-b border-white/[0.08]">
+      <div className="flex items-start justify-between gap-4 pb-3 border-b border-[#e5e7eb]/10">
         <div>
           <div className="flex items-center gap-2">
-            <Code className="h-5 w-5 text-indigo-400" />
-            <h3 className="text-base sm:text-lg font-bold text-white">
+            <Code className="h-5 w-5 text-[#73e5bf]" />
+            <h3 className="text-base sm:text-lg font-display font-black text-white">
               Integration Snippets for {slot.slot_name}
             </h3>
           </div>
-          <p className="text-xs text-zinc-400 mt-0.5">
+          <p className="text-xs text-[#8b94a3] mt-0.5">
             Embed via Client SDK script or fetch directly using the Headless JSON API.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-white/[0.04] text-zinc-300 border border-white/[0.08]">
+          <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#2e2d36] text-zinc-300 border border-[#e5e7eb]/10">
             Format: {slot.slot_type}
           </span>
           {onClose && (
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors"
+              className="p-1.5 rounded-lg text-[#8b94a3] hover:text-white hover:bg-[#2e2d36] transition-colors"
               title="Close Snippet Generator"
             >
               <X className="h-4 w-4" />
@@ -155,19 +155,19 @@ async function fetchSponsorSlot() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-white/[0.08] text-xs sm:text-sm font-medium">
+      <div className="flex items-center gap-2 border-b border-[#e5e7eb]/10 text-xs sm:text-sm font-medium">
         <button
           type="button"
           onClick={() => setActiveTab('client_sdk')}
-          className={`pb-2.5 px-2 border-b-2 transition-all flex items-center gap-2 ${
+          className={`pb-2.5 px-3 border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'client_sdk'
-              ? 'border-indigo-500 text-indigo-400 font-semibold'
-              : 'border-transparent text-zinc-400 hover:text-zinc-200'
+              ? 'border-[#73e5bf] text-[#73e5bf] font-bold'
+              : 'border-transparent text-[#8b94a3] hover:text-zinc-200'
           }`}
         >
           <Sparkles className="h-4 w-4" />
           <span>Client SDK Script</span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#73e5bf]/10 text-[#73e5bf] border border-[#73e5bf]/25">
             Zero-Code
           </span>
         </button>
@@ -175,15 +175,15 @@ async function fetchSponsorSlot() {
         <button
           type="button"
           onClick={() => setActiveTab('headless_api')}
-          className={`pb-2.5 px-2 border-b-2 transition-all flex items-center gap-2 ${
+          className={`pb-2.5 px-3 border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'headless_api'
-              ? 'border-indigo-500 text-indigo-400 font-semibold'
-              : 'border-transparent text-zinc-400 hover:text-zinc-200'
+              ? 'border-[#73e5bf] text-[#73e5bf] font-bold'
+              : 'border-transparent text-[#8b94a3] hover:text-zinc-200'
           }`}
         >
           <Code className="h-4 w-4" />
           <span>Headless JSON API</span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.08]">
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#2e2d36] text-[#8b94a3] border border-[#e5e7eb]/10">
             React / MV3
           </span>
         </button>
@@ -191,10 +191,10 @@ async function fetchSponsorSlot() {
         <button
           type="button"
           onClick={() => setActiveTab('curl')}
-          className={`pb-2.5 px-2 border-b-2 transition-all flex items-center gap-2 ${
+          className={`pb-2.5 px-3 border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'curl'
-              ? 'border-indigo-500 text-indigo-400 font-semibold'
-              : 'border-transparent text-zinc-400 hover:text-zinc-200'
+              ? 'border-[#73e5bf] text-[#73e5bf] font-bold'
+              : 'border-transparent text-[#8b94a3] hover:text-zinc-200'
           }`}
         >
           <Terminal className="h-4 w-4" />
@@ -203,16 +203,16 @@ async function fetchSponsorSlot() {
       </div>
 
       {/* Code Block Box with Copy Button */}
-      <div className="relative rounded-xl border border-white/[0.08] bg-[#090a0f] p-4 font-mono text-xs text-zinc-200 shadow-inner">
+      <div className="relative rounded-xl border border-[#e5e7eb]/12 bg-[#130f18] p-4 font-mono text-xs text-zinc-200 shadow-inner">
         {/* Copy Button */}
         <div className="absolute top-3 right-3 z-10">
           <button
             type="button"
             onClick={() => handleCopy(getActiveCode(), activeTab)}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all shadow-sm ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-sm ${
               copiedKey === activeTab
-                ? 'bg-emerald-600 text-white'
-                : 'bg-white/[0.06] text-zinc-300 hover:bg-white/[0.1] hover:text-white border border-white/[0.08]'
+                ? 'bg-[#73e5bf] text-[#130f18] shadow-mint-led'
+                : 'bg-[#2e2d36] text-zinc-300 hover:bg-[#383742] hover:text-white border border-[#e5e7eb]/10'
             }`}
           >
             {copiedKey === activeTab ? (
@@ -236,20 +236,20 @@ async function fetchSponsorSlot() {
       </div>
 
       {/* Architecture Guidance Callout */}
-      <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-xs text-zinc-300 space-y-1.5">
-        <div className="font-semibold text-white flex items-center gap-1.5">
-          <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
+      <div className="p-4 rounded-xl bg-[#2e2d36] border border-[#e5e7eb]/10 text-xs text-zinc-300 space-y-1.5">
+        <div className="font-bold text-white flex items-center gap-1.5">
+          <ShieldCheck className="h-4 w-4 text-[#73e5bf] shrink-0" />
           <span>Architecture & Runtime Behavior</span>
         </div>
-        <ul className="list-disc list-inside space-y-1 text-zinc-400 pl-1 text-[11px] leading-relaxed">
+        <ul className="list-disc list-inside space-y-1 text-[#8b94a3] pl-1 text-[11px] leading-relaxed">
           <li>
-            <strong className="text-zinc-300">Shadow DOM Isolation:</strong> <code className="text-indigo-300">embed.js</code> mounts into an open shadow root to prevent global CSS clashes.
+            <strong className="text-zinc-200">Shadow DOM Isolation:</strong> <code className="text-[#73e5bf]">embed.js</code> mounts into an open shadow root to prevent global CSS clashes.
           </li>
           <li>
-            <strong className="text-zinc-300">Unfilled Fallback:</strong> If the slot is vacant, it automatically renders a viral sponsor referral banner (<code className="text-indigo-300">⚡ Place your product here via SponsorSlot</code>).
+            <strong className="text-zinc-200">Unfilled Fallback:</strong> If the slot is vacant, it automatically renders a viral sponsor referral banner (<code className="text-[#73e5bf]">⚡ Place your product here via Neotic Ads</code>).
           </li>
           <li>
-            <strong className="text-zinc-300">Zero-PII Telemetry:</strong> Impressions and clicks trigger atomic counters on the Edge without collecting user IP, cookies, or personal identifiers.
+            <strong className="text-zinc-200">Zero-PII Telemetry:</strong> Impressions and clicks trigger atomic counters on the Edge without collecting user IP, cookies, or personal identifiers.
           </li>
         </ul>
       </div>

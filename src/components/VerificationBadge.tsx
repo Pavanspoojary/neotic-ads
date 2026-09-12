@@ -22,7 +22,7 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
   chrome_web_store: {
     name: 'Chrome Web Store',
     shortLabel: 'CWS Verified',
-    badgeClass: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]',
+    badgeClass: 'bg-[#73e5bf]/10 text-[#73e5bf] border-[#73e5bf]/25 shadow-[0_0_8px_rgba(115,229,191,0.15)]',
     description: 'Verified via Chrome Web Store active user metrics',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -37,7 +37,7 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
   plausible: {
     name: 'Plausible Analytics',
     shortLabel: 'Plausible Verified',
-    badgeClass: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20 shadow-[0_0_10px_rgba(99,102,241,0.1)]',
+    badgeClass: 'bg-[#a37af5]/10 text-[#a37af5] border-[#a37af5]/25 shadow-[0_0_8px_rgba(163,122,245,0.15)]',
     description: 'Verified via Plausible privacy-friendly analytics API',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -49,7 +49,7 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
   posthog: {
     name: 'PostHog Analytics',
     shortLabel: 'PostHog Verified',
-    badgeClass: 'bg-rose-500/10 text-rose-400 border-rose-500/20 shadow-[0_0_10px_rgba(244,63,94,0.1)]',
+    badgeClass: 'bg-[#ff4070]/10 text-[#ff4070] border-[#ff4070]/25 shadow-[0_0_8px_rgba(255,64,112,0.15)]',
     description: 'Verified via PostHog product telemetry event stream',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -60,7 +60,7 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
   ga4: {
     name: 'Google Analytics 4',
     shortLabel: 'GA4 Verified',
-    badgeClass: 'bg-amber-500/10 text-amber-400 border-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.1)]',
+    badgeClass: 'bg-amber-400/10 text-amber-300 border-amber-400/25 shadow-[0_0_8px_rgba(251,191,36,0.15)]',
     description: 'Verified via Google Analytics 4 daily active stream',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -73,7 +73,7 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
   manual: {
     name: 'SponsorSlot Audited',
     shortLabel: 'Audit Verified',
-    badgeClass: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20 shadow-[0_0_10px_rgba(6,182,212,0.1)]',
+    badgeClass: 'bg-[#73e5bf]/10 text-[#73e5bf] border-[#73e5bf]/25 shadow-[0_0_8px_rgba(115,229,191,0.15)]',
     description: 'Audited and verified by SponsorSlot engineering staff',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

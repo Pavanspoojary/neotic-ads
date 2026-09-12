@@ -87,30 +87,30 @@ export default async function ToolDetailPage({ params }: PageProps) {
   const appTypeMeta = APP_TYPE_LABELS[listing.app_type] || { label: listing.app_type, icon: '⚙️' };
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-zinc-100 flex flex-col selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-[#130f18] text-[#8b94a3] flex flex-col selection:bg-[#73e5bf] selection:text-[#130f18]">
       {/* Global Navigation */}
       <Navbar />
 
-      <main id="main-content" tabIndex={-1} className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 outline-none">
+      <main id="main-content" tabIndex={-1} className="flex-1 max-w-[1200px] w-full mx-auto px-4 sm:px-6 py-10 outline-none">
         {/* Top Navigation / Breadcrumbs */}
-        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-zinc-400">
+        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-[#8b94a3]">
           <Link href="/" className="inline-flex items-center gap-1 hover:text-white transition-colors">
-            <ArrowLeft className="h-3.5 w-3.5" />
+            <ArrowLeft className="h-3.5 w-3.5 text-[#73e5bf]" />
             <span>Marketplace</span>
           </Link>
-          <span className="text-zinc-600">/</span>
-          <span className="text-zinc-400 capitalize">{listing.category.replace('-', ' ')}</span>
-          <span className="text-zinc-600">/</span>
+          <span className="text-[#e5e7eb]/20">/</span>
+          <span className="text-[#8b94a3] capitalize">{listing.category.replace('-', ' ')}</span>
+          <span className="text-[#e5e7eb]/20">/</span>
           <span className="text-white font-medium">{listing.title}</span>
         </nav>
 
-        {/* Hero Listing Card (Obsidian Glass) */}
-        <header className="bg-white/[0.02] rounded-2xl border border-white/[0.08] p-6 sm:p-8 backdrop-blur-sm mb-8 shadow-inner-border">
+        {/* Hero Listing Card (Graphite Plum #21192a) */}
+        <header className="bg-[#21192a] rounded-card border border-[#e5e7eb]/15 p-6 sm:p-8 backdrop-blur-sm mb-8 shadow-sm">
           <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#73e5bf]/15 text-[#73e5bf] border border-[#73e5bf]/30">
               {CATEGORY_NAMES[listing.category] || listing.category}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium bg-white/[0.04] text-zinc-300 border border-white/[0.06]">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#2e2d36] text-white border border-[#e5e7eb]/10">
               <span>{appTypeMeta.icon}</span>
               <span>{appTypeMeta.label}</span>
             </span>
@@ -124,10 +124,10 @@ export default async function ToolDetailPage({ params }: PageProps) {
 
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
             <div className="max-w-3xl">
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              <h1 className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight">
                 {listing.title}
               </h1>
-              <p className="text-sm sm:text-base text-zinc-400 mt-3 leading-relaxed">
+              <p className="text-sm sm:text-base text-[#8b94a3] mt-3 leading-relaxed">
                 {listing.description}
               </p>
             </div>
@@ -137,38 +137,38 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 href={listing.website_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-zinc-200 bg-white/[0.05] hover:bg-white/[0.09] border border-white/[0.1] shadow-inner-border transition-all"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-btn text-xs font-semibold text-white bg-[#2e2d36] hover:bg-[#393844] border border-[#e5e7eb]/15 transition-all"
               >
                 <span>Visit Website</span>
-                <ExternalLink className="h-3.5 w-3.5 text-zinc-400" />
+                <ExternalLink className="h-3.5 w-3.5 text-[#8b94a3]" />
               </a>
             </div>
           </div>
 
           {/* Quick Stats Ribbon */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-white/[0.06]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-[#e5e7eb]/10">
             <div>
-              <div className="text-[11px] font-medium text-zinc-400 uppercase tracking-wider">Verified Traffic</div>
-              <div className="text-lg sm:text-xl font-bold text-white mt-0.5 tabular-nums">
+              <div className="text-[11px] font-mono text-[#8b94a3] uppercase tracking-wider">Verified Traffic</div>
+              <div className="text-lg sm:text-2xl font-bold text-white mt-0.5 tabular-nums">
                 {listing.verified_dau.toLocaleString('en-US')} DAU
               </div>
             </div>
             <div>
-              <div className="text-[11px] font-medium text-zinc-400 uppercase tracking-wider">Inventory Slots</div>
-              <div className="text-lg sm:text-xl font-bold text-white mt-0.5 tabular-nums">
+              <div className="text-[11px] font-mono text-[#8b94a3] uppercase tracking-wider">Inventory Slots</div>
+              <div className="text-lg sm:text-2xl font-bold text-white mt-0.5 tabular-nums">
                 {slots.length} Total ({availableSlotsCount} Vacant)
               </div>
             </div>
             <div>
-              <div className="text-[11px] font-medium text-zinc-400 uppercase tracking-wider">Platform</div>
-              <div className="text-lg sm:text-xl font-bold text-zinc-200 mt-0.5">
+              <div className="text-[11px] font-mono text-[#8b94a3] uppercase tracking-wider">Platform</div>
+              <div className="text-lg sm:text-2xl font-bold text-white mt-0.5">
                 {appTypeMeta.label}
               </div>
             </div>
             <div>
-              <div className="text-[11px] font-medium text-zinc-400 uppercase tracking-wider">Listing Status</div>
-              <div className="text-lg sm:text-xl font-bold text-emerald-400 mt-0.5 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="text-[11px] font-mono text-[#8b94a3] uppercase tracking-wider">Listing Status</div>
+              <div className="text-lg sm:text-2xl font-bold text-[#73e5bf] mt-0.5 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#73e5bf] animate-pulse" />
                 <span>Active</span>
               </div>
             </div>
@@ -179,22 +179,22 @@ export default async function ToolDetailPage({ params }: PageProps) {
         <section id="slots" aria-labelledby="inventory-heading" className="space-y-6 scroll-mt-24">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h2 id="inventory-heading" className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <h2 id="inventory-heading" className="font-display font-bold text-xl sm:text-3xl text-white tracking-tight">
                 Sponsorship Slots & Live Availability
               </h2>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
+              <p className="text-xs sm:text-sm text-[#8b94a3] mt-0.5">
                 Guaranteed 30-day single-tenant terms. Escrow protected with 15% platform take rate.
               </p>
             </div>
-            <div className="text-xs font-medium text-zinc-400">
-              <span className="font-bold text-emerald-400">{availableSlotsCount}</span> of {slots.length} bookable now
+            <div className="text-xs font-medium text-[#8b94a3] font-mono">
+              <span className="font-bold text-[#73e5bf]">{availableSlotsCount}</span> of {slots.length} bookable now
             </div>
           </div>
 
           {slots.length === 0 ? (
-            <div className="p-12 text-center bg-white/[0.02] rounded-2xl border border-white/[0.08]">
-              <p className="text-zinc-400 font-medium text-sm">No inventory slots are configured for this tool yet.</p>
-              <p className="text-xs text-zinc-500 mt-1">Check back later or explore other developer tools.</p>
+            <div className="p-12 text-center bg-[#21192a] rounded-card border border-[#e5e7eb]/12">
+              <p className="text-[#8b94a3] font-medium text-sm">No inventory slots are configured for this tool yet.</p>
+              <p className="text-xs text-[#8b94a3]/70 mt-1">Check back later or explore other developer tools.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -209,72 +209,72 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 return (
                   <div
                     key={slot.id}
-                    className="bg-white/[0.02] rounded-2xl border border-white/[0.08] hover:border-white/[0.16] transition-all flex flex-col justify-between overflow-hidden shadow-inner-border backdrop-blur-sm"
+                    className="bg-[#21192a] rounded-card border border-[#e5e7eb]/15 hover:border-[#73e5bf]/30 transition-all flex flex-col justify-between overflow-hidden shadow-sm"
                   >
                     <div className="p-6">
                       {/* Header: Name + Badges */}
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div>
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-white/[0.05] text-zinc-300 border border-white/[0.08] mb-2">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-mono text-[#a37af5] bg-[#2e2d36] border border-[#a37af5]/20 mb-2">
                             {formatMeta.label} • Max {copyLimit} chars
                           </span>
-                          <h3 className="text-base sm:text-lg font-bold text-white">{slot.slot_name}</h3>
+                          <h3 className="font-display font-bold text-lg text-white">{slot.slot_name}</h3>
                         </div>
 
                         {slot.is_available ? (
-                          <span className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#73e5bf]/15 text-[#73e5bf] border border-[#73e5bf]/30">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#73e5bf] animate-pulse" />
                             <span>Vacant</span>
                           </span>
                         ) : (
-                          <span className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-zinc-800 text-zinc-400 border border-zinc-700">
+                          <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#2e2d36] text-[#8b94a3] border border-[#e5e7eb]/10">
                             <span>Occupied</span>
                           </span>
                         )}
                       </div>
 
-                      <p className="text-xs text-zinc-400 mb-4">{formatMeta.description}</p>
+                      <p className="text-xs text-[#8b94a3] mb-4">{formatMeta.description}</p>
 
                       {/* Pricing */}
-                      <div className="mb-4 pb-4 border-b border-white/[0.06] flex items-baseline gap-2">
-                        <span className="text-2xl font-extrabold text-white tabular-nums">
+                      <div className="mb-4 pb-4 border-b border-[#e5e7eb]/10 flex items-baseline gap-2">
+                        <span className="font-display font-black text-3xl text-white tabular-nums">
                           {formatCentsToUsd(slot.monthly_price_cents)}
                         </span>
-                        <span className="text-xs text-zinc-500">/ 30 days (flat rate)</span>
+                        <span className="text-xs text-[#8b94a3]">/ 30 days (flat rate)</span>
                       </div>
 
                       {/* Creator Guidelines */}
                       {slot.guidelines && (
-                        <div className="mb-4 p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-400">
-                          <span className="font-semibold text-zinc-200">Sponsor Guidelines: </span>
+                        <div className="mb-4 p-3.5 rounded-xl bg-[#2e2d36] border border-[#e5e7eb]/10 text-xs text-[#8b94a3]">
+                          <span className="font-semibold text-white">Sponsor Guidelines: </span>
                           {slot.guidelines}
                         </div>
                       )}
 
                       {/* 30-Day Telemetry Chart */}
                       <div className="mt-4">
-                        <div className="text-xs font-semibold text-zinc-300 mb-2">Historical Telemetry (30 Days)</div>
+                        <div className="text-xs font-semibold text-white mb-2">Historical Telemetry (30 Days)</div>
                         <TelemetryChart telemetry={slotTelemetry} slotName={slot.slot_name} slotType={slot.slot_type} />
                       </div>
                     </div>
 
                     {/* Card CTA Footer */}
-                    <div className="p-4 bg-white/[0.02] border-t border-white/[0.06] flex items-center justify-between">
-                      <div className="text-[11px] text-zinc-500">
-                        {slot.is_available ? 'Instant booking via escrow' : 'Check back when term concludes'}
+                    <div className="p-4 bg-[#2e2d36]/60 border-t border-[#e5e7eb]/10 flex items-center justify-between">
+                      <div className="text-[11px] text-[#8b94a3] font-mono">
+                        {slot.is_available ? 'Instant booking via escrow' : 'Term active · unavailable'}
                       </div>
 
                       {slot.is_available ? (
                         <Link
                           href={`/sponsor/${slot.id}`}
-                          className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-glow-indigo transition-all active:scale-[0.98]"
+                          className="inline-flex items-center justify-center px-5 py-2.5 rounded-btn text-xs font-bold text-[#130f18] bg-[#73e5bf] hover:bg-[#86efac] shadow-mint-led transition-all active:scale-[0.98]"
                         >
                           Book This Slot →
                         </Link>
                       ) : (
                         <button
                           disabled
-                          className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-medium text-zinc-600 bg-white/[0.02] border border-white/[0.04] cursor-not-allowed"
+                          className="inline-flex items-center justify-center px-4 py-2 rounded-btn text-xs font-medium text-[#8b94a3] bg-[#2e2d36] border border-[#e5e7eb]/10 cursor-not-allowed"
                         >
                           Currently Leased
                         </button>
@@ -288,14 +288,14 @@ export default async function ToolDetailPage({ params }: PageProps) {
         </section>
 
         {/* Creator Callout Footer */}
-        <footer className="mt-16 p-6 rounded-2xl border border-white/[0.08] bg-white/[0.02] text-center backdrop-blur-sm">
-          <h4 className="text-sm font-bold text-white">Do you own or maintain {listing.title}?</h4>
-          <p className="text-xs text-zinc-400 mt-1 max-w-xl mx-auto">
+        <footer className="mt-16 p-6 rounded-card border border-[#e5e7eb]/15 bg-[#21192a] text-center backdrop-blur-sm">
+          <h4 className="font-display font-bold text-base text-white">Do you own or maintain {listing.title}?</h4>
+          <p className="text-xs text-[#8b94a3] mt-1 max-w-xl mx-auto">
             Manage your inventory slots, adjust monthly pricing, review sponsor submissions, or retrieve embed snippets in the Creator Portal.
           </p>
           <Link
             href="/creator"
-            className="inline-block mt-3 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors"
+            className="inline-block mt-3 text-xs font-bold text-[#73e5bf] hover:underline transition-colors"
           >
             Open Creator Dashboard →
           </Link>
@@ -303,17 +303,16 @@ export default async function ToolDetailPage({ params }: PageProps) {
       </main>
 
       {/* Global Footer */}
-      <footer className="border-t border-white/[0.08] bg-[#07080c] text-zinc-500 py-12 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2 text-zinc-300 font-semibold text-sm">
-            <Sparkles className="h-4 w-4 text-indigo-400" />
-            <span>SponsorSlot</span>
-            <span className="text-xs font-normal text-zinc-600 ml-2">
-              © {new Date().getFullYear()} SponsorSlot. All rights reserved.
+      <footer className="border-t border-[#e5e7eb]/10 bg-[#130f18] text-[#8b94a3] py-12 mt-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2 text-white font-semibold text-sm">
+            <span className="font-display font-black text-lg text-[#ff4070]">NEOTIC ADS</span>
+            <span className="text-xs font-normal text-[#8b94a3] ml-2">
+              © {new Date().getFullYear()} Neotic Ads. All rights reserved.
             </span>
           </div>
 
-          <div className="flex items-center gap-6 text-xs text-zinc-400">
+          <div className="flex items-center gap-6 text-xs text-[#8b94a3]">
             <Link href="/" className="hover:text-white transition-colors">
               Marketplace
             </Link>
@@ -321,7 +320,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
               Creator Portal
             </Link>
             <Link href="/dashboard" className="hover:text-white transition-colors">
-              Telemetry Dashboard
+              Edge Simulator
             </Link>
           </div>
         </div>

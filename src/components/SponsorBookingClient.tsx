@@ -99,51 +99,51 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
 
   if (successResult) {
     return (
-      <div className="bg-white/[0.02] rounded-2xl border border-emerald-500/30 shadow-inner-border backdrop-blur-sm p-8 text-center max-w-2xl mx-auto my-8">
-        <div className="w-14 h-14 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="bg-[#21192a] rounded-[24px] border border-[#73e5bf]/30 shadow-sm p-8 text-center max-w-2xl mx-auto my-8">
+        <div className="w-14 h-14 bg-[#73e5bf]/10 text-[#73e5bf] border border-[#73e5bf]/25 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 className="h-7 w-7" />
         </div>
-        <h2 className="text-2xl font-extrabold text-white">Sponsorship Escrow Reserved!</h2>
-        <p className="text-zinc-400 mt-2 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
-          Your creative has been locked for <span className="font-semibold text-white">{listing.title}</span> ({slot.slot_name}).
+        <h2 className="text-2xl font-display font-black text-white">Sponsorship Escrow Reserved!</h2>
+        <p className="text-[#8b94a3] mt-2 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+          Your creative has been locked for <span className="font-bold text-white">{listing.title}</span> ({slot.slot_name}).
           The 30-day automated escrow hold is active.
         </p>
 
-        <div className="mt-6 p-4 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left text-xs space-y-2.5">
+        <div className="mt-6 p-4 rounded-xl bg-[#2e2d36] border border-[#e5e7eb]/10 text-left text-xs space-y-2.5">
           <div className="flex justify-between">
-            <span className="text-zinc-500">Sponsorship ID:</span>
+            <span className="text-[#8b94a3]">Sponsorship ID:</span>
             <span className="font-mono text-zinc-300">{successResult.id}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-zinc-500">Term Duration:</span>
+            <span className="text-[#8b94a3]">Term Duration:</span>
             <span className="font-medium text-white">
               {successResult.start_date} to {successResult.end_date} (30 Days)
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-zinc-500">Monthly Amount:</span>
+            <span className="text-[#8b94a3]">Monthly Amount:</span>
             <span className="font-bold text-white tabular-nums">{formatCentsToUsd(successResult.monthly_amount_cents)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-zinc-500">Platform Escrow Fee (15%):</span>
+            <span className="text-[#8b94a3]">Platform Escrow Fee (15%):</span>
             <span className="text-zinc-400 tabular-nums">{formatCentsToUsd(successResult.platform_fee_cents)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-zinc-500">Creator Net Direct Payout (85%):</span>
-            <span className="text-emerald-400 font-bold tabular-nums">{formatCentsToUsd(successResult.creator_payout_cents)}</span>
+            <span className="text-[#8b94a3]">Creator Net Direct Payout (85%):</span>
+            <span className="text-[#73e5bf] font-bold tabular-nums">{formatCentsToUsd(successResult.creator_payout_cents)}</span>
           </div>
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             href={`/tools/${listing.slug}`}
-            className="w-full sm:w-auto px-5 py-2 rounded-lg bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-500 shadow-glow-indigo transition-all"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#73e5bf] text-[#130f18] text-xs font-bold hover:bg-[#85ebd0] shadow-mint-led transition-all"
           >
             Return to Tool Listing
           </Link>
           <Link
             href="/dashboard"
-            className="w-full sm:w-auto px-5 py-2 rounded-lg border border-white/[0.1] bg-white/[0.04] text-zinc-200 text-xs font-semibold hover:bg-white/[0.08] transition-colors"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-[#e5e7eb]/12 bg-[#2e2d36] text-zinc-200 text-xs font-semibold hover:bg-[#383742] transition-colors"
           >
             View Telemetry Dashboard
           </Link>
@@ -155,16 +155,16 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       {/* Left Column: Booking Form */}
-      <div className="lg:col-span-7 bg-white/[0.02] rounded-2xl border border-white/[0.08] shadow-inner-border backdrop-blur-sm p-6 sm:p-8">
-        <h2 className="text-lg sm:text-xl font-bold text-white mb-1">Reserve Slot & Submit Creative</h2>
-        <p className="text-xs text-zinc-400 mb-6">
+      <div className="lg:col-span-7 bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 shadow-sm p-6 sm:p-8">
+        <h2 className="text-xl font-display font-black text-white mb-1">Reserve Slot & Submit Creative</h2>
+        <p className="text-xs text-[#8b94a3] mb-6">
           Submit your non-intrusive in-app creative. Once confirmed, your placement goes live on the edge immediately.
         </p>
 
         {/* Quick Sample Copy Inserter */}
-        <div className="mb-6 p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-between flex-wrap gap-2 text-xs">
-          <span className="font-semibold text-indigo-300 flex items-center gap-1.5">
-            <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
+        <div className="mb-6 p-3.5 rounded-xl bg-[#2e2d36] border border-[#e5e7eb]/10 flex items-center justify-between flex-wrap gap-2 text-xs">
+          <span className="font-semibold text-zinc-200 flex items-center gap-1.5">
+            <Sparkles className="h-3.5 w-3.5 text-[#73e5bf]" />
             <span>Fill sample copy:</span>
           </span>
           <div className="flex items-center gap-1.5 flex-wrap">
@@ -173,7 +173,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
                 key={sample.name}
                 type="button"
                 onClick={() => applySampleCopy(sample)}
-                className="px-2.5 py-1 rounded-md bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] text-zinc-300 hover:text-white text-[11px] font-medium transition-colors"
+                className="px-2.5 py-1 rounded-lg bg-[#21192a] hover:bg-[#130f18] border border-[#e5e7eb]/10 text-zinc-300 hover:text-white text-[11px] font-medium transition-colors"
               >
                 {sample.name}
               </button>
@@ -198,7 +198,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               value={sponsorName}
               onChange={(e) => setSponsorName(e.target.value)}
               placeholder="e.g. Supabase, LogFast, PostHog"
-              className="w-full px-3.5 py-2 rounded-lg border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 placeholder-zinc-500 transition-all"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e7eb]/12 bg-[#2e2d36] text-sm text-white focus:outline-none focus:border-[#73e5bf] focus:ring-1 focus:ring-[#73e5bf] placeholder-[#8b94a3] transition-all"
             />
           </div>
 
@@ -212,7 +212,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               value={sponsorEmail}
               onChange={(e) => setSponsorEmail(e.target.value)}
               placeholder="growth@yourbrand.com"
-              className="w-full px-3.5 py-2 rounded-lg border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 placeholder-zinc-500 transition-all"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e7eb]/12 bg-[#2e2d36] text-sm text-white focus:outline-none focus:border-[#73e5bf] focus:ring-1 focus:ring-[#73e5bf] placeholder-[#8b94a3] transition-all"
             />
           </div>
 
@@ -223,7 +223,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               </label>
               <span
                 className={`text-[11px] font-mono tabular-nums ${
-                  isOverLimit ? 'text-rose-400 font-bold' : charPercent > 80 ? 'text-amber-400 font-semibold' : 'text-zinc-500'
+                  isOverLimit ? 'text-rose-400 font-bold' : charPercent > 80 ? 'text-amber-400 font-semibold' : 'text-[#8b94a3]'
                 }`}
               >
                 {charCount} / {maxChars} chars
@@ -235,17 +235,17 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               value={creativeText}
               onChange={(e) => setCreativeText(e.target.value)}
               placeholder={`Deploy APIs in 1-click on YourBrand (Max ${maxChars} chars)`}
-              className={`w-full px-3.5 py-2 rounded-lg border text-sm text-white bg-white/[0.03] focus:outline-none focus:ring-1 transition-all ${
+              className={`w-full px-3.5 py-2.5 rounded-xl border text-sm text-white bg-[#2e2d36] focus:outline-none focus:ring-1 transition-all ${
                 isOverLimit
                   ? 'border-rose-500/60 focus:ring-rose-500/40 bg-rose-500/10'
-                  : 'border-white/[0.08] focus:border-indigo-500/60 focus:ring-indigo-500/30'
+                  : 'border-[#e5e7eb]/12 focus:border-[#73e5bf] focus:ring-[#73e5bf]'
               }`}
             />
             {/* Live Character Progress Gauge */}
-            <div className="w-full bg-zinc-800 rounded-full h-1 mt-1.5 overflow-hidden">
+            <div className="w-full bg-[#130f18] rounded-full h-1.5 mt-2 overflow-hidden">
               <div
                 className={`h-full transition-all ${
-                  isOverLimit ? 'bg-rose-500' : charPercent > 80 ? 'bg-amber-500' : 'bg-indigo-500'
+                  isOverLimit ? 'bg-rose-500' : charPercent > 80 ? 'bg-amber-500' : 'bg-[#73e5bf]'
                 }`}
                 style={{ width: `${charPercent}%` }}
               />
@@ -262,23 +262,23 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
               value={targetUrl}
               onChange={(e) => setTargetUrl(e.target.value)}
               placeholder="https://yourbrand.com/landing?ref=tool"
-              className="w-full px-3.5 py-2 rounded-lg border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 placeholder-zinc-500 transition-all"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e7eb]/12 bg-[#2e2d36] text-sm text-white focus:outline-none focus:border-[#73e5bf] focus:ring-1 focus:ring-[#73e5bf] placeholder-[#8b94a3] transition-all"
             />
-            <p className="mt-1 text-[11px] text-zinc-500">
-              Must be HTTPS. Tracking parameters (utm_source=sponsorslot) will be appended automatically.
+            <p className="mt-1 text-[11px] text-[#8b94a3]">
+              Must be HTTPS. Tracking parameters (utm_source=neotic_ads) will be appended automatically.
             </p>
           </div>
 
           <button
             type="submit"
             disabled={loading || isOverLimit}
-            className="w-full mt-4 flex items-center justify-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 text-xs font-semibold text-white shadow-glow-indigo focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-[#090a0f] disabled:bg-zinc-800 disabled:text-zinc-600 disabled:cursor-not-allowed transition-all"
+            className="w-full mt-4 flex items-center justify-center gap-2 rounded-xl bg-[#73e5bf] hover:bg-[#85ebd0] px-5 py-3 text-sm font-bold text-[#130f18] shadow-mint-led focus:outline-none focus:ring-2 focus:ring-[#73e5bf] disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
           >
             {loading ? (
               <span>Confirming Escrow...</span>
             ) : (
               <>
-                <Lock className="h-3.5 w-3.5" />
+                <Lock className="h-4 w-4" />
                 <span>Confirm 30-Day Sponsorship ({formatCentsToUsd(slot.monthly_price_cents)})</span>
               </>
             )}
@@ -288,11 +288,11 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
 
       {/* Right Column: Live Context Preview & Escrow Terms */}
       <div className="lg:col-span-5 space-y-6">
-        {/* Live Rendering Preview Box */}
-        <div className="bg-white/[0.02] rounded-2xl border border-white/[0.08] shadow-inner-border backdrop-blur-sm p-6">
+        {/* Live Rendering Preview Box with Floating White Surface */}
+        <div className="bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 shadow-sm p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
+              <Sparkles className="h-3.5 w-3.5 text-[#73e5bf]" />
               <span>Live In-App Native Preview</span>
             </h3>
             {/* Format Selector Pills */}
@@ -302,10 +302,10 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
                   key={fmt}
                   type="button"
                   onClick={() => setPreviewFormat(fmt)}
-                  className={`text-[9px] font-mono px-1.5 py-0.5 rounded uppercase font-semibold transition-colors ${
+                  className={`text-[9px] font-mono px-2 py-0.5 rounded-lg uppercase font-bold transition-colors ${
                     previewFormat === fmt
-                      ? 'bg-indigo-600 text-white shadow-glow-indigo'
-                      : 'bg-white/[0.05] text-zinc-400 hover:text-white'
+                      ? 'bg-[#73e5bf] text-[#130f18] shadow-mint-led'
+                      : 'bg-[#2e2d36] text-[#8b94a3] hover:text-white'
                   }`}
                 >
                   {fmt.split('_')[0]}
@@ -314,121 +314,126 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
             </div>
           </div>
 
-          {/* Render Mock Container (Simulated Window) */}
-          <div className="p-4 rounded-xl bg-[#07080d] border border-white/[0.08] min-h-[140px] flex flex-col justify-between">
-            <div className="flex items-center gap-1.5 mb-3 opacity-60">
-              <span className="w-2 h-2 rounded-full bg-zinc-700" />
-              <span className="w-2 h-2 rounded-full bg-zinc-700" />
-              <span className="w-2 h-2 rounded-full bg-zinc-700" />
+          {/* Floating Product Surface (Level 3): The only white surface in the dark UI */}
+          <div className="p-5 rounded-2xl bg-[#ffffff] text-[#130f18] border border-zinc-200 shadow-2xl min-h-[160px] flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+              </div>
+              <span className="text-[10px] font-mono text-zinc-400 font-medium truncate max-w-[180px]">
+                {listing.title} — simulated host app
+              </span>
             </div>
 
-            <div className="flex items-center justify-center py-3">
+            <div className="flex items-center justify-center py-4">
               {previewFormat === 'header_pill' && (
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-xs text-zinc-200">
-                  <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-50 border border-zinc-200 text-xs text-zinc-900 shadow-xs">
+                  <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-[#73e5bf]/20 text-[#130f18] border border-[#73e5bf]/40">
                     Sponsored
                   </span>
-                  <span className="font-medium truncate max-w-[240px]">
+                  <span className="font-semibold truncate max-w-[240px]">
                     {creativeText || 'Deploy your API in 1-click on YourBrand'}
                   </span>
                 </div>
               )}
 
               {previewFormat === 'empty_state' && (
-                <div className="w-full max-w-[280px] p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-left">
+                <div className="w-full max-w-[300px] p-4 rounded-xl bg-zinc-50 border border-zinc-200 text-left shadow-xs">
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                    <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-[#a37af5]/15 text-[#6c39db] border border-[#a37af5]/30">
                       Recommended Partner
                     </span>
-                    <span className="text-[10px] text-zinc-500">Sponsored</span>
+                    <span className="text-[10px] text-zinc-400">Sponsored</span>
                   </div>
-                  <div className="text-xs font-semibold text-white mb-2 leading-snug">
+                  <div className="text-xs font-bold text-zinc-900 mb-2 leading-snug">
                     {creativeText || 'No active alerts. Need automated Postgres monitoring? Try YourBrand.'}
                   </div>
-                  <span className="inline-flex items-center text-[10px] font-medium text-indigo-400">
+                  <span className="inline-flex items-center text-[11px] font-bold text-[#6c39db]">
                     Learn more <ArrowRight className="h-3 w-3 ml-1" />
                   </span>
                 </div>
               )}
 
               {previewFormat === 'footer_badge' && (
-                <div className="inline-flex items-center gap-2 px-3 py-1 text-xs text-zinc-400">
-                  <span className="font-medium text-zinc-300">Infrastructure Partner:</span>
-                  <span className="text-indigo-400 font-semibold">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 text-xs text-zinc-600 bg-zinc-50 rounded-lg border border-zinc-200 shadow-xs">
+                  <span className="font-medium text-zinc-500">Infrastructure Partner:</span>
+                  <span className="text-zinc-950 font-bold">
                     {creativeText || 'Hosted on YourBrand'}
                   </span>
                 </div>
               )}
 
               {previewFormat === 'email_footer' && (
-                <div className="w-full p-2.5 rounded-lg bg-white/[0.03] border border-dashed border-white/[0.1] text-left text-xs text-zinc-400 font-mono">
+                <div className="w-full p-3 rounded-lg bg-zinc-50 border border-dashed border-zinc-300 text-left text-xs text-zinc-700 font-mono">
                   [Digest Footer] Powered by {listing.title}. Sponsored by{' '}
-                  <span className="text-indigo-400 font-semibold">
+                  <span className="text-[#6c39db] font-bold">
                     {creativeText || 'YourBrand Cloud'}
                   </span>
                 </div>
               )}
             </div>
 
-            <div className="text-[10px] text-zinc-600 text-center">
-              Native host application theme
+            <div className="text-[10px] text-zinc-400 text-center font-medium">
+              Floating product canvas: client DOM representation
             </div>
           </div>
         </div>
 
         {/* Escrow Terms & Breakdown */}
-        <div className="bg-white/[0.02] rounded-2xl border border-white/[0.08] shadow-inner-border backdrop-blur-sm p-6">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3 flex items-center gap-1.5">
-            <ShieldCheck className="h-4 w-4 text-emerald-400" />
+        <div className="bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 shadow-sm p-6">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-300 mb-3 flex items-center gap-1.5">
+            <ShieldCheck className="h-4 w-4 text-[#73e5bf]" />
             <span>Escrow Guarantee & Term Details</span>
           </h3>
 
           <div className="space-y-2.5 text-xs">
-            <div className="flex justify-between py-1.5 border-b border-white/[0.06]">
-              <span className="text-zinc-400">Monthly Lease Price:</span>
+            <div className="flex justify-between py-2 border-b border-[#e5e7eb]/10">
+              <span className="text-[#8b94a3]">Monthly Lease Price:</span>
               <span className="font-bold text-white tabular-nums">{formatCentsToUsd(slot.monthly_price_cents)}</span>
             </div>
-            <div className="flex justify-between py-1.5 border-b border-white/[0.06]">
-              <span className="text-zinc-400">30-Day Term Window:</span>
+            <div className="flex justify-between py-2 border-b border-[#e5e7eb]/10">
+              <span className="text-[#8b94a3]">30-Day Term Window:</span>
               <span className="text-zinc-300 font-medium">
                 {termDates.startDate} → {termDates.endDate}
               </span>
             </div>
-            <div className="flex justify-between py-1.5 border-b border-white/[0.06]">
-              <span className="text-zinc-400">Escrow Platform Fee (15%):</span>
+            <div className="flex justify-between py-2 border-b border-[#e5e7eb]/10">
+              <span className="text-[#8b94a3]">Escrow Platform Fee (15%):</span>
               <span className="text-zinc-300 tabular-nums">{formatCentsToUsd(split.platform_fee_cents)}</span>
             </div>
-            <div className="flex justify-between py-1.5">
-              <span className="text-zinc-400">Creator Net Allocation (85%):</span>
-              <span className="text-emerald-400 font-bold tabular-nums">{formatCentsToUsd(split.creator_payout_cents)}</span>
+            <div className="flex justify-between py-2">
+              <span className="text-[#8b94a3]">Creator Net Allocation (85%):</span>
+              <span className="text-[#73e5bf] font-bold tabular-nums">{formatCentsToUsd(split.creator_payout_cents)}</span>
             </div>
           </div>
 
           {/* Visual Take-Rate Split Bar */}
-          <div className="mt-4 pt-3 border-t border-white/[0.06]">
-            <div className="flex justify-between text-[11px] font-semibold mb-1.5">
-              <span className="text-zinc-400">Take-Rate Allocation</span>
-              <span className="text-zinc-300">85% Creator • 15% Platform</span>
+          <div className="mt-4 pt-3 border-t border-[#e5e7eb]/10">
+            <div className="flex justify-between text-[11px] font-semibold mb-2">
+              <span className="text-[#8b94a3]">Take-Rate Allocation</span>
+              <span className="text-zinc-300 font-bold">85% Creator • 15% Platform</span>
             </div>
-            <div className="h-2 w-full rounded-full overflow-hidden flex bg-zinc-800 gap-0.5">
+            <div className="h-2.5 w-full rounded-full overflow-hidden flex bg-[#130f18] gap-0.5">
               <div
-                className="bg-emerald-500 h-full rounded-l-full"
+                className="bg-[#73e5bf] h-full rounded-l-full shadow-[0_0_8px_rgba(115,229,191,0.4)]"
                 style={{ width: '85%' }}
                 title="85% Creator Direct Net Payout"
               />
               <div
-                className="bg-indigo-600 h-full rounded-r-full"
+                className="bg-[#a37af5] h-full rounded-r-full"
                 style={{ width: '15%' }}
                 title="15% Platform Escrow Fee"
               />
             </div>
-            <div className="flex justify-between text-[10px] text-zinc-500 mt-1 font-medium">
-              <span className="text-emerald-400 font-semibold">{formatCentsToUsd(split.creator_payout_cents)} (Creator Net)</span>
-              <span className="text-indigo-400 font-semibold">{formatCentsToUsd(split.platform_fee_cents)} (SponsorSlot)</span>
+            <div className="flex justify-between text-[10px] mt-1.5 font-medium">
+              <span className="text-[#73e5bf] font-bold">{formatCentsToUsd(split.creator_payout_cents)} (Creator Net)</span>
+              <span className="text-[#a37af5] font-bold">{formatCentsToUsd(split.platform_fee_cents)} (Neotic Ads)</span>
             </div>
           </div>
 
-          <div className="mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-300 leading-relaxed">
+          <div className="mt-4 p-3.5 rounded-xl bg-[#2e2d36] border border-[#e5e7eb]/10 text-[11px] text-[#8b94a3] leading-relaxed">
             Funds remain held in escrow. Payout is released to the creator after uptime verification ensures your creative was served faithfully for the term.
           </div>
         </div>
