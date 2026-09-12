@@ -65,7 +65,7 @@ interface ToolVisualMeta {
 const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'jsonhero-visualizer': {
     icon: Code2,
-    bg: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/25',
+    bg: 'bg-emerald-50 text-emerald-700 border border-emerald-200/80',
     badgeLabel: 'Developer Tools',
     creatorName: 'Anant Gupta',
     creatorHandle: '@anant-gupta',
@@ -77,7 +77,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'tabmaster-pro': {
     icon: LayoutGrid,
-    bg: 'bg-sky-500/15 text-sky-400 border border-sky-500/25',
+    bg: 'bg-sky-50 text-sky-700 border border-sky-200/80',
     badgeLabel: 'Chrome Extension',
     creatorName: 'Sarah Chen',
     creatorHandle: '@sarahchen',
@@ -90,7 +90,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'svg-shape-shifter': {
     icon: Palette,
-    bg: 'bg-amber-500/15 text-amber-400 border border-amber-500/25',
+    bg: 'bg-amber-50 text-amber-700 border border-amber-200/80',
     badgeLabel: 'Design & Assets',
     creatorName: 'Marco Rossi',
     creatorHandle: '@mrossi',
@@ -102,7 +102,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'tailscan-devtools': {
     icon: Sliders,
-    bg: 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/25',
+    bg: 'bg-indigo-50 text-indigo-700 border border-indigo-200/80',
     badgeLabel: 'DevTools & CSS',
     creatorName: 'Stanislav Bruch',
     creatorHandle: '@stanislav',
@@ -114,7 +114,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'regex101-companion': {
     icon: FileCode2,
-    bg: 'bg-teal-500/15 text-teal-400 border border-teal-500/25',
+    bg: 'bg-teal-50 text-teal-700 border border-teal-200/80',
     badgeLabel: 'Regex Utilities',
     creatorName: 'Paras Shah',
     creatorHandle: '@paras-shah',
@@ -126,7 +126,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'crontab-guru-visualizer': {
     icon: Clock,
-    bg: 'bg-rose-500/15 text-rose-400 border border-rose-500/25',
+    bg: 'bg-rose-50 text-rose-700 border border-rose-200/80',
     badgeLabel: 'Cron Automations',
     creatorName: 'Alex Rivera',
     creatorHandle: '@arivera',
@@ -138,7 +138,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'markdown-slides-preview': {
     icon: Sparkles,
-    bg: 'bg-purple-500/15 text-purple-400 border border-purple-500/25',
+    bg: 'bg-purple-50 text-purple-700 border border-purple-200/80',
     badgeLabel: 'Markdown & Slides',
     creatorName: 'Elena Rostova',
     creatorHandle: '@erostova',
@@ -156,7 +156,7 @@ function getToolVisual(slug: string, index: number): ToolVisualMeta {
   }
   return {
     icon: Sparkles,
-    bg: 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/25',
+    bg: 'bg-zinc-100 text-zinc-700 border border-zinc-200/80',
     badgeLabel: 'Web Utility',
     creatorName: 'Developer',
     creatorHandle: `@tool-${index + 1}`,
@@ -286,7 +286,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
               }
             }}
             placeholder="Search..."
-            className="w-full bg-[#0e131d]/90 hover:bg-[#111723] focus:bg-[#131b29] text-white placeholder-[#8b97a8]/70 border border-white/[0.1] focus:border-[#73e5bf]/50 rounded-full pl-5 pr-28 py-3 text-sm transition-all outline-none shadow-inner"
+            className="w-full bg-white hover:bg-zinc-50/50 focus:bg-white text-zinc-950 placeholder-zinc-400 border border-zinc-200/90 focus:border-zinc-400 rounded-full pl-5 pr-28 py-3 text-sm transition-all outline-none shadow-sm focus:ring-2 focus:ring-zinc-100"
           />
           
           <div className="absolute right-2 flex items-center gap-1.5">
@@ -294,13 +294,13 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="p-1 rounded-full text-gray-400 hover:text-white"
+                className="p-1 rounded-full text-zinc-400 hover:text-zinc-700"
                 title="Clear"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
             )}
-            <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-black/40 border border-white/10 text-[10px] font-mono text-gray-400">
+            <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-[10px] font-mono text-zinc-500 shadow-2xs">
               ⌘ + K
             </span>
             <button
@@ -311,16 +311,16 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
               }}
-              className="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white flex items-center justify-center border border-white/10 transition-colors"
+              className="w-8 h-8 rounded-full bg-zinc-900 hover:bg-black text-white flex items-center justify-center border border-zinc-900 transition-colors shadow-xs"
               title="Search"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
         {/* Subtext under search */}
-        <p className="text-xs text-[#8b97a8] font-normal tracking-wide">
+        <p className="text-xs text-zinc-500 font-normal tracking-wide">
           The front page of micro-tool sponsorships. Used by 50K+ developers.
         </p>
 
@@ -338,14 +338,14 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
             }}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.03] hover:bg-white/[0.07] text-gray-300 hover:text-white text-xs font-semibold transition-all active:scale-95 shadow-sm"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-zinc-200 hover:border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 text-xs font-semibold transition-all active:scale-95 shadow-xs"
           >
             <span>Browse All Ads</span>
           </button>
 
           <Link
             href="/creator"
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/[0.03] hover:bg-white/[0.07] text-gray-300 hover:text-white border border-white/10 hover:border-white/20 text-xs font-semibold transition-all active:scale-95 shadow-sm"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 border border-zinc-200 hover:border-zinc-300 text-xs font-semibold transition-all active:scale-95 shadow-xs"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Create / List Tools</span>
@@ -356,7 +356,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
       {/* =========================================================================
           HORIZONTAL CATEGORY PILL FILTER BAR (Exactly as in Reference Screenshot)
           ========================================================================= */}
-      <div className="w-full flex items-center gap-2 overflow-x-auto pb-2 pt-2 scrollbar-none no-scrollbar text-xs font-medium border-b border-white/[0.08]">
+      <div className="w-full flex items-center gap-2 overflow-x-auto pb-2 pt-2 scrollbar-none no-scrollbar text-xs font-medium border-b border-zinc-200/80">
         {/* 1. Today Dropdown Pill (with glowing green dot) */}
         <div className="relative">
           <button
@@ -364,19 +364,19 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
               sortBy === 'today'
-                ? 'bg-[#73e5bf]/15 text-[#73e5bf] border-[#73e5bf]/30 shadow-sm font-semibold'
-                : 'bg-white/[0.03] text-gray-300 border-white/[0.08] hover:border-white/[0.15]'
+                ? 'bg-zinc-900 text-white border-zinc-900 shadow-xs font-semibold'
+                : 'bg-white text-zinc-700 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
             }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#73e5bf] shadow-[0_0_6px_#73e5bf]" />
+            <span className={`w-1.5 h-1.5 rounded-full ${sortBy === 'today' ? 'bg-emerald-400 shadow-[0_0_6px_#34d399]' : 'bg-emerald-500'}`} />
             <span>Today</span>
-            <span className="text-[10px] font-mono opacity-80">{initialListings.length}</span>
+            <span className={`text-[10px] font-mono ${sortBy === 'today' ? 'opacity-80' : 'text-zinc-500'}`}>{initialListings.length}</span>
             <ChevronDown className={`w-3 h-3 opacity-60 transition-transform ${sortDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {/* Sort Dropdown Menu */}
           {sortDropdownOpen && (
-            <div className="absolute top-full left-0 mt-2 w-48 rounded-xl glass-panel p-1.5 shadow-2xl z-40">
+            <div className="absolute top-full left-0 mt-2 w-48 rounded-xl bg-white border border-zinc-200 p-1.5 shadow-xl z-40">
               <button
                 type="button"
                 onClick={() => {
@@ -384,11 +384,11 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   setSortDropdownOpen(false);
                 }}
                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between ${
-                  sortBy === 'today' ? 'bg-white/[0.1] text-white font-semibold' : 'text-[#8b97a8] hover:text-white hover:bg-white/[0.04]'
+                  sortBy === 'today' ? 'bg-zinc-100 text-zinc-950 font-semibold' : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50'
                 }`}
               >
                 <span>Today (Recent)</span>
-                {sortBy === 'today' && <Check className="w-3 h-3 text-[#73e5bf]" />}
+                {sortBy === 'today' && <Check className="w-3 h-3 text-emerald-600" />}
               </button>
               <button
                 type="button"
@@ -397,11 +397,11 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   setSortDropdownOpen(false);
                 }}
                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between ${
-                  sortBy === 'dau' ? 'bg-white/[0.1] text-white font-semibold' : 'text-[#8b97a8] hover:text-white hover:bg-white/[0.04]'
+                  sortBy === 'dau' ? 'bg-zinc-100 text-zinc-950 font-semibold' : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50'
                 }`}
               >
                 <span>Highest DAU</span>
-                {sortBy === 'dau' && <Check className="w-3 h-3 text-[#73e5bf]" />}
+                {sortBy === 'dau' && <Check className="w-3 h-3 text-emerald-600" />}
               </button>
               <button
                 type="button"
@@ -410,11 +410,11 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   setSortDropdownOpen(false);
                 }}
                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between ${
-                  sortBy === 'price' ? 'bg-white/[0.1] text-white font-semibold' : 'text-[#8b97a8] hover:text-white hover:bg-white/[0.04]'
+                  sortBy === 'price' ? 'bg-zinc-100 text-zinc-950 font-semibold' : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50'
                 }`}
               >
                 <span>Lowest Price</span>
-                {sortBy === 'price' && <Check className="w-3 h-3 text-[#73e5bf]" />}
+                {sortBy === 'price' && <Check className="w-3 h-3 text-emerald-600" />}
               </button>
               <button
                 type="button"
@@ -423,11 +423,11 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   setSortDropdownOpen(false);
                 }}
                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between ${
-                  sortBy === 'views' ? 'bg-white/[0.1] text-white font-semibold' : 'text-[#8b97a8] hover:text-white hover:bg-white/[0.04]'
+                  sortBy === 'views' ? 'bg-zinc-100 text-zinc-950 font-semibold' : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50'
                 }`}
               >
                 <span>Most Views</span>
-                {sortBy === 'views' && <Check className="w-3 h-3 text-[#73e5bf]" />}
+                {sortBy === 'views' && <Check className="w-3 h-3 text-emerald-600" />}
               </button>
             </div>
           )}
@@ -444,12 +444,16 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'all' && !availableOnly && !verifiedOnly && searchQuery === ''
-              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
-              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
+              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
           }`}
         >
           <span>Tools</span>
-          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
+            selectedCategory === 'all' && !availableOnly && !verifiedOnly && searchQuery === ''
+              ? 'bg-white/20 text-white'
+              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+          }`}>
             {initialListings.length}
           </span>
         </button>
@@ -465,12 +469,16 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'developer-tools' && !availableOnly && !verifiedOnly
-              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
-              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
+              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
           }`}
         >
           <span>Developer Tools</span>
-          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
+            selectedCategory === 'developer-tools' && !availableOnly && !verifiedOnly
+              ? 'bg-white/20 text-white'
+              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+          }`}>
             {categoryCounts['developer-tools'] ?? 2}
           </span>
         </button>
@@ -486,12 +494,16 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'productivity' && !availableOnly && !verifiedOnly
-              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
-              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
+              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
           }`}
         >
           <span>Productivity</span>
-          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
+            selectedCategory === 'productivity' && !availableOnly && !verifiedOnly
+              ? 'bg-white/20 text-white'
+              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+          }`}>
             {categoryCounts['productivity'] ?? 2}
           </span>
         </button>
@@ -507,12 +519,16 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'design' && !availableOnly && !verifiedOnly
-              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
-              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
+              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
           }`}
         >
           <span>Design & Assets</span>
-          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
+            selectedCategory === 'design' && !availableOnly && !verifiedOnly
+              ? 'bg-white/20 text-white'
+              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+          }`}>
             {categoryCounts['design'] ?? 2}
           </span>
         </button>
@@ -528,12 +544,16 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'utilities' && !availableOnly && !verifiedOnly
-              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
-              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white hover:border-white/[0.15]'
+              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
           }`}
         >
           <span>Web Utilities</span>
-          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
+            selectedCategory === 'utilities' && !availableOnly && !verifiedOnly
+              ? 'bg-white/20 text-white'
+              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+          }`}>
             {categoryCounts['utilities'] ?? 1}
           </span>
         </button>
@@ -547,12 +567,16 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             searchQuery.toLowerCase() === 'chrome'
-              ? 'bg-white/[0.1] text-white border-white/[0.2] font-semibold'
-              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white'
+              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
           }`}
         >
           <span>Chrome Extensions</span>
-          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-gray-400">
+          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
+            searchQuery.toLowerCase() === 'chrome'
+              ? 'bg-white/20 text-white'
+              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+          }`}>
             2
           </span>
         </button>
@@ -563,11 +587,11 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           onClick={() => setVerifiedOnly(!verifiedOnly)}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             verifiedOnly
-              ? 'bg-sky-500/15 text-sky-300 border-sky-500/30 font-semibold'
-              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white'
+              ? 'bg-sky-50 text-sky-700 border-sky-300 font-semibold shadow-2xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
           }`}
         >
-          <ShieldCheck className="w-3.5 h-3.5 text-sky-400" />
+          <ShieldCheck className="w-3.5 h-3.5 text-sky-600" />
           <span>Verified Only</span>
         </button>
 
@@ -577,12 +601,14 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           onClick={() => setAvailableOnly(!availableOnly)}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             availableOnly
-              ? 'bg-[#73e5bf]/15 text-[#73e5bf] border-[#73e5bf]/30 font-semibold'
-              : 'bg-white/[0.03] text-[#8b97a8] border-white/[0.07] hover:text-white'
+              ? 'bg-emerald-50 text-emerald-800 border-emerald-300 font-semibold shadow-2xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
           }`}
         >
           <span>Available Slots</span>
-          <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px] font-mono text-[#73e5bf]">
+          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-bold ${
+            availableOnly ? 'bg-emerald-100 text-emerald-800' : 'bg-zinc-100 text-emerald-700 border border-zinc-200/60'
+          }`}>
             8
           </span>
         </button>
@@ -593,8 +619,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           ========================================================================= */}
       <div id="marketplace-feed" className="w-full space-y-2">
         {filteredListings.length === 0 ? (
-          <div className="text-center py-16 bg-[#101522]/80 rounded-2xl border border-white/[0.08] text-[#8b97a8]">
-            <p className="text-sm font-semibold text-white">No developer tools found</p>
+          <div className="text-center py-16 bg-white rounded-2xl border border-zinc-200 text-zinc-500 shadow-xs">
+            <p className="text-sm font-semibold text-zinc-900">No developer tools found</p>
             <p className="text-xs mt-1">Try resetting your filters or search keywords.</p>
             <button
               type="button"
@@ -604,7 +630,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 setAvailableOnly(false);
                 setVerifiedOnly(false);
               }}
-              className="mt-4 px-4 py-1.5 rounded-full bg-white/[0.06] text-white text-xs font-semibold hover:bg-white/[0.12] border border-white/[0.1]"
+              className="mt-4 px-4 py-1.5 rounded-full bg-zinc-900 text-white text-xs font-semibold hover:bg-black border border-zinc-900 shadow-xs"
             >
               Reset Filters
             </button>
@@ -632,7 +658,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   onClick={() => setExpandedListingId(isExpanded ? null : listing.id)}
                   className={`w-full glass-row transition-all rounded-xl p-3 sm:px-4 sm:py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer select-none group ${
                     isExpanded
-                      ? 'border-[#73e5bf]/40 bg-[#141b27] shadow-lg'
+                      ? 'border-emerald-500/40 bg-emerald-50/20 shadow-md'
                       : ''
                   }`}
                 >
@@ -642,15 +668,15 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                     {/* Col 1: Time Ago / Ad Badge & Views */}
                     <div className="w-12 shrink-0 text-center flex flex-col items-center justify-center">
                       {visual.isAd ? (
-                        <span className="px-1.5 py-0.2 rounded bg-sky-500/15 text-sky-400 font-mono text-[10px] font-bold uppercase tracking-wider border border-sky-500/25">
+                        <span className="px-1.5 py-0.2 rounded bg-sky-50 text-sky-700 font-mono text-[10px] font-bold uppercase tracking-wider border border-sky-200">
                           AD
                         </span>
                       ) : (
-                        <span className="text-xs font-semibold text-gray-300 font-mono">
+                        <span className="text-xs font-semibold text-zinc-700 font-mono">
                           {visual.timeAgo}
                         </span>
                       )}
-                      <div className="flex items-center gap-0.5 text-[10px] text-gray-400 font-mono mt-0.5">
+                      <div className="flex items-center gap-0.5 text-[10px] text-zinc-400 font-mono mt-0.5">
                         <Eye className="w-2.5 h-2.5 opacity-60" />
                         <span>{visual.views}</span>
                       </div>
@@ -658,7 +684,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
 
                     {/* Col 2: App Icon */}
                     <div className="shrink-0">
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${visual.bg} shadow-inner`}>
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${visual.bg} shadow-2xs`}>
                         <Icon className="w-5 h-5 stroke-[2]" />
                       </div>
                     </div>
@@ -669,79 +695,79 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                         <Link
                           href={`/tools/${listing.slug}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="font-bold text-white text-sm hover:text-[#73e5bf] transition-colors truncate"
+                          className="font-bold text-zinc-950 text-sm hover:text-emerald-700 transition-colors truncate"
                         >
                           {listing.title}
                         </Link>
 
                         {/* Verified Checkmark Badge */}
                         <span
-                          className="inline-flex items-center text-[#38bdf8]"
+                          className="inline-flex items-center text-[#0284c7]"
                           title="Verified Traffic & Publisher"
                         >
                           <Check className="w-3.5 h-3.5 stroke-[3]" />
                         </span>
 
                         {/* Version / Meta Pill */}
-                        <span className="px-1.5 py-0.2 rounded bg-white/[0.04] text-gray-400 text-[10px] font-mono border border-white/[0.06]">
+                        <span className="px-1.5 py-0.2 rounded bg-zinc-100 text-zinc-600 text-[10px] font-mono border border-zinc-200">
                           {visual.version}
                         </span>
 
                         {/* Slots Pill */}
-                        <span className="px-1.5 py-0.2 rounded bg-white/[0.04] text-gray-400 text-[10px] font-mono border border-white/[0.06]">
+                        <span className="px-1.5 py-0.2 rounded bg-zinc-100 text-zinc-600 text-[10px] font-mono border border-zinc-200">
                           {totalSlots} slots
                         </span>
 
                         {/* Price Pill */}
-                        <span className="px-2 py-0.2 rounded bg-[#73e5bf]/10 text-[#73e5bf] border border-[#73e5bf]/25 text-[10px] font-mono font-bold">
+                        <span className="px-2 py-0.2 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-mono font-bold">
                           {minPrice}
                         </span>
                       </div>
 
                       {/* One-Line Description */}
-                      <p className="text-xs text-[#8b97a8] truncate max-w-xl font-normal">
+                      <p className="text-xs text-zinc-500 truncate max-w-xl font-normal">
                         {listing.description}
                       </p>
                     </div>
                   </div>
 
                   {/* Middle / Right Group: Category Pill, Creator Profile, Action & Bookmark */}
-                  <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-white/[0.06]">
+                  <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-zinc-200/80">
                     
                     {/* Col 4: Category Pill */}
-                    <div className="hidden lg:flex items-center px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-gray-300">
-                      <span className="font-medium text-[11px] text-[#8b97a8]">{visual.badgeLabel}</span>
+                    <div className="hidden lg:flex items-center px-3 py-1 rounded-full bg-zinc-100/70 border border-zinc-200 text-xs text-zinc-700">
+                      <span className="font-medium text-[11px] text-zinc-700">{visual.badgeLabel}</span>
                     </div>
 
                     {/* Col 5: Creator Profile */}
                     <div className="flex items-center gap-2 text-left">
-                      <div className="w-7 h-7 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-[10px] font-bold text-white">
+                      <div className="w-7 h-7 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-zinc-800">
                         {visual.creatorAvatar}
                       </div>
                       <div className="text-[11px] leading-tight">
-                        <div className="font-semibold text-white flex items-center gap-1">
+                        <div className="font-semibold text-zinc-950 flex items-center gap-1">
                           <span>{visual.creatorName}</span>
-                          <Check className="w-2.5 h-2.5 text-[#38bdf8] stroke-[3]" />
+                          <Check className="w-2.5 h-2.5 text-[#0284c7] stroke-[3]" />
                         </div>
-                        <div className="text-[#8b97a8] font-mono text-[10px]">
+                        <div className="text-zinc-400 font-mono text-[10px]">
                           {visual.creatorHandle}
                         </div>
                       </div>
                     </div>
 
-                    {/* Col 6: Actions — Terminal-grade emerald Book Ad button & Bookmark */}
+                    {/* Col 6: Actions — Sleek Obsidian Book Ad button & Bookmark */}
                     <div className="flex items-center gap-2">
                       {firstAvailableSlot ? (
                         <Link
                           href={`/sponsor/${firstAvailableSlot.id}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="px-3.5 py-1.5 rounded-lg bg-[#143d2e] hover:bg-[#1a4f3c] text-[#73e5bf] border border-[#73e5bf]/35 text-xs font-bold transition-all active:scale-95 shadow-sm"
+                          className="px-3.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-black text-white border border-zinc-900 text-xs font-semibold transition-all active:scale-95 shadow-xs"
                           title="Directly book this slot"
                         >
                           Book Ad ({minPrice})
                         </Link>
                       ) : (
-                        <span className="px-2.5 py-1 rounded-lg bg-white/[0.04] text-gray-400 text-[11px] font-medium border border-white/[0.06]">
+                        <span className="px-2.5 py-1 rounded-lg bg-zinc-100 text-zinc-400 text-[11px] font-medium border border-zinc-200">
                           Sold Out
                         </span>
                       )}
@@ -752,8 +778,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                         onClick={(e) => toggleBookmark(listing.id, e)}
                         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-all ${
                           isBookmarked
-                            ? 'bg-[#1877f2]/20 text-[#38bdf8] border-[#38bdf8]/40'
-                            : 'bg-white/[0.03] hover:bg-white/[0.07] text-gray-400 hover:text-white border-white/[0.08]'
+                            ? 'bg-sky-50 text-sky-700 border-sky-300'
+                            : 'bg-white hover:bg-zinc-50 text-zinc-500 hover:text-zinc-900 border-zinc-200 shadow-2xs'
                         }`}
                         title="Bookmark this tool"
                       >
@@ -764,7 +790,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                       </button>
 
                       {/* Drawer Chevron */}
-                      <div className="text-gray-400 group-hover:text-white transition-colors pl-0.5">
+                      <div className="text-zinc-400 group-hover:text-zinc-700 transition-colors pl-0.5">
                         {isExpanded ? (
                           <ChevronUp className="w-4 h-4" />
                         ) : (
@@ -779,20 +805,20 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                     EXPANDABLE INLINE DRAWER (Slot Booking & Code Embed Details)
                     ========================================================================= */}
                 {isExpanded && (
-                  <div className="w-full bg-[#0a0d13] border-x border-b border-white/[0.08] rounded-b-xl p-5 mt-[-4px] mb-3 space-y-4 shadow-xl">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-white/[0.06]">
+                  <div className="w-full bg-zinc-50/95 border-x border-b border-zinc-200 rounded-b-xl p-5 mt-[-4px] mb-3 space-y-4 shadow-sm">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-zinc-200/80">
                       <div>
-                        <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                        <h4 className="text-xs font-bold text-zinc-950 uppercase tracking-wider">
                           Configured Micro-Sponsorship Slots for {listing.title}
                         </h4>
-                        <p className="text-[11px] text-[#8b97a8] mt-0.5">
+                        <p className="text-[11px] text-zinc-500 mt-0.5">
                           {listing.verified_dau.toLocaleString()} Verified DAU · {listing.verification_source.toUpperCase()} Audited
                         </p>
                       </div>
 
                       <Link
                         href={`/tools/${listing.slug}`}
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-[#73e5bf] hover:underline"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:underline"
                       >
                         <span>View Full Listing Page</span>
                         <ExternalLink className="w-3.5 h-3.5" />
@@ -802,47 +828,47 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                     {/* Available Slots Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {toolSlots.length === 0 ? (
-                        <div className="col-span-full py-4 text-center text-xs text-gray-400">
+                        <div className="col-span-full py-4 text-center text-xs text-zinc-500">
                           No active slots configured for this application yet.
                         </div>
                       ) : (
                         toolSlots.map((slot) => (
                           <div
                             key={slot.id}
-                            className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.14] flex flex-col justify-between gap-3 transition-all"
+                            className="p-3.5 rounded-xl bg-white border border-zinc-200 hover:border-zinc-300 flex flex-col justify-between gap-3 transition-all shadow-2xs"
                           >
                             <div className="space-y-1">
                               <div className="flex items-center justify-between">
-                                <span className="font-semibold text-white text-xs">
+                                <span className="font-semibold text-zinc-950 text-xs">
                                   {slot.slot_name}
                                 </span>
                                 <span
                                   className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                                     slot.is_available
-                                      ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/25'
-                                      : 'bg-rose-500/15 text-rose-300 border border-rose-500/25'
+                                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                                      : 'bg-rose-50 text-rose-800 border border-rose-200'
                                   }`}
                                 >
                                   {slot.is_available ? 'Available' : 'Occupied'}
                                 </span>
                               </div>
-                              <p className="text-[11px] text-[#8b97a8]">
-                                Format: <span className="text-white font-mono">{slot.slot_type}</span>
+                              <p className="text-[11px] text-zinc-500">
+                                Format: <span className="text-zinc-900 font-mono">{slot.slot_type}</span>
                               </p>
-                              <div className="text-xs font-bold text-white pt-1">
+                              <div className="text-xs font-bold text-zinc-950 pt-1">
                                 {formatCentsToUsd(slot.monthly_price_cents)}{' '}
-                                <span className="text-[10px] font-normal text-gray-400">/ 30-day term</span>
+                                <span className="text-[10px] font-normal text-zinc-500">/ 30-day term</span>
                               </div>
                             </div>
 
                             {/* Booking Action */}
-                            <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between">
-                              <div className="text-[10px] text-gray-400 font-mono">
+                            <div className="pt-2 border-t border-zinc-100 flex items-center justify-between">
+                              <div className="text-[10px] text-zinc-500 font-mono">
                                 Escrow: 85% Creator / 15% Platform
                               </div>
                               <Link
                                 href={`/sponsor/${slot.id}`}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#73e5bf] hover:bg-[#8bf2ce] text-[#0d1017] text-xs font-bold transition-colors shadow-sm"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-black text-white text-xs font-semibold transition-colors shadow-xs"
                               >
                                 <span>Book This Slot</span>
                                 <ArrowRight className="w-3.5 h-3.5" />

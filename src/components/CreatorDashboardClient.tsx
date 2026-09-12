@@ -25,10 +25,10 @@ export interface CreatorDashboardClientProps {
 }
 
 const SLOT_TYPE_LABELS: Record<SlotType, { label: string; bgClass: string }> = {
-  header_pill: { label: 'Header Pill', bgClass: 'bg-[#73e5bf]/10 text-[#73e5bf] border-[#73e5bf]/25' },
-  empty_state: { label: 'Empty State Canvas', bgClass: 'bg-[#a37af5]/10 text-[#a37af5] border-[#a37af5]/25' },
-  footer_badge: { label: 'Footer Badge', bgClass: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
-  email_footer: { label: 'Email Digest Footer', bgClass: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
+  header_pill: { label: 'Header Pill', bgClass: 'bg-emerald-50 text-emerald-800 border-emerald-200/80' },
+  empty_state: { label: 'Empty State Canvas', bgClass: 'bg-violet-50 text-violet-800 border-violet-200/80' },
+  footer_badge: { label: 'Footer Badge', bgClass: 'bg-sky-50 text-sky-800 border-sky-200/80' },
+  email_footer: { label: 'Email Digest Footer', bgClass: 'bg-amber-50 text-amber-800 border-amber-200/80' },
 };
 
 export function CreatorDashboardClient({
@@ -69,15 +69,15 @@ export function CreatorDashboardClient({
   return (
     <div className="space-y-6">
       {/* Navigation Tabs */}
-      <div className="flex items-center justify-between border-b border-[#e5e7eb]/10 pb-3">
+      <div className="flex items-center justify-between border-b border-zinc-200/80 pb-3">
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => setActiveTab('tools')}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'tools'
-                ? 'bg-[#73e5bf] text-[#130f18] shadow-mint-led'
-                : 'bg-[#21192a] text-[#8b94a3] hover:text-white border border-[#e5e7eb]/12'
+                ? 'bg-zinc-900 text-white shadow-2xs'
+                : 'bg-white text-zinc-600 hover:text-zinc-950 border border-zinc-200/80'
             }`}
           >
             <Layers className="h-3.5 w-3.5" />
@@ -86,10 +86,10 @@ export function CreatorDashboardClient({
           <button
             type="button"
             onClick={() => setActiveTab('onboard')}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'onboard'
-                ? 'bg-[#73e5bf] text-[#130f18] shadow-mint-led'
-                : 'bg-[#21192a] text-[#8b94a3] hover:text-white border border-[#e5e7eb]/12'
+                ? 'bg-zinc-900 text-white shadow-2xs'
+                : 'bg-white text-zinc-600 hover:text-zinc-950 border border-zinc-200/80'
             }`}
           >
             <PlusCircle className="h-3.5 w-3.5" />
@@ -102,16 +102,16 @@ export function CreatorDashboardClient({
       {activeTab === 'tools' && (
         <div className="space-y-6">
           {listings.length === 0 ? (
-            <div className="text-center py-16 bg-[#21192a] rounded-[24px] border border-dashed border-[#e5e7eb]/15 p-8">
-              <Layers className="h-10 w-10 mx-auto text-[#8b94a3] mb-3" />
-              <h3 className="text-base font-bold text-white">No tools registered yet</h3>
-              <p className="mt-1 text-xs text-[#8b94a3] max-w-md mx-auto">
+            <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-zinc-300 p-8 shadow-2xs">
+              <Layers className="h-10 w-10 mx-auto text-zinc-400 mb-3" />
+              <h3 className="text-base font-bold text-zinc-950">No tools registered yet</h3>
+              <p className="mt-1 text-xs text-zinc-500 max-w-md mx-auto">
                 Onboard your first micro-tool or Chrome extension to configure ad inventory and start earning 85% net payouts.
               </p>
               <button
                 type="button"
                 onClick={() => setActiveTab('onboard')}
-                className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#73e5bf] hover:bg-[#85ebd0] text-[#130f18] text-xs font-bold shadow-mint-led transition-all"
+                className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-semibold shadow-xs transition-all"
               >
                 <PlusCircle className="h-3.5 w-3.5" />
                 <span>Register First Tool</span>
@@ -129,27 +129,27 @@ export function CreatorDashboardClient({
                 return (
                   <div
                     key={tool.id}
-                    className="bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 hover:border-[#e5e7eb]/20 transition-all overflow-hidden shadow-sm"
+                    className="bg-white rounded-2xl border border-zinc-200/80 hover:border-zinc-300 transition-all overflow-hidden shadow-2xs"
                   >
                     {/* Tool Header Card */}
-                    <div className="p-6 border-b border-[#e5e7eb]/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="p-6 border-b border-zinc-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
                       <div>
                         <div className="flex items-center gap-2.5 flex-wrap mb-2">
-                          <h3 className="text-lg font-bold text-white font-display">{tool.title}</h3>
+                          <h3 className="text-lg font-bold text-zinc-950 font-display">{tool.title}</h3>
                           <VerificationBadge
                             source={tool.verification_source}
                             dau={tool.verified_dau}
                             identifier={tool.verification_identifier}
                             size="sm"
                           />
-                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#2e2d36] text-zinc-300 border border-[#e5e7eb]/10">
+                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 border border-zinc-200/80">
                             {tool.category}
                           </span>
-                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#a37af5]/10 text-[#a37af5] border border-[#a37af5]/25">
+                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 border border-zinc-200/80">
                             {tool.app_type.replace('_', ' ')}
                           </span>
                         </div>
-                        <p className="text-xs text-[#8b94a3] max-w-3xl line-clamp-2 leading-relaxed">
+                        <p className="text-xs text-zinc-500 max-w-3xl line-clamp-2 leading-relaxed">
                           {tool.description}
                         </p>
                       </div>
@@ -157,26 +157,26 @@ export function CreatorDashboardClient({
                       {/* Tool Actions & Earnings Badge */}
                       <div className="flex items-center gap-3 shrink-0">
                         <div className="text-right hidden sm:block">
-                          <div className="text-[10px] text-[#8b94a3]">Net Creator Payout</div>
-                          <div className="text-base font-extrabold text-[#73e5bf] tabular-nums">
+                          <div className="text-[10px] text-zinc-400">Net Creator Payout</div>
+                          <div className="text-base font-bold text-emerald-700 tabular-nums">
                             {formatCentsToUsd(monthlyNetCents)}
-                            <span className="text-xs font-normal text-[#8b94a3]">/mo</span>
+                            <span className="text-xs font-normal text-zinc-500">/mo</span>
                           </div>
                         </div>
                         <Link
                           href={`/tools/${tool.slug}`}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e5e7eb]/12 bg-[#2e2d36] hover:bg-[#383742] text-xs font-semibold text-zinc-300 transition-colors"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200/80 bg-zinc-100 hover:bg-zinc-200/70 text-xs font-semibold text-zinc-700 transition-colors"
                         >
                           <span>Public Page</span>
-                          <ExternalLink className="h-3 w-3 text-[#8b94a3]" />
+                          <ExternalLink className="h-3 w-3 text-zinc-400" />
                         </Link>
                         <button
                           type="button"
                           onClick={() => setExpandedToolId(isExpanded ? null : tool.id)}
-                          className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                          className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                             isExpanded
-                              ? 'bg-[#73e5bf] text-[#130f18] shadow-mint-led'
-                              : 'bg-[#2e2d36] text-zinc-200 hover:bg-[#383742] border border-[#e5e7eb]/10'
+                              ? 'bg-zinc-900 text-white shadow-2xs'
+                              : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200/70 border border-zinc-200/80'
                           }`}
                         >
                           <Settings className="h-3 w-3" />
@@ -192,19 +192,19 @@ export function CreatorDashboardClient({
 
                     {/* Associated Inventory Slots Summary */}
                     {!isExpanded && (
-                      <div className="p-6 bg-[#130f18]/40">
+                      <div className="p-6 bg-zinc-50/70">
                         <div className="flex items-center justify-between mb-4">
-                          <div className="text-[11px] font-semibold text-[#8b94a3] uppercase tracking-wider flex items-center gap-2">
-                            <Tag className="h-3.5 w-3.5 text-[#a37af5]" />
+                          <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider flex items-center gap-2">
+                            <Tag className="h-3.5 w-3.5 text-zinc-400" />
                             <span>Configured Inventory Slots ({toolSlots.length})</span>
-                            <span className="text-[#73e5bf] font-bold bg-[#73e5bf]/10 px-2.5 py-0.5 rounded-full border border-[#73e5bf]/25 text-[10px]">
+                            <span className="text-emerald-800 font-semibold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80 text-[10px]">
                               {vacantCount} vacant & rentable
                             </span>
                           </div>
                         </div>
 
                         {toolSlots.length === 0 ? (
-                          <div className="p-4 rounded-xl border border-dashed border-[#e5e7eb]/10 bg-[#21192a] text-center text-xs text-[#8b94a3]">
+                          <div className="p-4 rounded-xl border border-dashed border-zinc-200 bg-white text-center text-xs text-zinc-500">
                             No slots configured yet. Click &quot;Manage Slots&quot; to configure your first standardized placement.
                           </div>
                         ) : (
@@ -213,14 +213,14 @@ export function CreatorDashboardClient({
                               const meta =
                                 SLOT_TYPE_LABELS[slot.slot_type] || {
                                   label: slot.slot_type,
-                                  bgClass: 'bg-[#2e2d36] text-zinc-300 border-[#e5e7eb]/10',
+                                  bgClass: 'bg-zinc-100 text-zinc-700 border-zinc-200/80',
                                 };
                               const creatorPayout = Math.round(slot.monthly_price_cents * 0.85);
 
                               return (
                                 <div
                                   key={slot.id}
-                                  className="bg-[#2e2d36] rounded-xl p-4 border border-[#e5e7eb]/10 flex flex-col justify-between hover:border-[#e5e7eb]/20 transition-all"
+                                  className="bg-white rounded-xl p-4 border border-zinc-200/80 flex flex-col justify-between hover:border-zinc-300 transition-all shadow-2xs"
                                 >
                                   <div>
                                     <div className="flex items-center justify-between mb-2">
@@ -230,35 +230,35 @@ export function CreatorDashboardClient({
                                         {meta.label}
                                       </span>
                                       {slot.is_available ? (
-                                        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#73e5bf] bg-[#73e5bf]/10 px-2 py-0.5 rounded-full border border-[#73e5bf]/25">
-                                          <span className="w-1.5 h-1.5 rounded-full bg-[#73e5bf] shadow-[0_0_6px_#73e5bf]" />
+                                        <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/80">
+                                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                                           <span>Vacant</span>
                                         </span>
                                       ) : (
-                                        <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#8b94a3] bg-[#21192a] px-2 py-0.5 rounded-full border border-[#e5e7eb]/10">
+                                        <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded-full border border-zinc-200/80">
                                           <Clock className="h-2.5 w-2.5" />
                                           <span>Occupied</span>
                                         </span>
                                       )}
                                     </div>
-                                    <div className="font-bold text-xs text-white mb-1">
+                                    <div className="font-bold text-xs text-zinc-950 mb-1">
                                       {slot.slot_name}
                                     </div>
                                     {slot.guidelines && (
-                                      <p className="text-[11px] text-[#8b94a3] line-clamp-1 mb-2">
+                                      <p className="text-[11px] text-zinc-500 line-clamp-1 mb-2">
                                         Guidelines: {slot.guidelines}
                                       </p>
                                     )}
                                   </div>
 
-                                  <div className="pt-2.5 border-t border-[#e5e7eb]/10 flex items-center justify-between mt-2">
+                                  <div className="pt-2.5 border-t border-zinc-100 flex items-center justify-between mt-2">
                                     <div>
-                                      <span className="text-[10px] text-[#8b94a3]">Rate: </span>
-                                      <span className="text-xs font-bold text-white tabular-nums">
+                                      <span className="text-[10px] text-zinc-400">Rate: </span>
+                                      <span className="text-xs font-bold text-zinc-950 tabular-nums">
                                         {formatCentsToUsd(slot.monthly_price_cents)}/mo
                                       </span>
                                     </div>
-                                    <div className="text-[11px] font-bold text-[#73e5bf] tabular-nums">
+                                    <div className="text-[11px] font-bold text-emerald-700 tabular-nums">
                                       {formatCentsToUsd(creatorPayout)} take-home
                                     </div>
                                   </div>
@@ -272,7 +272,7 @@ export function CreatorDashboardClient({
 
                     {/* Expanded SlotManager View */}
                     {isExpanded && (
-                      <div className="p-6 bg-[#130f18] border-t border-[#e5e7eb]/10">
+                      <div className="p-6 bg-zinc-50/50 border-t border-zinc-200/80">
                         <SlotManager
                           listingId={tool.id}
                           listingSlug={tool.slug}
@@ -292,7 +292,7 @@ export function CreatorDashboardClient({
 
       {/* TAB 2: Tool Onboarding Form View */}
       {activeTab === 'onboard' && (
-        <div className="bg-[#21192a] border border-[#e5e7eb]/12 rounded-[24px] p-6 sm:p-8">
+        <div className="bg-white border border-zinc-200/80 rounded-2xl p-6 sm:p-8 shadow-2xs">
           <ListingForm
             existingSlugs={existingSlugs}
             onSuccess={handleToolCreated}

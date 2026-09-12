@@ -84,68 +84,68 @@ export function DashboardClient({
     <div className="space-y-8">
       {/* High-Level Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        <div className="bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 p-6 shadow-sm hover:border-[#e5e7eb]/20 transition-all">
-          <div className="flex items-center justify-between text-[#8b94a3] mb-3">
+        <div className="bg-white rounded-2xl border border-zinc-200/80 p-6 shadow-2xs hover:border-zinc-300 transition-all">
+          <div className="flex items-center justify-between text-zinc-500 mb-3">
             <span className="text-[11px] font-semibold uppercase tracking-wider">Active Inventory</span>
-            <div className="p-2 rounded-xl bg-[#2e2d36] text-[#73e5bf] border border-[#e5e7eb]/10">
+            <div className="p-2 rounded-xl bg-zinc-100 text-zinc-700 border border-zinc-200/80">
               <Sparkles className="h-4 w-4" />
             </div>
           </div>
-          <div className="text-3xl sm:text-4xl font-display font-black text-white tabular-nums">{initialSlots.length} Slots</div>
-          <div className="text-[11px] text-[#8b94a3] mt-2">
+          <div className="text-3xl sm:text-4xl font-display font-bold text-zinc-950 tabular-nums">{initialSlots.length} Slots</div>
+          <div className="text-[11px] text-zinc-500 mt-2">
             Across {initialListings.length} verified developer tools
           </div>
         </div>
 
-        <div className="bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 p-6 shadow-sm hover:border-[#e5e7eb]/20 transition-all">
-          <div className="flex items-center justify-between text-[#8b94a3] mb-3">
+        <div className="bg-white rounded-2xl border border-zinc-200/80 p-6 shadow-2xs hover:border-zinc-300 transition-all">
+          <div className="flex items-center justify-between text-zinc-500 mb-3">
             <span className="text-[11px] font-semibold uppercase tracking-wider">Total Impressions</span>
-            <div className="p-2 rounded-xl bg-[#2e2d36] text-[#a37af5] border border-[#e5e7eb]/10">
+            <div className="p-2 rounded-xl bg-zinc-100 text-zinc-700 border border-zinc-200/80">
               <Eye className="h-4 w-4" />
             </div>
           </div>
-          <div className="text-3xl sm:text-4xl font-display font-black text-white tabular-nums">
+          <div className="text-3xl sm:text-4xl font-display font-bold text-zinc-950 tabular-nums">
             {totalTelemetry.impressions.toLocaleString()}
           </div>
-          <div className="text-[11px] text-[#8b94a3] mt-2">Verified non-PII session pings</div>
+          <div className="text-[11px] text-zinc-500 mt-2">Verified non-PII session pings</div>
         </div>
 
-        <div className="bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 p-6 shadow-sm hover:border-[#e5e7eb]/20 transition-all">
-          <div className="flex items-center justify-between text-[#8b94a3] mb-3">
+        <div className="bg-white rounded-2xl border border-zinc-200/80 p-6 shadow-2xs hover:border-zinc-300 transition-all">
+          <div className="flex items-center justify-between text-zinc-500 mb-3">
             <span className="text-[11px] font-semibold uppercase tracking-wider">Total Clicks</span>
-            <div className="p-2 rounded-xl bg-[#2e2d36] text-[#73e5bf] border border-[#e5e7eb]/10">
+            <div className="p-2 rounded-xl bg-zinc-100 text-zinc-700 border border-zinc-200/80">
               <MousePointer className="h-4 w-4" />
             </div>
           </div>
-          <div className="text-3xl sm:text-4xl font-display font-black text-white tabular-nums">
+          <div className="text-3xl sm:text-4xl font-display font-bold text-zinc-950 tabular-nums">
             {totalTelemetry.clicks.toLocaleString()}
           </div>
-          <div className="text-[11px] text-[#8b94a3] mt-2">High-intent developer referrals</div>
+          <div className="text-[11px] text-zinc-500 mt-2">High-intent developer referrals</div>
         </div>
 
-        <div className="bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 p-6 shadow-sm hover:border-[#e5e7eb]/20 transition-all">
-          <div className="flex items-center justify-between text-[#8b94a3] mb-3">
+        <div className="bg-white rounded-2xl border border-zinc-200/80 p-6 shadow-2xs hover:border-zinc-300 transition-all">
+          <div className="flex items-center justify-between text-zinc-500 mb-3">
             <span className="text-[11px] font-semibold uppercase tracking-wider">Platform CTR</span>
-            <div className="p-2 rounded-xl bg-[#2e2d36] text-[#a37af5] border border-[#e5e7eb]/10">
+            <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/80">
               <BarChart3 className="h-4 w-4" />
             </div>
           </div>
-          <div className="text-3xl sm:text-4xl font-display font-black text-[#73e5bf] tabular-nums">{ctr}%</div>
-          <div className="text-[11px] text-[#8b94a3] mt-2">
+          <div className="text-3xl sm:text-4xl font-display font-bold text-emerald-700 tabular-nums">{ctr}%</div>
+          <div className="text-[11px] text-zinc-500 mt-2">
             vs 0.15% average for web banners
           </div>
         </div>
       </div>
 
       {/* Live Edge Delivery & Telemetry Playground */}
-      <div className="bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 p-6 sm:p-8 shadow-sm">
+      <div className="bg-white rounded-2xl border border-zinc-200/80 p-6 sm:p-8 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
-            <h3 className="text-lg sm:text-xl font-display font-black text-white flex items-center gap-2">
-              <Zap className="h-4 w-4 text-[#73e5bf]" />
+            <h3 className="text-lg sm:text-xl font-display font-bold text-zinc-950 flex items-center gap-2">
+              <Zap className="h-4 w-4 text-emerald-600" />
               <span>Live Edge Delivery & Beacon Simulator</span>
             </h3>
-            <p className="text-xs text-[#8b94a3] mt-1">
+            <p className="text-xs text-zinc-500 mt-1">
               Simulate how client applications and Chrome extensions consume the /api/v1/slot/[id] edge API and send telemetry beacons.
             </p>
           </div>
@@ -158,7 +158,7 @@ export function DashboardClient({
                 setApiResponse(null);
                 setBeaconStatus(null);
               }}
-              className="px-3.5 py-2 rounded-xl border border-[#e5e7eb]/12 text-xs font-semibold text-zinc-200 bg-[#2e2d36] focus:outline-none focus:border-[#73e5bf] focus:ring-1 focus:ring-[#73e5bf]"
+              className="px-3.5 py-2 rounded-xl border border-zinc-200/90 text-xs font-semibold text-zinc-800 bg-white focus:outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-400/20"
             >
               {initialSlots.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -170,7 +170,7 @@ export function DashboardClient({
             <button
               onClick={testEdgeDelivery}
               disabled={loadingApi}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#73e5bf] hover:bg-[#85ebd0] text-[#130f18] text-xs font-bold shadow-mint-led transition-all disabled:opacity-50 cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-semibold shadow-xs transition-all disabled:opacity-50 cursor-pointer"
             >
               {loadingApi ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Play className="h-3.5 w-3.5" />}
               <span>Test Delivery</span>
@@ -179,22 +179,22 @@ export function DashboardClient({
         </div>
 
         {/* Action triggers */}
-        <div className="flex flex-wrap items-center gap-3 pb-4 border-b border-[#e5e7eb]/10 mb-4">
-          <span className="text-xs text-[#8b94a3] font-medium">Send Telemetry Ping:</span>
+        <div className="flex flex-wrap items-center gap-3 pb-4 border-b border-zinc-100 mb-4">
+          <span className="text-xs text-zinc-500 font-medium">Send Telemetry Ping:</span>
           <button
             onClick={() => fireTestBeacon('impression')}
-            className="px-3.5 py-1.5 rounded-xl border border-[#e5e7eb]/12 bg-[#2e2d36] hover:bg-[#383742] text-xs font-semibold text-zinc-200 transition-colors"
+            className="px-3.5 py-1.5 rounded-xl border border-zinc-200/80 bg-zinc-100 hover:bg-zinc-200/70 text-xs font-semibold text-zinc-700 transition-colors shadow-2xs"
           >
             +1 Impression
           </button>
           <button
             onClick={() => fireTestBeacon('click')}
-            className="px-3.5 py-1.5 rounded-xl border border-[#e5e7eb]/12 bg-[#2e2d36] hover:bg-[#383742] text-xs font-semibold text-zinc-200 transition-colors"
+            className="px-3.5 py-1.5 rounded-xl border border-zinc-200/80 bg-zinc-100 hover:bg-zinc-200/70 text-xs font-semibold text-zinc-700 transition-colors shadow-2xs"
           >
             +1 Click
           </button>
           {beaconStatus && (
-            <span className="text-xs font-bold text-[#73e5bf] ml-2 animate-fadeIn">
+            <span className="text-xs font-semibold text-emerald-700 ml-2 animate-fadeIn">
               {beaconStatus}
             </span>
           )}
@@ -203,29 +203,29 @@ export function DashboardClient({
         {/* API Response display */}
         {apiResponse && (
           <div className="space-y-4 pt-2">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#8b94a3] pb-2 border-b border-[#e5e7eb]/10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-zinc-500 pb-2 border-b border-zinc-100">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-zinc-200 font-semibold">
+                <span className="font-mono text-zinc-900 font-semibold">
                   GET /api/v1/slot/{selectedSlotId.slice(0, 8)}...
                 </span>
-                <span className="px-2.5 py-0.5 rounded-full bg-[#73e5bf]/10 text-[#73e5bf] font-bold border border-[#73e5bf]/25">200 OK</span>
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-semibold border border-emerald-200/80">200 OK</span>
                 {latencyMs !== null && (
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#2e2d36] text-[#73e5bf] font-bold border border-[#e5e7eb]/10 flex items-center gap-1">
-                    <Zap className="h-3 w-3 text-[#73e5bf]" />
+                  <span className="px-2.5 py-0.5 rounded-full bg-zinc-100 text-emerald-700 font-semibold border border-zinc-200/80 flex items-center gap-1">
+                    <Zap className="h-3 w-3 text-emerald-600" />
                     <span>{latencyMs}ms</span>
                   </span>
                 )}
               </div>
 
               {/* View Mode Toggle */}
-              <div className="flex items-center gap-1 bg-[#2e2d36] p-1 rounded-xl border border-[#e5e7eb]/10">
+              <div className="flex items-center gap-1 bg-zinc-100 p-1 rounded-xl border border-zinc-200/80">
                 <button
                   type="button"
                   onClick={() => setViewMode('visual')}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${
+                  className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${
                     viewMode === 'visual'
-                      ? 'bg-[#73e5bf] text-[#130f18] shadow-mint-led'
-                      : 'text-[#8b94a3] hover:text-white'
+                      ? 'bg-zinc-900 text-white shadow-2xs'
+                      : 'text-zinc-600 hover:text-zinc-950'
                   }`}
                 >
                   Visual Widget Preview
@@ -233,10 +233,10 @@ export function DashboardClient({
                 <button
                   type="button"
                   onClick={() => setViewMode('json')}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${
+                  className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${
                     viewMode === 'json'
-                      ? 'bg-[#73e5bf] text-[#130f18] shadow-mint-led'
-                      : 'text-[#8b94a3] hover:text-white'
+                      ? 'bg-zinc-900 text-white shadow-2xs'
+                      : 'text-zinc-600 hover:text-zinc-950'
                   }`}
                 >
                   Raw JSON Payload
@@ -245,51 +245,51 @@ export function DashboardClient({
             </div>
 
             {viewMode === 'visual' ? (
-              <div className="p-6 rounded-[24px] bg-[#130f18] border border-[#e5e7eb]/10 space-y-4">
+              <div className="p-6 rounded-2xl bg-zinc-50/70 border border-zinc-200/80 space-y-4">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-bold text-zinc-300 uppercase tracking-wide">
+                  <span className="font-semibold text-zinc-700 uppercase tracking-wide">
                     Format: {apiResponse.slot?.type || 'slot'} • Status: {apiResponse.status}
                   </span>
                   {apiResponse.fallback ? (
-                    <span className="text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">
+                    <span className="text-[10px] font-semibold text-amber-800 bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 rounded-full">
                       Viral Referral Fallback (Vacant)
                     </span>
                   ) : (
-                    <span className="text-[10px] font-bold text-[#73e5bf] bg-[#73e5bf]/10 border border-[#73e5bf]/25 px-2.5 py-0.5 rounded-full">
+                    <span className="text-[10px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full">
                       Active Sponsored Campaign
                     </span>
                   )}
                 </div>
 
                 {/* Rendered Visual Unit */}
-                <div className="p-4 rounded-xl bg-[#21192a] border border-[#e5e7eb]/10 flex items-center justify-center min-h-[90px]">
+                <div className="p-4 rounded-xl bg-white border border-zinc-200/80 shadow-2xs flex items-center justify-center min-h-[90px]">
                   {apiResponse.creative ? (
                     <a
                       href={apiResponse.creative.target_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#2e2d36] hover:bg-[#383742] border border-[#e5e7eb]/12 transition-colors text-xs text-zinc-200 group"
+                      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 transition-colors text-xs text-zinc-900 group shadow-2xs"
                     >
-                      <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#73e5bf]/20 text-[#73e5bf] border border-[#73e5bf]/30">
+                      <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200/80">
                         {apiResponse.creative.disclaimer_text || 'Sponsored'}
                       </span>
-                      <span className="font-medium group-hover:text-[#73e5bf] transition-colors">
+                      <span className="font-medium group-hover:text-emerald-700 transition-colors">
                         {apiResponse.creative.text}
                       </span>
-                      <ExternalLink className="h-3 w-3 text-[#8b94a3] group-hover:text-[#73e5bf]" />
+                      <ExternalLink className="h-3 w-3 text-zinc-400 group-hover:text-emerald-700" />
                     </a>
                   ) : (
-                    <span className="text-xs text-[#8b94a3]">No creative payload</span>
+                    <span className="text-xs text-zinc-400">No creative payload</span>
                   )}
                 </div>
 
-                <div className="flex items-center justify-between text-[11px] text-[#8b94a3] font-mono">
+                <div className="flex items-center justify-between text-[11px] text-zinc-400 font-mono">
                   <span>Parent Tool: {apiResponse.slot?.listing_title}</span>
                   <span>Beacon: {apiResponse.beacon?.endpoint}</span>
                 </div>
               </div>
             ) : (
-              <pre className="p-4 rounded-2xl bg-[#130f18] border border-[#e5e7eb]/10 text-zinc-200 text-xs font-mono overflow-x-auto max-h-72">
+              <pre className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-mono overflow-x-auto max-h-72">
                 {JSON.stringify(apiResponse, null, 2)}
               </pre>
             )}
@@ -298,10 +298,10 @@ export function DashboardClient({
       </div>
 
       {/* Active Sponsorships Table */}
-      <div className="bg-[#21192a] rounded-[24px] border border-[#e5e7eb]/12 shadow-sm overflow-hidden">
-        <div className="p-6 border-b border-[#e5e7eb]/10">
-          <h3 className="text-base sm:text-lg font-display font-black text-white">Active Sponsorship Contracts</h3>
-          <p className="text-xs text-[#8b94a3] mt-0.5">
+      <div className="bg-white rounded-2xl border border-zinc-200/80 shadow-2xs overflow-hidden">
+        <div className="p-6 border-b border-zinc-100">
+          <h3 className="text-base sm:text-lg font-display font-bold text-zinc-950">Active Sponsorship Contracts</h3>
+          <p className="text-xs text-zinc-500 mt-0.5">
             Sponsorships currently active or in 30-day escrow hold with verified creative delivery.
           </p>
         </div>
@@ -309,7 +309,7 @@ export function DashboardClient({
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b border-[#e5e7eb]/10 bg-[#130f18]/40 text-[#8b94a3] font-semibold uppercase tracking-wider text-[10px]">
+              <tr className="border-b border-zinc-100 bg-zinc-50/70 text-zinc-500 font-semibold uppercase tracking-wider text-[10px]">
                 <th className="py-3 px-4">Sponsor Brand</th>
                 <th className="py-3 px-4">Slot Name</th>
                 <th className="py-3 px-4">Creative Headline</th>
@@ -318,28 +318,28 @@ export function DashboardClient({
                 <th className="py-3 px-4">Escrow Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e5e7eb]/10">
+            <tbody className="divide-y divide-zinc-100">
               {initialSponsorships.map((sp) => {
                 const slot = initialSlots.find((s) => s.id === sp.slot_id);
                 return (
-                  <tr key={sp.id} className="hover:bg-[#2e2d36]/30 transition-colors">
-                    <td className="py-3 px-4 font-bold text-white">
+                  <tr key={sp.id} className="hover:bg-zinc-50/70 transition-colors">
+                    <td className="py-3 px-4 font-semibold text-zinc-950">
                       {sp.sponsor_name || 'Verified B2B Sponsor'}
                     </td>
-                    <td className="py-3 px-4 text-zinc-300">
+                    <td className="py-3 px-4 text-zinc-700">
                       {slot ? slot.slot_name : sp.slot_id.slice(0, 8)}
                     </td>
-                    <td className="py-3 px-4 text-[#8b94a3] max-w-xs truncate">
+                    <td className="py-3 px-4 text-zinc-500 max-w-xs truncate">
                       {sp.creative_text}
                     </td>
-                    <td className="py-3 px-4 font-bold text-white tabular-nums">
+                    <td className="py-3 px-4 font-bold text-zinc-950 tabular-nums">
                       {formatCentsToUsd(sp.monthly_amount_cents)}
                     </td>
-                    <td className="py-3 px-4 text-[#8b94a3] font-mono text-[11px]">
+                    <td className="py-3 px-4 text-zinc-500 font-mono text-[11px]">
                       {sp.start_date} → {sp.end_date}
                     </td>
                     <td className="py-3 px-4">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#73e5bf]/10 text-[#73e5bf] border border-[#73e5bf]/25">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
                         {sp.status}
                       </span>
                     </td>

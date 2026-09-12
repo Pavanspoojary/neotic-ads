@@ -45,26 +45,26 @@ export default async function CreatorPage() {
   const totalDau = listings.reduce((sum, l) => sum + (l.verified_dau || 0), 0);
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] text-[#8b97a8] flex flex-col selection:bg-[#73e5bf] selection:text-[#0b0e14]">
+    <div className="min-h-screen bg-[#fbfbfd] text-zinc-600 flex flex-col selection:bg-emerald-100 selection:text-emerald-900">
       {/* Global Navigation */}
       <Navbar />
 
       <main id="main-content" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 outline-none">
         {/* Creator Portal Header Banner */}
         <div className="mb-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.08] pb-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-200/80 pb-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-semibold text-[#73e5bf] mb-3.5 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#73e5bf] shadow-[0_0_8px_#73e5bf] animate-pulse" />
-                <Sparkles className="h-3.5 w-3.5 text-[#73e5bf]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-xs font-semibold text-emerald-800 mb-3.5 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
                 <span>Creator Monetization Console</span>
-                <span className="text-white/20">•</span>
-                <span className="text-gray-300">85% Net Payout Guarantee</span>
+                <span className="text-zinc-300">•</span>
+                <span className="text-zinc-600">85% Net Payout Guarantee</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black tracking-[-0.03em] text-white">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-zinc-950">
                 Creator Inventory & Tool Management
               </h1>
-              <p className="mt-3 text-sm sm:text-base text-[#8b97a8] max-w-3xl leading-relaxed tracking-[-0.025em]">
+              <p className="mt-3 text-sm sm:text-base text-zinc-600 max-w-3xl leading-relaxed">
                 Onboard your developer utilities and Chrome extensions, configure standardized in-app ad slots,
                 and connect with high-intent B2B sponsors on automated 30-day terms.
               </p>
@@ -74,88 +74,88 @@ export default async function CreatorPage() {
           {/* Top Summary Metrics Cards (4-Column Grid) */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {/* Card 1: Registered Tools */}
-            <div className="glass-panel rounded-2xl p-6 transition-all hover:border-white/[0.16]">
+            <div className="bg-white border border-zinc-200/80 rounded-2xl p-6 shadow-2xs hover:border-zinc-300 transition-all">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[#8b97a8] uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
                   Registered Tools
                 </span>
-                <div className="p-2 rounded-xl bg-white/[0.04] text-purple-400 border border-white/[0.08]">
+                <div className="p-2 rounded-xl bg-zinc-100 text-zinc-700 border border-zinc-200/80">
                   <Layers className="h-4 w-4" />
                 </div>
               </div>
               <div className="mt-3 flex items-baseline gap-2">
-                <span className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight tabular-nums">{totalTools}</span>
-                <span className="text-xs text-[#8b97a8] font-medium">active apps</span>
+                <span className="text-3xl sm:text-4xl font-display font-bold text-zinc-950 tracking-tight tabular-nums">{totalTools}</span>
+                <span className="text-xs text-zinc-500 font-medium">active apps</span>
               </div>
-              <p className="mt-2 text-xs text-[#8b97a8]/80">
+              <p className="mt-2 text-xs text-zinc-500">
                 Live across developer, productivity, and utility categories
               </p>
             </div>
 
             {/* Card 2: Configured Slots */}
-            <div className="glass-panel rounded-2xl p-6 transition-all hover:border-white/[0.16]">
+            <div className="bg-white border border-zinc-200/80 rounded-2xl p-6 shadow-2xs hover:border-zinc-300 transition-all">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[#8b97a8] uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
                   Configured Slots
                 </span>
-                <div className="p-2 rounded-xl bg-white/[0.04] text-[#73e5bf] border border-white/[0.08]">
+                <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/80">
                   <CheckCircle2 className="h-4 w-4" />
                 </div>
               </div>
               <div className="mt-3 flex items-baseline gap-2">
-                <span className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight tabular-nums">{totalSlots}</span>
-                <span className="text-[11px] text-[#73e5bf] font-bold bg-[#73e5bf]/10 px-2.5 py-0.5 rounded-full border border-[#73e5bf]/25">
+                <span className="text-3xl sm:text-4xl font-display font-bold text-zinc-950 tracking-tight tabular-nums">{totalSlots}</span>
+                <span className="text-[11px] text-emerald-800 font-semibold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
                   {vacantSlots} bookable
                 </span>
               </div>
-              <div className="mt-2 flex items-center gap-2 text-xs text-[#8b97a8]">
-                <span className="inline-block w-2 h-2 rounded-full bg-[#73e5bf] shadow-[0_0_6px_#73e5bf]"></span>
-                <span className="text-gray-300 font-medium">{vacantSlots} vacant</span>
-                <span className="text-white/20">•</span>
-                <span className="inline-block w-2 h-2 rounded-full bg-purple-400"></span>
+              <div className="mt-2 flex items-center gap-2 text-xs text-zinc-500">
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span className="text-zinc-700 font-medium">{vacantSlots} vacant</span>
+                <span className="text-zinc-300">•</span>
+                <span className="inline-block w-2 h-2 rounded-full bg-zinc-400"></span>
                 <span>{occupiedSlots} sponsored</span>
               </div>
             </div>
 
             {/* Card 3: Potential Monthly Revenue */}
-            <div className="glass-panel rounded-2xl p-6 transition-all hover:border-white/[0.16]">
+            <div className="bg-white border border-zinc-200/80 rounded-2xl p-6 shadow-2xs hover:border-zinc-300 transition-all">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[#8b97a8] uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
                   Net Monthly Potential
                 </span>
-                <div className="p-2 rounded-xl bg-white/[0.04] text-[#73e5bf] border border-white/[0.08]">
+                <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/80">
                   <DollarSign className="h-4 w-4" />
                 </div>
               </div>
               <div className="mt-3 flex items-baseline gap-1.5">
-                <span className="text-3xl sm:text-4xl font-display font-black text-[#73e5bf] tracking-tight tabular-nums">
+                <span className="text-3xl sm:text-4xl font-display font-bold text-emerald-700 tracking-tight tabular-nums">
                   {formatCentsToUsd(netPotentialCents)}
                 </span>
-                <span className="text-xs font-semibold text-[#8b97a8]">/mo</span>
+                <span className="text-xs font-semibold text-zinc-500">/mo</span>
               </div>
-              <div className="mt-2 flex items-center justify-between text-xs text-[#8b97a8]">
+              <div className="mt-2 flex items-center justify-between text-xs text-zinc-500">
                 <span>Gross: {formatCentsToUsd(grossPotentialCents)}/mo</span>
-                <span className="text-[10px] text-[#73e5bf] font-semibold">85% Share</span>
+                <span className="text-[10px] text-emerald-800 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">85% Share</span>
               </div>
             </div>
 
             {/* Card 4: Verified Audience Reach */}
-            <div className="glass-panel rounded-2xl p-6 transition-all hover:border-white/[0.16]">
+            <div className="bg-white border border-zinc-200/80 rounded-2xl p-6 shadow-2xs hover:border-zinc-300 transition-all">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[#8b97a8] uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
                   Verified Audience Reach
                 </span>
-                <div className="p-2 rounded-xl bg-white/[0.04] text-purple-400 border border-white/[0.08]">
+                <div className="p-2 rounded-xl bg-zinc-100 text-zinc-700 border border-zinc-200/80">
                   <Users className="h-4 w-4" />
                 </div>
               </div>
               <div className="mt-3 flex items-baseline gap-2">
-                <span className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight tabular-nums">
+                <span className="text-3xl sm:text-4xl font-display font-bold text-zinc-950 tracking-tight tabular-nums">
                   {totalDau.toLocaleString('en-US')}
                 </span>
-                <span className="text-xs text-[#8b97a8] font-medium">DAU</span>
+                <span className="text-xs text-zinc-500 font-medium">DAU</span>
               </div>
-              <p className="mt-2 text-xs text-[#8b97a8]/80">
+              <p className="mt-2 text-xs text-zinc-500">
                 Audited daily active users across registered applications
               </p>
             </div>
