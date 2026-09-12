@@ -16,3 +16,5 @@ Always adhere to `/ponytail` skills and senior engineering principles across thi
 ## 2. Persistent Rule: Skill Discovery & Extensibility
 - **Broad Skill Utilization**: Actively search, activate, and draw upon the library of 2,000+ specialized engineering skills (from AAS, Matt Pocock architecture, Karpathy LLM guidelines, Chrome DevTools, Supabase/Firebase, etc.) whenever relevant to the task at hand.
 - **On-Demand Custom Skills**: When encountering domain-specific operations or repeatable project patterns not covered by existing tools, create and persist modular skills in the project repository under `.agents/skills/`.
+  - [`sponsorslot-integration`](file:///.agents/skills/sponsorslot-integration/SKILL.md): Standard integration rules for in-app ad slots, embed SDK, and telemetry.
+  - [`wikiskill`](file:///.agents/skills/wikiskill/SKILL.md): Repository architecture wiki, LLM knowledge management, and link drift linting via `docs/wiki/`.
