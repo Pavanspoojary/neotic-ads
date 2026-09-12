@@ -18,3 +18,11 @@ Always adhere to `/ponytail` skills and senior engineering principles across thi
 - **On-Demand Custom Skills**: When encountering domain-specific operations or repeatable project patterns not covered by existing tools, create and persist modular skills in the project repository under `.agents/skills/`.
   - [`sponsorslot-integration`](file:///.agents/skills/sponsorslot-integration/SKILL.md): Standard integration rules for in-app ad slots, embed SDK, and telemetry.
   - [`wikiskill`](file:///.agents/skills/wikiskill/SKILL.md): Repository architecture wiki, LLM knowledge management, and link drift linting via `docs/wiki/`.
+
+## 3. Persistent Rule: Continuous Vercel Deployment & GitHub Sync
+- **Continuous Deployment Directive**: Until explicitly told otherwise by the user, for every modification, enhancement, or fix implemented in the repository, automatically:
+  1. Verify changes locally with tests (`node --import tsx --test 'tests/**/*.test.ts'`) and type checking (`npx tsc --noEmit`).
+  2. Commit and push directly to GitHub (`git push origin main`).
+  3. Deploy to production on Vercel immediately (`PATH="/opt/homebrew/bin:$PATH" npx --yes vercel --prod`).
+  4. Perform live health checks (`curl -sI https://neotic-ads.vercel.app` & `curl -sI https://www.neotic.app`).
+
