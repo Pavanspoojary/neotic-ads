@@ -1,16 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Zap,
-  Check,
   ChevronDown,
   FileText,
   Tag,
   Search,
-  Download,
   ArrowRight,
   Menu,
   X,
@@ -20,7 +18,7 @@ import {
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [freeMode, setFreeMode] = useState(false);
+  const [freeMode, setFreeMode] = useState(true);
   const pathname = usePathname();
 
   const handleSearchClick = () => {
@@ -30,6 +28,17 @@ export function Navbar() {
       searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        handleSearchClick();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full flex flex-col transition-all select-none">
@@ -54,12 +63,13 @@ export function Navbar() {
               </span>
             </Link>
 
-            {/* > Free mode / Live Edge Toggle Switch */}
+            {/* > Free mode Toggle Switch */}
             <div className="flex items-center gap-2 pl-1 border-l border-[#212638] text-[#8b97a8]">
               <button
                 type="button"
                 onClick={() => setFreeMode(!freeMode)}
                 className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
+                title={freeMode ? 'Free mode: Active (all software browseable)' : 'Pro mode'}
               >
                 <span className="text-gray-400 font-mono text-[11px]">&gt;</span>
                 <span className="font-medium text-[11px]">Free mode</span>
@@ -78,7 +88,7 @@ export function Navbar() {
           <nav className="hidden md:flex items-center gap-2 text-xs font-medium text-[#8b97a8]">
             {/* Ads Dropdown/Tab */}
             <Link
-              href="/"
+              href="/#marketplace"
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors ${
                 pathname === '/'
                   ? 'bg-[#1c2233] text-white font-semibold border border-[#2a344d]'
@@ -104,9 +114,9 @@ export function Navbar() {
               <ChevronDown className="w-3 h-3 opacity-60" />
             </Link>
 
-            {/* Prompts / SDK Embeds */}
+            {/* Prompts / Creator Portal */}
             <Link
-              href="/embed.js"
+              href="/creator"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:text-white hover:bg-[#1c2233]/60 transition-colors"
             >
               <FileText className="w-3.5 h-3.5 text-amber-400" />
@@ -126,7 +136,7 @@ export function Navbar() {
               <span>Deals</span>
             </Link>
 
-            {/* Quick Search Shortcut */}
+            {/* Quick Search Shortcut (⌘+K) */}
             <button
               type="button"
               onClick={handleSearchClick}
@@ -140,18 +150,10 @@ export function Navbar() {
             </button>
           </nav>
 
-          {/* Right: Actions (Install, Log in, Sign up) */}
+          {/* Right: Actions (Log in, Sign up) — Install removed per user request */}
           <div className="flex items-center gap-3 shrink-0">
             <Link
-              href="/embed.js"
-              className="hidden sm:inline-flex items-center gap-1.5 text-xs text-[#8b97a8] hover:text-white font-medium transition-colors"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>Install</span>
-            </Link>
-
-            <Link
-              href="/dashboard"
+              href="/creator"
               className="text-xs text-[#8b97a8] hover:text-white font-medium transition-colors"
             >
               Log in
@@ -195,7 +197,7 @@ export function Navbar() {
           {/* Right Dual Switcher Pills: Ads & Launchpad */}
           <div className="hidden sm:flex items-center gap-1.5">
             <Link
-              href="/"
+              href="/#marketplace"
               className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold transition-all ${
                 pathname === '/'
                   ? 'bg-white text-[#d9383a] shadow-sm'
@@ -222,7 +224,7 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#131722] border-b border-[#212638] px-4 py-3 space-y-2 text-xs">
           <Link
-            href="/"
+            href="/#marketplace"
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center gap-2 py-2 px-3 rounded-lg text-white bg-[#1e2536]"
           >
@@ -244,14 +246,6 @@ export function Navbar() {
           >
             <Tag className="w-4 h-4 text-rose-400" />
             <span>Telemetry & Deals</span>
-          </Link>
-          <Link
-            href="/embed.js"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 py-2 px-3 rounded-lg text-[#8b97a8] hover:text-white"
-          >
-            <Download className="w-4 h-4 text-sky-400" />
-            <span>Install SDK (embed.js)</span>
           </Link>
         </div>
       )}

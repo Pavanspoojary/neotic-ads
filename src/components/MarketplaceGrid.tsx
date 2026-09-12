@@ -274,6 +274,14 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                const feed = document.getElementById('marketplace-feed');
+                if (feed) {
+                  feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }
+            }}
             placeholder="Search..."
             className="w-full bg-[#181d28] hover:bg-[#1c2230] focus:bg-[#1c2230] text-white placeholder-[#8b97a8] border border-[#2a344d] focus:border-[#73e5bf]/60 rounded-full pl-5 pr-28 py-3 text-sm transition-all outline-none shadow-inner"
           />
@@ -294,6 +302,12 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             </span>
             <button
               type="button"
+              onClick={() => {
+                const feed = document.getElementById('marketplace-feed');
+                if (feed) {
+                  feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
               className="w-8 h-8 rounded-full bg-[#242c3d] hover:bg-[#2e374c] text-white flex items-center justify-center border border-[#344059] transition-colors"
               title="Search"
             >
@@ -313,7 +327,13 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             type="button"
             onClick={() => {
               setSelectedCategory('all');
-              setAvailableOnly(true);
+              setAvailableOnly(false);
+              setVerifiedOnly(false);
+              setSearchQuery('');
+              const feed = document.getElementById('marketplace-feed');
+              if (feed) {
+                feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
             }}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#d9383a]/70 hover:border-[#d9383a] bg-[#d9383a]/10 hover:bg-[#d9383a]/20 text-[#ff5f6d] text-xs font-semibold transition-all active:scale-95"
           >
@@ -435,7 +455,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
       {/* =========================================================================
           HIGH-DENSITY LISTING FEED ("listing like so in ss")
           ========================================================================= */}
-      <div className="w-full space-y-2">
+      <div id="marketplace-feed" className="w-full space-y-2">
         {filteredListings.length === 0 ? (
           <div className="text-center py-16 bg-[#181d28] rounded-2xl border border-[#252f44] text-[#8b97a8]">
             <p className="text-sm font-semibold text-white">No developer tools found</p>
@@ -464,6 +484,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             const isExpanded = expandedListingId === listing.id;
             const isBookmarked = bookmarkedMap[listing.id] ?? false;
             const toolSlots = initialSlots.filter((s) => s.listing_id === listing.id);
+            const firstAvailableSlot = toolSlots.find((s) => s.is_available);
 
             return (
               <div
@@ -578,19 +599,17 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                       </div>
                     </div>
 
-                    {/* Col 6: Actions — Book Ad / Slots & Bookmark */}
+                    {/* Col 6: Actions — Direct Book Ad link / Slots & Bookmark */}
                     <div className="flex items-center gap-1.5">
-                      {availableSlots > 0 ? (
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setExpandedListingId(isExpanded ? null : listing.id);
-                          }}
-                          className="px-3 py-1.5 rounded-lg bg-[#27c93f]/15 hover:bg-[#27c93f]/25 text-[#73e5bf] border border-[#73e5bf]/30 text-xs font-semibold transition-all active:scale-95"
+                      {firstAvailableSlot ? (
+                        <Link
+                          href={`/sponsor/${firstAvailableSlot.id}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="px-3 py-1.5 rounded-lg bg-[#27c93f]/20 hover:bg-[#27c93f]/35 text-[#73e5bf] border border-[#73e5bf]/40 text-xs font-bold transition-all active:scale-95 shadow-sm"
+                          title="Directly book this slot"
                         >
                           Book Ad ({minPrice})
-                        </button>
+                        </Link>
                       ) : (
                         <span className="px-2.5 py-1 rounded-lg bg-gray-800 text-gray-400 text-[11px] font-medium border border-gray-700">
                           Sold Out
