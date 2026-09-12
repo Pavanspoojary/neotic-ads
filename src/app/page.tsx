@@ -23,7 +23,7 @@ export default async function HomePage() {
     : '/sponsor/20000000-0000-0000-0000-000000000002';
 
   return (
-    <div className="min-h-screen bg-[#fbfbfd] text-zinc-600 flex flex-col selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-[#fafafa] text-zinc-600 flex flex-col selection:bg-emerald-100 selection:text-emerald-900">
       {/* 1. Ultra-Minimal Glass Navigation Bar */}
       <Navbar />
 
@@ -35,41 +35,41 @@ export default async function HomePage() {
               ===================================================================== */}
           <section className="text-center mb-8 space-y-3">
             {/* Ambient subtle emerald glow background */}
-            <div className="absolute top-14 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-[radial-gradient(ellipse_at_top,_rgba(16,185,129,0.08),transparent_70%)] pointer-events-none -z-10" />
+            <div className="absolute top-14 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-[radial-gradient(ellipse_at_top,_rgba(16,185,129,0.05),transparent_70%)] pointer-events-none -z-10" />
 
             {/* Breadcrumb Monospace Subtext */}
-            <div className="font-mono text-xs text-zinc-500 tracking-wide select-none pt-2">
+            <div className="font-mono text-xs text-zinc-400 tracking-wider select-none pt-2">
               neotic.app/any-keyword
             </div>
 
             {/* Massive Clean Headline */}
-            <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-[76px] text-zinc-950 tracking-tight uppercase leading-[1.04] select-none max-w-4xl mx-auto">
-              THERE’S AN AD FOR THAT <sup className="text-lg sm:text-2xl font-bold font-sans opacity-60">®</sup>
+            <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-[72px] text-zinc-950 tracking-[-0.035em] uppercase leading-[1.02] select-none max-w-4xl mx-auto">
+              THERE’S AN AD FOR THAT <sup className="text-lg sm:text-2xl font-bold font-sans opacity-50">®</sup>
             </h1>
 
             {/* =====================================================================
                 FEATURED SPONSOR CARD — Pristine Minimal White Card
                 ===================================================================== */}
             <div className="pt-3 pb-2">
-              <div className="max-w-2xl mx-auto relative rounded-2xl bg-white border border-zinc-200/90 hover:border-emerald-500/40 p-4 sm:px-5 sm:py-4 text-left shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_25px_-5px_rgba(0,0,0,0.04)] backdrop-blur-xl transition-all group">
+              <div className="max-w-2xl mx-auto relative rounded-2xl bg-white border border-black/[0.06] hover:border-black/[0.12] p-4 sm:px-5 sm:py-4 text-left shadow-[0_1px_2px_rgba(0,0,0,0.02),0_8px_24px_rgba(0,0,0,0.03)] transition-all group">
                 {/* Floating "SPONSOR" Pill on top border */}
                 <div className="absolute -top-2.5 left-1/2 -translate-x-1/2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-white border border-emerald-500/30 text-[9px] font-bold text-emerald-800 uppercase tracking-widest shadow-xs">
+                  <span className="px-2.5 py-0.5 rounded-full bg-white border border-black/[0.08] text-[9px] font-mono font-bold text-emerald-700 uppercase tracking-widest shadow-2xs">
                     SPONSOR
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between gap-4">
                   {/* Left Icon/Box ($01) */}
-                  <div className="w-11 h-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0 shadow-sm">
-                    <span className="font-display font-black text-base text-emerald-400 font-mono tracking-tight">
+                  <div className="w-10 h-10 rounded-xl bg-zinc-950 text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <span className="font-display font-black text-sm text-emerald-400 font-mono tracking-tight">
                       $01
                     </span>
                   </div>
 
                   {/* Middle Copy */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm sm:text-base font-bold text-zinc-950 group-hover:text-emerald-700 transition-colors truncate">
+                    <h3 className="text-sm sm:text-base font-bold text-zinc-950 group-hover:text-black transition-colors truncate">
                       Salesguy — You built it. Now what?
                     </h3>
                     <p className="text-xs text-zinc-500 truncate mt-0.5">
@@ -80,7 +80,7 @@ export default async function HomePage() {
                   {/* Right CTA Button */}
                   <Link
                     href={featuredBookingUrl}
-                    className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-semibold transition-all shadow-sm active:scale-95"
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-zinc-950 hover:bg-black text-white text-xs font-medium transition-all shadow-xs hover:shadow active:scale-95"
                   >
                     <span>Get Started</span>
                     <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -101,7 +101,7 @@ export default async function HomePage() {
       </main>
 
       {/* Minimal Footer */}
-      <footer className="border-t border-zinc-200/80 bg-zinc-50 text-zinc-500 py-8 text-xs w-full">
+      <footer className="border-t border-black/[0.06] bg-white text-zinc-500 py-8 text-xs w-full">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-display font-black text-zinc-950">NEOTIC ADS</span>
@@ -109,7 +109,7 @@ export default async function HomePage() {
             <span>The Front Page of Developer Micro-Sponsorships</span>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 text-zinc-500">
             <Link href="/" className="hover:text-zinc-950 transition-colors">
               Marketplace
             </Link>

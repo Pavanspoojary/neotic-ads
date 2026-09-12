@@ -286,7 +286,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
               }
             }}
             placeholder="Search..."
-            className="w-full bg-white hover:bg-zinc-50/50 focus:bg-white text-zinc-950 placeholder-zinc-400 border border-zinc-200/90 focus:border-zinc-400 rounded-full pl-5 pr-28 py-3 text-sm transition-all outline-none shadow-sm focus:ring-2 focus:ring-zinc-100"
+            className="w-full bg-white hover:bg-zinc-50/50 focus:bg-white text-zinc-950 placeholder-zinc-400 border border-black/[0.08] focus:border-zinc-400 rounded-full pl-5 pr-28 py-3 text-sm transition-all outline-none shadow-[0_1px_2px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-zinc-900/5"
           />
           
           <div className="absolute right-2 flex items-center gap-1.5">
@@ -300,7 +300,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 <X className="w-3.5 h-3.5" />
               </button>
             )}
-            <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-[10px] font-mono text-zinc-500 shadow-2xs">
+            <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-zinc-100/80 border border-black/[0.06] text-[10px] font-mono text-zinc-500 shadow-2xs">
               ⌘ + K
             </span>
             <button
@@ -311,7 +311,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
               }}
-              className="w-8 h-8 rounded-full bg-zinc-900 hover:bg-black text-white flex items-center justify-center border border-zinc-900 transition-colors shadow-xs"
+              className="w-8 h-8 rounded-full bg-zinc-950 hover:bg-black text-white flex items-center justify-center transition-colors shadow-xs"
               title="Search"
             >
               <Search className="w-3.5 h-3.5" />
@@ -320,7 +320,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
         </div>
 
         {/* Subtext under search */}
-        <p className="text-xs text-zinc-500 font-normal tracking-wide">
+        <p className="text-xs text-zinc-400 font-normal tracking-wide">
           The front page of micro-tool sponsorships. Used by 50K+ developers.
         </p>
 
@@ -338,14 +338,14 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
             }}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-zinc-200 hover:border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 text-xs font-semibold transition-all active:scale-95 shadow-xs"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-black/[0.08] hover:border-black/[0.14] bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 text-xs font-medium transition-all active:scale-95 shadow-2xs"
           >
             <span>Browse All Ads</span>
           </button>
 
           <Link
             href="/creator"
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 border border-zinc-200 hover:border-zinc-300 text-xs font-semibold transition-all active:scale-95 shadow-xs"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 border border-black/[0.08] hover:border-black/[0.14] text-xs font-medium transition-all active:scale-95 shadow-2xs"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Create / List Tools</span>
@@ -356,7 +356,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
       {/* =========================================================================
           HORIZONTAL CATEGORY PILL FILTER BAR (Exactly as in Reference Screenshot)
           ========================================================================= */}
-      <div className="w-full flex items-center gap-2 overflow-x-auto pb-2 pt-2 scrollbar-none no-scrollbar text-xs font-medium border-b border-zinc-200/80">
+      <div className="w-full flex items-center gap-2 overflow-x-auto pb-2 pt-2 scrollbar-none no-scrollbar text-xs font-medium border-b border-black/[0.06]">
         {/* 1. Today Dropdown Pill (with glowing green dot) */}
         <div className="relative">
           <button
@@ -364,8 +364,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
               sortBy === 'today'
-                ? 'bg-zinc-900 text-white border-zinc-900 shadow-xs font-semibold'
-                : 'bg-white text-zinc-700 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
+                ? 'bg-zinc-950 text-white border-zinc-950 shadow-xs font-medium'
+                : 'bg-white text-zinc-700 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
             }`}
           >
             <span className={`w-1.5 h-1.5 rounded-full ${sortBy === 'today' ? 'bg-emerald-400 shadow-[0_0_6px_#34d399]' : 'bg-emerald-500'}`} />
@@ -444,15 +444,15 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'all' && !availableOnly && !verifiedOnly && searchQuery === ''
-              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
-              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
+              ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
           }`}
         >
           <span>Tools</span>
           <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
             selectedCategory === 'all' && !availableOnly && !verifiedOnly && searchQuery === ''
               ? 'bg-white/20 text-white'
-              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+              : 'bg-zinc-100 text-zinc-500 border border-black/[0.04]'
           }`}>
             {initialListings.length}
           </span>
@@ -469,15 +469,15 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'developer-tools' && !availableOnly && !verifiedOnly
-              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
-              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
+              ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
           }`}
         >
           <span>Developer Tools</span>
           <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
             selectedCategory === 'developer-tools' && !availableOnly && !verifiedOnly
               ? 'bg-white/20 text-white'
-              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+              : 'bg-zinc-100 text-zinc-500 border border-black/[0.04]'
           }`}>
             {categoryCounts['developer-tools'] ?? 2}
           </span>
@@ -494,15 +494,15 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'productivity' && !availableOnly && !verifiedOnly
-              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
-              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
+              ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
           }`}
         >
           <span>Productivity</span>
           <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
             selectedCategory === 'productivity' && !availableOnly && !verifiedOnly
               ? 'bg-white/20 text-white'
-              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+              : 'bg-zinc-100 text-zinc-500 border border-black/[0.04]'
           }`}>
             {categoryCounts['productivity'] ?? 2}
           </span>
@@ -519,15 +519,15 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'design' && !availableOnly && !verifiedOnly
-              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
-              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
+              ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
           }`}
         >
           <span>Design & Assets</span>
           <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
             selectedCategory === 'design' && !availableOnly && !verifiedOnly
               ? 'bg-white/20 text-white'
-              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+              : 'bg-zinc-100 text-zinc-500 border border-black/[0.04]'
           }`}>
             {categoryCounts['design'] ?? 2}
           </span>
@@ -544,15 +544,15 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             selectedCategory === 'utilities' && !availableOnly && !verifiedOnly
-              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
-              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
+              ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
           }`}
         >
           <span>Web Utilities</span>
           <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
             selectedCategory === 'utilities' && !availableOnly && !verifiedOnly
               ? 'bg-white/20 text-white'
-              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+              : 'bg-zinc-100 text-zinc-500 border border-black/[0.04]'
           }`}>
             {categoryCounts['utilities'] ?? 1}
           </span>
@@ -567,15 +567,15 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           }}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             searchQuery.toLowerCase() === 'chrome'
-              ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs'
-              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
+              ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
           }`}
         >
           <span>Chrome Extensions</span>
           <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
             searchQuery.toLowerCase() === 'chrome'
               ? 'bg-white/20 text-white'
-              : 'bg-zinc-100 text-zinc-500 border border-zinc-200/60'
+              : 'bg-zinc-100 text-zinc-500 border border-black/[0.04]'
           }`}>
             2
           </span>
@@ -587,8 +587,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           onClick={() => setVerifiedOnly(!verifiedOnly)}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             verifiedOnly
-              ? 'bg-sky-50 text-sky-700 border-sky-300 font-semibold shadow-2xs'
-              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
+              ? 'bg-sky-50 text-sky-700 border-sky-200 font-medium shadow-2xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
           }`}
         >
           <ShieldCheck className="w-3.5 h-3.5 text-sky-600" />
@@ -601,13 +601,13 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           onClick={() => setAvailableOnly(!availableOnly)}
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
             availableOnly
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-300 font-semibold shadow-2xs'
-              : 'bg-white text-zinc-600 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300 shadow-2xs'
+              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 font-medium shadow-2xs'
+              : 'bg-white text-zinc-600 hover:text-zinc-950 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
           }`}
         >
           <span>Available Slots</span>
-          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-bold ${
-            availableOnly ? 'bg-emerald-100 text-emerald-800' : 'bg-zinc-100 text-emerald-700 border border-zinc-200/60'
+          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-medium ${
+            availableOnly ? 'bg-emerald-100 text-emerald-800' : 'bg-zinc-100 text-emerald-700 border border-black/[0.04]'
           }`}>
             8
           </span>
@@ -656,9 +656,9 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 {/* Main Row Strip */}
                 <div
                   onClick={() => setExpandedListingId(isExpanded ? null : listing.id)}
-                  className={`w-full glass-row transition-all rounded-xl p-3 sm:px-4 sm:py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer select-none group ${
+                  className={`w-full glass-row transition-all duration-150 rounded-xl p-3 sm:px-4 sm:py-3 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer select-none group ${
                     isExpanded
-                      ? 'border-emerald-500/40 bg-emerald-50/20 shadow-md'
+                      ? 'border-black/[0.12] bg-white shadow-xs'
                       : ''
                   }`}
                 >
@@ -668,24 +668,24 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                     {/* Col 1: Time Ago / Ad Badge & Views */}
                     <div className="w-12 shrink-0 text-center flex flex-col items-center justify-center">
                       {visual.isAd ? (
-                        <span className="px-1.5 py-0.2 rounded bg-sky-50 text-sky-700 font-mono text-[10px] font-bold uppercase tracking-wider border border-sky-200">
+                        <span className="px-1.5 py-0.2 rounded bg-sky-50 text-sky-700 font-mono text-[10px] font-medium uppercase tracking-wider border border-sky-200/60">
                           AD
                         </span>
                       ) : (
-                        <span className="text-xs font-semibold text-zinc-700 font-mono">
+                        <span className="text-xs font-medium text-zinc-700 font-mono">
                           {visual.timeAgo}
                         </span>
                       )}
                       <div className="flex items-center gap-0.5 text-[10px] text-zinc-400 font-mono mt-0.5">
-                        <Eye className="w-2.5 h-2.5 opacity-60" />
+                        <Eye className="w-2.5 h-2.5 opacity-50" />
                         <span>{visual.views}</span>
                       </div>
                     </div>
 
                     {/* Col 2: App Icon */}
                     <div className="shrink-0">
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${visual.bg} shadow-2xs`}>
-                        <Icon className="w-5 h-5 stroke-[2]" />
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${visual.bg} shadow-2xs`}>
+                        <Icon className="w-5 h-5 stroke-[1.8]" />
                       </div>
                     </div>
 
@@ -695,31 +695,31 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                         <Link
                           href={`/tools/${listing.slug}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="font-bold text-zinc-950 text-sm hover:text-emerald-700 transition-colors truncate"
+                          className="font-bold text-zinc-950 text-sm hover:text-black transition-colors truncate"
                         >
                           {listing.title}
                         </Link>
 
                         {/* Verified Checkmark Badge */}
                         <span
-                          className="inline-flex items-center text-[#0284c7]"
+                          className="inline-flex items-center text-sky-600"
                           title="Verified Traffic & Publisher"
                         >
-                          <Check className="w-3.5 h-3.5 stroke-[3]" />
+                          <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                         </span>
 
                         {/* Version / Meta Pill */}
-                        <span className="px-1.5 py-0.2 rounded bg-zinc-100 text-zinc-600 text-[10px] font-mono border border-zinc-200">
+                        <span className="px-1.5 py-0.2 rounded bg-zinc-100/80 text-zinc-600 text-[10px] font-mono border border-black/[0.04]">
                           {visual.version}
                         </span>
 
                         {/* Slots Pill */}
-                        <span className="px-1.5 py-0.2 rounded bg-zinc-100 text-zinc-600 text-[10px] font-mono border border-zinc-200">
+                        <span className="px-1.5 py-0.2 rounded bg-zinc-100/80 text-zinc-600 text-[10px] font-mono border border-black/[0.04]">
                           {totalSlots} slots
                         </span>
 
                         {/* Price Pill */}
-                        <span className="px-2 py-0.2 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-mono font-bold">
+                        <span className="px-2 py-0.2 rounded bg-emerald-50 text-emerald-800 border border-emerald-500/20 text-[10px] font-mono font-medium">
                           {minPrice}
                         </span>
                       </div>
@@ -732,22 +732,22 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   </div>
 
                   {/* Middle / Right Group: Category Pill, Creator Profile, Action & Bookmark */}
-                  <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-zinc-200/80">
+                  <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-black/[0.05]">
                     
                     {/* Col 4: Category Pill */}
-                    <div className="hidden lg:flex items-center px-3 py-1 rounded-full bg-zinc-100/70 border border-zinc-200 text-xs text-zinc-700">
-                      <span className="font-medium text-[11px] text-zinc-700">{visual.badgeLabel}</span>
+                    <div className="hidden lg:flex items-center px-2.5 py-0.5 rounded-full bg-zinc-100/60 border border-black/[0.05] text-[11px] text-zinc-600">
+                      <span className="font-medium text-[11px] text-zinc-600">{visual.badgeLabel}</span>
                     </div>
 
                     {/* Col 5: Creator Profile */}
                     <div className="flex items-center gap-2 text-left">
-                      <div className="w-7 h-7 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-zinc-800">
+                      <div className="w-6 h-6 rounded-full bg-zinc-100 border border-black/[0.08] flex items-center justify-center text-[9px] font-bold text-zinc-700">
                         {visual.creatorAvatar}
                       </div>
                       <div className="text-[11px] leading-tight">
-                        <div className="font-semibold text-zinc-950 flex items-center gap-1">
+                        <div className="font-medium text-zinc-950 flex items-center gap-1">
                           <span>{visual.creatorName}</span>
-                          <Check className="w-2.5 h-2.5 text-[#0284c7] stroke-[3]" />
+                          <Check className="w-2.5 h-2.5 text-sky-600 stroke-[2.5]" />
                         </div>
                         <div className="text-zinc-400 font-mono text-[10px]">
                           {visual.creatorHandle}
@@ -761,13 +761,13 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                         <Link
                           href={`/sponsor/${firstAvailableSlot.id}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="px-3.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-black text-white border border-zinc-900 text-xs font-semibold transition-all active:scale-95 shadow-xs"
+                          className="px-3 py-1.5 rounded-lg bg-zinc-950 hover:bg-black text-white border border-zinc-950 text-xs font-medium transition-all active:scale-95 shadow-xs hover:shadow"
                           title="Directly book this slot"
                         >
                           Book Ad ({minPrice})
                         </Link>
                       ) : (
-                        <span className="px-2.5 py-1 rounded-lg bg-zinc-100 text-zinc-400 text-[11px] font-medium border border-zinc-200">
+                        <span className="px-2.5 py-1 rounded-lg bg-zinc-100 text-zinc-400 text-[11px] font-medium border border-black/[0.06]">
                           Sold Out
                         </span>
                       )}
@@ -778,8 +778,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                         onClick={(e) => toggleBookmark(listing.id, e)}
                         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-all ${
                           isBookmarked
-                            ? 'bg-sky-50 text-sky-700 border-sky-300'
-                            : 'bg-white hover:bg-zinc-50 text-zinc-500 hover:text-zinc-900 border-zinc-200 shadow-2xs'
+                            ? 'bg-sky-50 text-sky-700 border-sky-200'
+                            : 'bg-white hover:bg-zinc-50 text-zinc-400 hover:text-zinc-900 border-black/[0.06] hover:border-black/[0.12] shadow-2xs'
                         }`}
                         title="Bookmark this tool"
                       >
@@ -805,8 +805,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                     EXPANDABLE INLINE DRAWER (Slot Booking & Code Embed Details)
                     ========================================================================= */}
                 {isExpanded && (
-                  <div className="w-full bg-zinc-50/95 border-x border-b border-zinc-200 rounded-b-xl p-5 mt-[-4px] mb-3 space-y-4 shadow-sm">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-zinc-200/80">
+                  <div className="w-full bg-[#fafafa] border-x border-b border-black/[0.06] rounded-b-xl p-5 mt-[-4px] mb-3 space-y-4 shadow-xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-black/[0.06]">
                       <div>
                         <h4 className="text-xs font-bold text-zinc-950 uppercase tracking-wider">
                           Configured Micro-Sponsorship Slots for {listing.title}
@@ -818,7 +818,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
 
                       <Link
                         href={`/tools/${listing.slug}`}
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:underline"
+                        className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 hover:underline"
                       >
                         <span>View Full Listing Page</span>
                         <ExternalLink className="w-3.5 h-3.5" />
@@ -835,7 +835,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                         toolSlots.map((slot) => (
                           <div
                             key={slot.id}
-                            className="p-3.5 rounded-xl bg-white border border-zinc-200 hover:border-zinc-300 flex flex-col justify-between gap-3 transition-all shadow-2xs"
+                            className="p-3.5 rounded-xl bg-white border border-black/[0.06] hover:border-black/[0.12] flex flex-col justify-between gap-3 transition-all shadow-2xs"
                           >
                             <div className="space-y-1">
                               <div className="flex items-center justify-between">
@@ -843,10 +843,10 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                                   {slot.slot_name}
                                 </span>
                                 <span
-                                  className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                  className={`px-2 py-0.5 rounded text-[10px] font-medium ${
                                     slot.is_available
-                                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                                      : 'bg-rose-50 text-rose-800 border border-rose-200'
+                                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-500/20'
+                                      : 'bg-rose-50 text-rose-800 border border-rose-500/20'
                                   }`}
                                 >
                                   {slot.is_available ? 'Available' : 'Occupied'}

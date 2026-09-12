@@ -75,41 +75,41 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-xl border-b border-zinc-200/80 transition-all select-none">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-black/[0.06] transition-all select-none">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 h-13 sm:h-14 flex items-center justify-between gap-4">
         
         {/* Left: Brand Identity + Edge Status Pill */}
-        <div className="flex items-center gap-3.5 shrink-0">
+        <div className="flex items-center gap-3 shrink-0">
           <Link
             href="/"
             className="flex items-center gap-2 group transition-opacity"
             title="Neotic Ads"
           >
-            <div className="w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 text-emerald-400 flex items-center justify-center shadow-sm">
-              <Zap className="w-4 h-4 fill-current" />
+            <div className="w-6 h-6 rounded-md bg-zinc-950 text-white flex items-center justify-center shadow-xs">
+              <Zap className="w-3.5 h-3.5 fill-current text-emerald-400" />
             </div>
             <div className="flex items-center gap-1.5">
               <span className="font-display font-black text-sm tracking-tight text-zinc-950">
                 NEOTIC
               </span>
-              <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 uppercase tracking-wider">
+              <span className="text-[9px] font-mono font-bold px-1.5 py-0.2 rounded bg-zinc-100 text-zinc-800 border border-black/[0.06] uppercase tracking-wider">
                 ADS
               </span>
             </div>
           </Link>
 
           {/* Sub-50ms Live Status Badge */}
-          <div className="hidden lg:inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-zinc-100/80 border border-zinc-200/80 text-[11px] text-zinc-600">
+          <div className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-zinc-50 border border-black/[0.06] text-[11px] text-zinc-500">
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-600" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
             </span>
-            <span className="font-mono text-[10px] text-zinc-700">Edge Sub-50ms</span>
+            <span className="font-mono text-[10px] text-zinc-600">Sub-50ms Edge</span>
           </div>
         </div>
 
         {/* Center: Top Navigation Tabs (Prominent Ads & Launchpad Dropdowns) */}
-        <nav className="hidden md:flex items-center gap-1.5 text-xs font-medium text-zinc-600">
+        <nav className="hidden md:flex items-center gap-1 text-xs font-medium text-zinc-600">
           {/* 1. Ads Dropdown */}
           <div className="relative" ref={adsDropdownRef}>
             <button
@@ -120,18 +120,18 @@ export function Navbar() {
               }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all border ${
                 adsDropdownOpen || pathname === '/'
-                  ? 'bg-zinc-100 text-zinc-950 border-zinc-300 font-semibold shadow-xs'
-                  : 'bg-zinc-100/60 hover:bg-zinc-100 text-zinc-700 border-zinc-200/80 hover:border-zinc-300'
+                  ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+                  : 'bg-transparent hover:bg-black/[0.04] text-zinc-600 hover:text-zinc-950 border-transparent'
               }`}
             >
-              <Store className="w-3.5 h-3.5 opacity-75" />
+              <Store className="w-3.5 h-3.5 opacity-80" />
               <span>Ads</span>
               <ChevronDown className={`w-3 h-3 transition-transform opacity-70 ${adsDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {/* Ads Dropdown Menu */}
             {adsDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 rounded-xl bg-white/95 backdrop-blur-xl border border-zinc-200 p-2 shadow-xl z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute top-full left-0 mt-2 w-64 rounded-xl bg-white/95 backdrop-blur-xl border border-black/[0.08] p-1.5 shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <Link
                   href="/"
                   onClick={() => setAdsDropdownOpen(false)}
@@ -179,13 +179,13 @@ export function Navbar() {
               }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all border ${
                 launchpadDropdownOpen || pathname === '/creator'
-                  ? 'bg-zinc-100 text-zinc-950 border-zinc-300 font-semibold shadow-xs'
-                  : 'bg-zinc-100/60 hover:bg-zinc-100 text-zinc-700 border-zinc-200/80 hover:border-zinc-300'
+                  ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+                  : 'bg-transparent hover:bg-black/[0.04] text-zinc-600 hover:text-zinc-950 border-transparent'
               }`}
             >
-              <Layers className="w-3.5 h-3.5 opacity-75" />
+              <Layers className="w-3.5 h-3.5 opacity-80" />
               <span>Launchpad</span>
-              <span className="px-1.5 py-0.2 rounded text-[9px] font-bold font-mono bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span className="px-1.5 py-0.2 rounded text-[9px] font-mono font-medium bg-emerald-50 text-emerald-700 border border-emerald-500/20">
                 85%
               </span>
               <ChevronDown className={`w-3 h-3 transition-transform opacity-70 ${launchpadDropdownOpen ? 'rotate-180' : ''}`} />
@@ -193,7 +193,7 @@ export function Navbar() {
 
             {/* Launchpad Dropdown Menu */}
             {launchpadDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-72 rounded-xl bg-white/95 backdrop-blur-xl border border-zinc-200 p-2 shadow-xl z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute top-full left-0 mt-2 w-72 rounded-xl bg-white/95 backdrop-blur-xl border border-black/[0.08] p-1.5 shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <Link
                   href="/creator"
                   onClick={() => setLaunchpadDropdownOpen(false)}
@@ -247,11 +247,11 @@ export function Navbar() {
             href="/dashboard"
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all border ${
               pathname === '/dashboard'
-                ? 'bg-zinc-100 text-zinc-950 border-zinc-300 font-semibold shadow-xs'
-                : 'bg-zinc-100/60 hover:bg-zinc-100 text-zinc-700 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300'
+                ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+                : 'bg-transparent hover:bg-black/[0.04] text-zinc-600 hover:text-zinc-950 border-transparent'
             }`}
           >
-            <BarChart3 className="w-3.5 h-3.5 opacity-75" />
+            <BarChart3 className="w-3.5 h-3.5 opacity-80" />
             <span>Telemetry</span>
           </Link>
 
@@ -259,32 +259,32 @@ export function Navbar() {
           <Link
             href="/embed.js"
             target="_blank"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all border bg-zinc-100/60 hover:bg-zinc-100 text-zinc-700 hover:text-zinc-950 border-zinc-200/80 hover:border-zinc-300"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all border bg-transparent hover:bg-black/[0.04] text-zinc-600 hover:text-zinc-950 border-transparent"
           >
-            <Code className="w-3.5 h-3.5 opacity-75" />
+            <Code className="w-3.5 h-3.5 opacity-80" />
             <span>Client SDK</span>
           </Link>
         </nav>
 
         {/* Right: Search Shortcut, Sign in, and Primary Action CTA */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2.5 shrink-0">
           {/* Quick Search Button (⌘K) */}
           <button
             type="button"
             onClick={handleSearchClick}
-            className="hidden sm:inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-100/80 hover:bg-zinc-100 border border-zinc-200/80 hover:border-zinc-300 text-zinc-600 hover:text-zinc-950 text-xs transition-all"
+            className="hidden sm:inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-100/60 hover:bg-zinc-100 border border-black/[0.05] hover:border-black/[0.1] text-zinc-500 hover:text-zinc-900 text-xs transition-all"
             title="Search developer tools (⌘K)"
           >
             <Search className="w-3.5 h-3.5 text-zinc-400" />
             <span className="text-[11px] text-zinc-600">Search</span>
-            <kbd className="px-1.5 py-0.2 rounded bg-white border border-zinc-200 text-[9px] font-mono text-zinc-500 shadow-xs">
+            <kbd className="px-1.5 py-0.2 rounded bg-white border border-black/[0.08] text-[9px] font-mono text-zinc-500 shadow-2xs">
               ⌘K
             </kbd>
           </button>
 
           <Link
             href="/creator"
-            className="text-xs text-zinc-600 hover:text-zinc-950 font-medium transition-colors hidden sm:inline-block"
+            className="text-xs text-zinc-600 hover:text-zinc-950 font-medium transition-colors hidden sm:inline-block px-1"
           >
             Log in
           </Link>
@@ -292,7 +292,7 @@ export function Navbar() {
           {/* High-Contrast Production Action Button */}
           <Link
             href="/creator"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-900 hover:bg-black text-white font-semibold text-xs transition-all active:scale-95 shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-950 hover:bg-black text-white font-medium text-xs transition-all active:scale-95 shadow-xs hover:shadow"
           >
             <span>List Your Tool</span>
             <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />

@@ -22,7 +22,7 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
   chrome_web_store: {
     name: 'Chrome Web Store',
     shortLabel: 'CWS Verified',
-    badgeClass: 'bg-emerald-50 text-emerald-800 border-emerald-200/80',
+    badgeClass: 'bg-emerald-50/80 text-emerald-800 border-emerald-500/20',
     description: 'Verified via Chrome Web Store active user metrics',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -37,7 +37,7 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
   plausible: {
     name: 'Plausible Analytics',
     shortLabel: 'Plausible Verified',
-    badgeClass: 'bg-violet-50 text-violet-800 border-violet-200/80',
+    badgeClass: 'bg-violet-50/80 text-violet-800 border-violet-500/20',
     description: 'Verified via Plausible privacy-friendly analytics API',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -49,7 +49,7 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
   posthog: {
     name: 'PostHog Analytics',
     shortLabel: 'PostHog Verified',
-    badgeClass: 'bg-rose-50 text-rose-800 border-rose-200/80',
+    badgeClass: 'bg-rose-50/80 text-rose-800 border-rose-500/20',
     description: 'Verified via PostHog product telemetry event stream',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -60,7 +60,7 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
   ga4: {
     name: 'Google Analytics 4',
     shortLabel: 'GA4 Verified',
-    badgeClass: 'bg-amber-50 text-amber-800 border-amber-200/80',
+    badgeClass: 'bg-amber-50/80 text-amber-800 border-amber-500/20',
     description: 'Verified via Google Analytics 4 daily active stream',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -71,10 +71,10 @@ const SOURCE_CONFIGS: Record<VerificationSource, SourceConfig> = {
     ),
   },
   manual: {
-    name: 'SponsorSlot Audited',
+    name: 'Neotic Audited',
     shortLabel: 'Audit Verified',
-    badgeClass: 'bg-zinc-100 text-zinc-800 border-zinc-200/80',
-    description: 'Audited and verified by SponsorSlot engineering staff',
+    badgeClass: 'bg-zinc-100 text-zinc-800 border-black/[0.06]',
+    description: 'Audited and verified by Neotic engineering staff',
     iconSvg: (
       <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M9 11l3 3L22 4" />
@@ -95,20 +95,20 @@ export function VerificationBadge({
   const config = SOURCE_CONFIGS[source] || SOURCE_CONFIGS.manual;
 
   const sizeClasses = {
-    sm: 'text-xs px-2 py-0.5 gap-1.5',
-    md: 'text-xs px-2.5 py-1 gap-2',
-    lg: 'text-sm px-3 py-1.5 gap-2.5',
+    sm: 'text-[11px] px-2 py-0.5 gap-1.5',
+    md: 'text-xs px-2.5 py-0.5 gap-1.5',
+    lg: 'text-xs px-3 py-1 gap-2',
   }[size];
 
   const iconSizes = {
-    sm: 'w-3.5 h-3.5',
-    md: 'w-4 h-4',
-    lg: 'w-4.5 h-4.5',
+    sm: 'w-3 h-3',
+    md: 'w-3.5 h-3.5',
+    lg: 'w-4 h-4',
   }[size];
 
   return (
     <div
-      className={`inline-flex items-center font-medium rounded-full border shadow-sm ${config.badgeClass} ${sizeClasses} ${className}`}
+      className={`inline-flex items-center font-medium rounded-full border shadow-2xs ${config.badgeClass} ${sizeClasses} ${className}`}
       title={`${config.name}: ${config.description}`}
     >
       <span className={`shrink-0 ${iconSizes}`} aria-hidden="true">

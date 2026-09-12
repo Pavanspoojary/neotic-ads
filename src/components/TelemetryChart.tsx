@@ -29,7 +29,7 @@ export function TelemetryChart({
 
   if (telemetry.length === 0) {
     return (
-      <div className={`p-5 rounded-2xl bg-zinc-50 border border-zinc-200/80 text-center ${className}`}>
+      <div className={`p-5 rounded-2xl bg-zinc-50 border border-black/[0.06] text-center ${className}`}>
         <p className="text-xs text-zinc-600 font-medium">No 30-day telemetry history recorded yet.</p>
         <p className="text-[11px] text-zinc-400 mt-0.5">Telemetry begins logging upon slot activation.</p>
       </div>
@@ -37,19 +37,19 @@ export function TelemetryChart({
   }
 
   return (
-    <div className={`rounded-2xl bg-zinc-50/70 border border-zinc-200/80 p-5 ${className}`}>
+    <div className={`rounded-2xl bg-zinc-50/50 border border-black/[0.06] p-4 sm:p-5 ${className}`}>
       {/* Metric summary banner */}
       <div className="grid grid-cols-3 gap-3 mb-4 text-center">
-        <div className="bg-white rounded-xl p-3 border border-zinc-200/80 shadow-2xs">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">30d Impressions</div>
+        <div className="bg-white rounded-xl p-3 border border-black/[0.06] shadow-2xs">
+          <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">30d Impressions</div>
           <div className="text-sm sm:text-base font-bold text-zinc-950 mt-0.5 tabular-nums">{totalImpressions.toLocaleString('en-US')}</div>
         </div>
-        <div className="bg-white rounded-xl p-3 border border-zinc-200/80 shadow-2xs">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">30d Clicks</div>
+        <div className="bg-white rounded-xl p-3 border border-black/[0.06] shadow-2xs">
+          <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">30d Clicks</div>
           <div className="text-sm sm:text-base font-bold text-zinc-950 mt-0.5 tabular-nums">{totalClicks.toLocaleString('en-US')}</div>
         </div>
-        <div className="bg-white rounded-xl p-3 border border-zinc-200/80 shadow-2xs">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Avg CTR</div>
+        <div className="bg-white rounded-xl p-3 border border-black/[0.06] shadow-2xs">
+          <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">Avg CTR</div>
           <div className="text-sm sm:text-base font-bold text-emerald-700 mt-0.5 tabular-nums">{avgCtr.toFixed(2)}%</div>
         </div>
       </div>
@@ -61,7 +61,7 @@ export function TelemetryChart({
           <span className="tabular-nums">Peak: {peakDaily.toLocaleString('en-US')} / day</span>
         </div>
 
-        <div className="h-28 flex items-end gap-1 sm:gap-1.5 pt-3 pb-1 px-2 bg-white rounded-xl border border-zinc-200/80">
+        <div className="h-28 flex items-end gap-1 sm:gap-1.5 pt-3 pb-1 px-2 bg-white rounded-xl border border-black/[0.06] shadow-2xs">
           {telemetry.map((t, idx) => {
             const heightPercent = Math.max(8, Math.round(((t.impressions_count || 0) / peakDaily) * 100));
             const dayCtr = calculateCtr(t.clicks_count || 0, t.impressions_count || 0);
@@ -75,7 +75,7 @@ export function TelemetryChart({
                 {/* Visual bar */}
                 <div
                   style={{ height: `${heightPercent}%` }}
-                  className="w-full bg-emerald-500/80 group-hover:bg-emerald-600 rounded-t-xs transition-all duration-100"
+                  className="w-full bg-emerald-500 group-hover:bg-emerald-600 rounded-t-xs transition-all duration-100"
                   title={tooltip}
                 />
               </div>

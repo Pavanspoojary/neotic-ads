@@ -265,17 +265,17 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
     VERIFICATION_SOURCES.find((s) => s.id === verificationSource) || VERIFICATION_SOURCES[0];
 
   return (
-    <div className="bg-white rounded-2xl border border-zinc-200/80 shadow-2xs overflow-hidden">
+    <div className="bg-white rounded-2xl border border-black/[0.06] shadow-2xs overflow-hidden">
       {/* Form Header */}
-      <div className="bg-white p-6 sm:p-8 border-b border-zinc-100 text-zinc-950">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-semibold uppercase tracking-wider mb-2">
+      <div className="bg-white p-6 sm:p-8 border-b border-black/[0.05] text-zinc-950">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-500/20 text-emerald-800 text-xs font-medium uppercase tracking-wider mb-2">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
           <span>New Tool Onboarding Flow</span>
         </div>
         <h2 className="text-2xl font-display font-bold tracking-tight text-zinc-950">Register Your Micro-Tool</h2>
         <p className="mt-1 text-sm text-zinc-500 max-w-2xl">
-          Publish your developer utility or Chrome extension to the SponsorSlot marketplace and start
+          Publish your developer utility or Chrome extension to the marketplace and start
           accepting non-intrusive 30-day sponsorships.
         </p>
       </div>
@@ -305,8 +305,8 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
 
         {/* SECTION 1: Identity & Routing */}
         <div className="space-y-4">
-          <h3 className="text-base font-bold text-zinc-950 border-b border-zinc-100 pb-2 flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-bold">
+          <h3 className="text-base font-bold text-zinc-950 border-b border-black/[0.05] pb-2 flex items-center gap-2">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-100 border border-black/[0.06] text-zinc-800 text-[11px] font-bold">
               1
             </span>
             <span>Tool Identity & Slug</span>
@@ -315,7 +315,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Tool Title */}
             <div>
-              <label htmlFor={titleId} className="block text-sm font-semibold text-zinc-700 mb-1">
+              <label htmlFor={titleId} className="block text-sm font-medium text-zinc-700 mb-1">
                 Tool Title / Name <span className="text-rose-500">*</span>
               </label>
               <input
@@ -329,7 +329,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
                 className={`w-full px-3.5 py-2.5 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 ${
                   errors.title
                     ? 'border-rose-300 focus:ring-rose-200 bg-rose-50/50 text-rose-900 placeholder-rose-400'
-                    : 'bg-white border-zinc-200/90 text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-400/20'
+                    : 'bg-white border-black/[0.08] text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-900/5'
                 }`}
               />
               {errors.title && <p className="mt-1 text-xs text-rose-600">{errors.title}</p>}
@@ -338,7 +338,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
             {/* Tool Slug with Real-Time Auto Generation & Manual Override */}
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label htmlFor={slugId} className="block text-sm font-semibold text-zinc-700">
+                <label htmlFor={slugId} className="block text-sm font-medium text-zinc-700">
                   Tool Slug (URL Path) <span className="text-rose-500">*</span>
                 </label>
                 {isSlugManuallyEdited && (
@@ -364,7 +364,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
                   className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-mono transition-all focus:outline-none focus:ring-2 ${
                     errors.slug
                       ? 'border-rose-300 focus:ring-rose-200 bg-rose-50/50 text-rose-900 placeholder-rose-400'
-                      : 'bg-white border-zinc-200/90 text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-400/20'
+                      : 'bg-white border-black/[0.08] text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-900/5'
                   }`}
                 />
               </div>
@@ -385,7 +385,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
           {/* Description */}
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label htmlFor={descId} className="block text-sm font-semibold text-zinc-700">
+              <label htmlFor={descId} className="block text-sm font-medium text-zinc-700">
                 Description <span className="text-rose-500">*</span>
               </label>
               <span
@@ -410,7 +410,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
               className={`w-full px-3.5 py-2.5 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 ${
                 errors.description
                   ? 'border-rose-300 focus:ring-rose-200 bg-rose-50/50 text-rose-900 placeholder-rose-400'
-                  : 'bg-white border-zinc-200/90 text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-400/20'
+                  : 'bg-white border-black/[0.08] text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-900/5'
               }`}
             />
             {errors.description && <p className="mt-1 text-xs text-rose-600">{errors.description}</p>}
@@ -419,8 +419,8 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
 
         {/* SECTION 2: Category & Architecture */}
         <div className="space-y-4">
-          <h3 className="text-base font-bold text-zinc-950 border-b border-zinc-100 pb-2 flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-bold">
+          <h3 className="text-base font-bold text-zinc-950 border-b border-black/[0.05] pb-2 flex items-center gap-2">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-100 border border-black/[0.06] text-zinc-800 text-[11px] font-bold">
               2
             </span>
             <span>Category & Architecture</span>
@@ -429,7 +429,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Category */}
             <div>
-              <label className="block text-sm font-semibold text-zinc-700 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 Marketplace Category
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -440,12 +440,12 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
                     onClick={() => setCategory(cat.id)}
                     className={`p-3 rounded-xl border text-left transition-all ${
                       category === cat.id
-                        ? 'border-emerald-600 bg-emerald-50 text-emerald-950 ring-1 ring-emerald-600/30 shadow-2xs'
-                        : 'border-zinc-200/80 hover:border-zinc-300 bg-white text-zinc-700'
+                        ? 'border-zinc-950 bg-zinc-950 text-white shadow-xs'
+                        : 'border-black/[0.06] hover:border-black/[0.12] bg-white text-zinc-700'
                     }`}
                   >
                     <div className="text-sm font-semibold">{cat.label}</div>
-                    <div className="text-xs text-zinc-500 line-clamp-1">{cat.description}</div>
+                    <div className={`text-xs line-clamp-1 ${category === cat.id ? 'text-zinc-300' : 'text-zinc-500'}`}>{cat.description}</div>
                   </button>
                 ))}
               </div>
@@ -453,7 +453,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
 
             {/* App Architecture */}
             <div>
-              <label className="block text-sm font-semibold text-zinc-700 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 App Architecture
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -466,16 +466,16 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
                       onClick={() => setAppType(type.id)}
                       className={`p-3 rounded-xl border text-center flex flex-col items-center gap-1.5 transition-all ${
                         appType === type.id
-                          ? 'border-emerald-600 bg-emerald-50 text-emerald-950 ring-1 ring-emerald-600/30 shadow-2xs'
-                          : 'border-zinc-200/80 hover:border-zinc-300 bg-white text-zinc-700'
+                          ? 'border-zinc-950 bg-zinc-950 text-white shadow-xs'
+                          : 'border-black/[0.06] hover:border-black/[0.12] bg-white text-zinc-700'
                       }`}
                     >
                       <Icon
                         className={`h-5 w-5 ${
-                          appType === type.id ? 'text-emerald-700' : 'text-zinc-400'
+                          appType === type.id ? 'text-emerald-400' : 'text-zinc-400'
                         }`}
                       />
-                      <span className="text-xs font-semibold">{type.label}</span>
+                      <span className="text-xs font-medium">{type.label}</span>
                     </button>
                   );
                 })}
@@ -485,7 +485,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
 
           {/* Website / Store URL */}
           <div>
-            <label htmlFor={websiteId} className="block text-sm font-semibold text-zinc-700 mb-1">
+            <label htmlFor={websiteId} className="block text-sm font-medium text-zinc-700 mb-1">
               Website or Store URL <span className="text-rose-500">*</span>
             </label>
             <input
@@ -501,7 +501,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
               className={`w-full px-3.5 py-2.5 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 ${
                 errors.websiteUrl
                   ? 'border-rose-300 focus:ring-rose-200 bg-rose-50/50 text-rose-900 placeholder-rose-400'
-                  : 'bg-white border-zinc-200/90 text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-400/20'
+                  : 'bg-white border-black/[0.08] text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-900/5'
               }`}
             />
             {errors.websiteUrl ? (
@@ -516,8 +516,8 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
 
         {/* SECTION 3: Traffic & Verification Badge */}
         <div className="space-y-4">
-          <h3 className="text-base font-bold text-zinc-950 border-b border-zinc-100 pb-2 flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-bold">
+          <h3 className="text-base font-bold text-zinc-950 border-b border-black/[0.05] pb-2 flex items-center gap-2">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-100 border border-black/[0.06] text-zinc-800 text-[11px] font-bold">
               3
             </span>
             <span>Audience Traffic & Verification Badge</span>
@@ -526,7 +526,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Verified DAU Input with Presets */}
             <div>
-              <label htmlFor={dauId} className="block text-sm font-semibold text-zinc-700 mb-1">
+              <label htmlFor={dauId} className="block text-sm font-medium text-zinc-700 mb-1">
                 Verified Daily Active Users (DAU) <span className="text-rose-500">*</span>
               </label>
               <input
@@ -543,14 +543,14 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
                 className={`w-full px-3.5 py-2.5 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 ${
                   errors.verifiedDau
                     ? 'border-rose-300 focus:ring-rose-200 bg-rose-50/50 text-rose-900 placeholder-rose-400'
-                    : 'bg-white border-zinc-200/90 text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-400/20'
+                    : 'bg-white border-black/[0.08] text-zinc-950 placeholder-zinc-400 focus:border-zinc-400 focus:ring-zinc-900/5'
                 }`}
               />
               {errors.verifiedDau && <p className="mt-1 text-xs text-rose-600">{errors.verifiedDau}</p>}
 
               {/* Quick DAU Presets */}
               <div className="mt-2.5 flex items-center gap-1.5 flex-wrap">
-                <span className="text-xs text-zinc-500 mr-1">Presets:</span>
+                <span className="text-xs text-zinc-400 mr-1">Presets:</span>
                 {DAU_PRESET_BUTTONS.map((preset) => (
                   <button
                     key={preset}
@@ -558,8 +558,8 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
                     onClick={() => setVerifiedDau(preset)}
                     className={`text-xs px-2.5 py-1 rounded-lg border transition-all ${
                       verifiedDau === preset
-                        ? 'bg-zinc-900 text-white font-semibold border-zinc-900 shadow-2xs'
-                        : 'bg-zinc-100 text-zinc-700 border-zinc-200/80 hover:bg-zinc-200/70'
+                        ? 'bg-zinc-950 text-white font-medium border-zinc-950 shadow-2xs'
+                        : 'bg-zinc-100 text-zinc-600 border border-black/[0.04] hover:bg-zinc-200/60'
                     }`}
                   >
                     {preset.toLocaleString('en-US')}
@@ -570,7 +570,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
 
             {/* Verification Source Selector */}
             <div>
-              <label className="block text-sm font-semibold text-zinc-700 mb-1">
+              <label className="block text-sm font-medium text-zinc-700 mb-1">
                 Verification Source
               </label>
               <select
@@ -578,7 +578,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
                 onChange={(e) =>
                   setVerificationSource(e.target.value as VerificationSource)
                 }
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200/90 text-sm bg-white text-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-400/20 focus:border-zinc-400"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-black/[0.08] text-sm bg-white text-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-900/5 focus:border-zinc-400"
               >
                 {VERIFICATION_SOURCES.map((source) => (
                   <option key={source.id} value={source.id}>
@@ -594,7 +594,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
 
           {/* Verification Identifier (Extension ID / Domain) */}
           <div>
-            <label htmlFor={idenfierId} className="block text-sm font-semibold text-zinc-700 mb-1">
+            <label htmlFor={idenfierId} className="block text-sm font-medium text-zinc-700 mb-1">
               Verification Identifier <span className="text-zinc-400 font-normal">(optional)</span>
             </label>
             <input
@@ -603,13 +603,13 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
               value={verificationIdentifier}
               onChange={(e) => setVerificationIdentifier(e.target.value)}
               placeholder={currentSourceConfig.placeholder}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200/90 text-sm font-mono bg-white text-zinc-950 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-400/20 focus:border-zinc-400"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-black/[0.08] text-sm font-mono bg-white text-zinc-950 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900/5 focus:border-zinc-400"
             />
             <p className="mt-1 text-xs text-zinc-500">{currentSourceConfig.helperText}</p>
           </div>
 
           {/* LIVE VERIFICATION BADGE PREVIEW */}
-          <div className="mt-4 p-4 rounded-xl border border-zinc-200/80 bg-zinc-50/70">
+          <div className="mt-4 p-4 rounded-xl border border-black/[0.06] bg-[#fafafa]">
             <div className="flex items-center justify-between mb-2.5">
               <span className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
                 <ShieldCheck className="h-4 w-4 text-emerald-600" />
@@ -617,7 +617,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
               </span>
               <span className="text-xs text-zinc-400">Interactive live preview</span>
             </div>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-zinc-200/80 shadow-2xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-black/[0.06] shadow-2xs">
               <div className="flex items-center gap-3">
                 <VerificationBadge
                   source={verificationSource}
@@ -635,13 +635,13 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
         </div>
 
         {/* Submit and Action Buttons */}
-        <div className="border-t border-zinc-100 pt-6 flex items-center justify-end gap-3">
+        <div className="border-t border-black/[0.05] pt-6 flex items-center justify-end gap-3">
           {onCancel && (
             <button
               type="button"
               onClick={onCancel}
               disabled={isSubmitting}
-              className="px-5 py-2.5 rounded-xl border border-zinc-200/80 text-sm font-semibold text-zinc-700 hover:bg-zinc-100 transition-colors"
+              className="px-5 py-2.5 rounded-xl border border-black/[0.06] hover:border-black/[0.12] text-sm font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-colors shadow-2xs"
             >
               Cancel
             </button>
@@ -649,7 +649,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 hover:bg-black px-6 py-2.5 text-sm font-semibold text-white shadow-xs active:scale-[0.99] disabled:opacity-50 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-xl bg-zinc-950 hover:bg-black px-6 py-2.5 text-sm font-medium text-white shadow-xs hover:shadow active:scale-[0.99] disabled:opacity-50 transition-all cursor-pointer"
           >
             {isSubmitting ? (
               <>

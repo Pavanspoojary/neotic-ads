@@ -41,21 +41,21 @@ export default async function DashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#fbfbfd] text-zinc-600 flex flex-col selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-[#fafafa] text-zinc-600 flex flex-col selection:bg-emerald-500/10 selection:text-emerald-950">
       <Navbar />
 
-      <main id="main-content" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 outline-none">
+      <main id="main-content" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-10 outline-none">
         {/* Page Header */}
-        <div className="mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-semibold mb-3.5 shadow-2xs">
+        <div className="mb-8">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/[0.08] border border-emerald-500/20 text-emerald-800 text-[11px] font-medium mb-3 shadow-2xs">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <BarChart2 className="h-3.5 w-3.5 text-emerald-600" />
+            <BarChart2 className="h-3 w-3 text-emerald-600" />
             <span>Platform Telemetry & Ad Delivery Engine</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-zinc-950 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-display font-semibold text-zinc-950 tracking-tight">
             Analytics & Verification Dashboard
           </h1>
-          <p className="mt-3 text-sm sm:text-base text-zinc-600 max-w-3xl leading-relaxed">
+          <p className="mt-2 text-xs sm:text-sm text-zinc-500 max-w-2xl leading-relaxed">
             Real-time telemetry aggregated directly from client-side pings without storing PII.
             Monitor impression volume, click conversions, and active escrow contracts.
           </p>
