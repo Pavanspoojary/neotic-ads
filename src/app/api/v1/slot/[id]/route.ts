@@ -107,7 +107,7 @@ export async function GET(
         listing_slug: listing?.slug || '',
       },
       creative: {
-        text: '⚡ Place your product here via SponsorSlot',
+        text: 'Place your product here via SponsorSlot',
         target_url: `https://sponsorslot.com/sponsor/${slot.id}?ref=unfilled_slot`,
         image_url: null,
         badge_svg: null,

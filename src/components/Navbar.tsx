@@ -124,7 +124,7 @@ export function Navbar() {
                   : 'bg-white/[0.03] hover:bg-white/[0.06] text-gray-300 border-white/[0.07] hover:border-white/[0.12]'
               }`}
             >
-              <span>🛒</span>
+              <Store className="w-3.5 h-3.5 opacity-75" />
               <span>Ads</span>
               <ChevronDown className={`w-3 h-3 transition-transform opacity-70 ${adsDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -183,7 +183,7 @@ export function Navbar() {
                   : 'bg-white/[0.03] hover:bg-white/[0.06] text-gray-300 border-white/[0.07] hover:border-white/[0.12]'
               }`}
             >
-              <span>🚀</span>
+              <Layers className="w-3.5 h-3.5 opacity-75" />
               <span>Launchpad</span>
               <span className="px-1.5 py-0.2 rounded text-[9px] font-bold font-mono bg-[#73e5bf]/15 text-[#73e5bf] border border-[#73e5bf]/30">
                 85%
@@ -251,7 +251,7 @@ export function Navbar() {
                 : 'bg-white/[0.03] hover:bg-white/[0.06] text-[#8b97a8] hover:text-white border-white/[0.07] hover:border-white/[0.12]'
             }`}
           >
-            <span>📊</span>
+            <BarChart3 className="w-3.5 h-3.5 opacity-75" />
             <span>Telemetry</span>
           </Link>
 
@@ -261,7 +261,7 @@ export function Navbar() {
             target="_blank"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all border bg-white/[0.03] hover:bg-white/[0.06] text-[#8b97a8] hover:text-white border-white/[0.07] hover:border-white/[0.12]"
           >
-            <span>🧩</span>
+            <Code className="w-3.5 h-3.5 opacity-75" />
             <span>Client SDK</span>
           </Link>
         </nav>

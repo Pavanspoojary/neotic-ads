@@ -246,7 +246,7 @@ async function fetchSponsorSlot() {
             <strong className="text-zinc-200">Shadow DOM Isolation:</strong> <code className="text-[#73e5bf]">embed.js</code> mounts into an open shadow root to prevent global CSS clashes.
           </li>
           <li>
-            <strong className="text-zinc-200">Unfilled Fallback:</strong> If the slot is vacant, it automatically renders a viral sponsor referral banner (<code className="text-[#73e5bf]">⚡ Place your product here via Neotic Ads</code>).
+            <strong className="text-zinc-200">Unfilled Fallback:</strong> If the slot is vacant, it automatically renders a viral sponsor referral banner (<code className="text-[#73e5bf]">Place your product here via Neotic Ads</code>).
           </li>
           <li>
             <strong className="text-zinc-200">Zero-PII Telemetry:</strong> Impressions and clicks trigger atomic counters on the Edge without collecting user IP, cookies, or personal identifiers.

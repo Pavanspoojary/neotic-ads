@@ -162,7 +162,7 @@ export async function dispatchGetSlot(slotId: string, db: IDatabaseRepository) {
         listing_slug: listing?.slug || '',
       },
       creative: {
-        text: '⚡ Place your product here via SponsorSlot',
+        text: 'Place your product here via SponsorSlot',
         target_url: `https://sponsorslot.dev/tools/${listing?.slug || 'explore'}?slot=${slot.id}&ref=unfilled_slot`,
         image_url: null,
         badge_svg: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/></svg>",

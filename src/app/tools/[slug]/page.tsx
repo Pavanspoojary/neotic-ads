@@ -7,7 +7,7 @@ import { SLOT_COPY_LIMITS, SlotType, ListingCategory, AppType } from '../../../l
 import { VerificationBadge } from '../../../components/VerificationBadge';
 import { TelemetryChart } from '../../../components/TelemetryChart';
 import { Navbar } from '../../../components/Navbar';
-import { Sparkles, ArrowLeft, ExternalLink } from 'lucide-react';
+import { Sparkles, ArrowLeft, ExternalLink, Globe, Puzzle, Monitor, Settings } from 'lucide-react';
 
 interface PageProps {
   params: { slug: string } | Promise<{ slug: string }>;
@@ -20,10 +20,10 @@ const CATEGORY_NAMES: Record<ListingCategory, string> = {
   utilities: 'Utilities',
 };
 
-const APP_TYPE_LABELS: Record<AppType, { label: string; icon: string }> = {
-  web_app: { label: 'Web Application', icon: '🌐' },
-  chrome_extension: { label: 'Chrome Extension', icon: '🧩' },
-  desktop_app: { label: 'Desktop App', icon: '💻' },
+const APP_TYPE_LABELS: Record<AppType, { label: string; icon: any }> = {
+  web_app: { label: 'Web Application', icon: Globe },
+  chrome_extension: { label: 'Chrome Extension', icon: Puzzle },
+  desktop_app: { label: 'Desktop App', icon: Monitor },
 };
 
 const SLOT_FORMAT_META: Record<SlotType, { label: string; description: string }> = {
@@ -84,7 +84,8 @@ export default async function ToolDetailPage({ params }: PageProps) {
   const telemetryMap = Object.fromEntries(telemetryEntries);
 
   const availableSlotsCount = slots.filter((s) => s.is_available).length;
-  const appTypeMeta = APP_TYPE_LABELS[listing.app_type] || { label: listing.app_type, icon: '⚙️' };
+  const appTypeMeta = APP_TYPE_LABELS[listing.app_type] || { label: listing.app_type, icon: Settings };
+  const AppIcon = appTypeMeta.icon;
 
   return (
     <div className="min-h-screen bg-[#0b0e14] text-[#8b97a8] flex flex-col selection:bg-[#73e5bf] selection:text-[#0b0e14]">
@@ -111,7 +112,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
               {CATEGORY_NAMES[listing.category] || listing.category}
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/[0.04] text-white border border-white/[0.08]">
-              <span>{appTypeMeta.icon}</span>
+              <AppIcon className="w-3.5 h-3.5 text-gray-400" />
               <span>{appTypeMeta.label}</span>
             </span>
             <VerificationBadge

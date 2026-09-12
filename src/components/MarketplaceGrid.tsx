@@ -51,11 +51,9 @@ const CATEGORY_TABS: { id: ListingCategory | 'all'; label: string }[] = [
 interface ToolVisualMeta {
   icon: any;
   bg: string;
-  badgeIcon: string;
   badgeLabel: string;
   creatorName: string;
   creatorHandle: string;
-  creatorFlag: string;
   creatorAvatar: string;
   timeAgo: string;
   isAd?: boolean;
@@ -68,11 +66,9 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'jsonhero-visualizer': {
     icon: Code2,
     bg: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/25',
-    badgeIcon: '⚡',
     badgeLabel: 'Developer Tools',
     creatorName: 'Anant Gupta',
     creatorHandle: '@anant-gupta',
-    creatorFlag: '🇺🇸',
     creatorAvatar: 'AG',
     timeAgo: '5h',
     views: '1,240',
@@ -82,11 +78,9 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'tabmaster-pro': {
     icon: LayoutGrid,
     bg: 'bg-sky-500/15 text-sky-400 border border-sky-500/25',
-    badgeIcon: '🧩',
     badgeLabel: 'Chrome Extension',
     creatorName: 'Sarah Chen',
     creatorHandle: '@sarahchen',
-    creatorFlag: '🇨🇦',
     creatorAvatar: 'SC',
     timeAgo: 'Ad',
     isAd: true,
@@ -97,11 +91,9 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'svg-shape-shifter': {
     icon: Palette,
     bg: 'bg-amber-500/15 text-amber-400 border border-amber-500/25',
-    badgeIcon: '🎨',
     badgeLabel: 'Design & Assets',
     creatorName: 'Marco Rossi',
     creatorHandle: '@mrossi',
-    creatorFlag: '🇮🇹',
     creatorAvatar: 'MR',
     timeAgo: '3h',
     views: '850',
@@ -111,11 +103,9 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'tailscan-devtools': {
     icon: Sliders,
     bg: 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/25',
-    badgeIcon: '🛠',
     badgeLabel: 'DevTools & CSS',
     creatorName: 'Stanislav Bruch',
     creatorHandle: '@stanislav',
-    creatorFlag: '🇨🇿',
     creatorAvatar: 'SB',
     timeAgo: '6h',
     views: '1,120',
@@ -125,11 +115,9 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'regex101-companion': {
     icon: FileCode2,
     bg: 'bg-teal-500/15 text-teal-400 border border-teal-500/25',
-    badgeIcon: '⚡',
     badgeLabel: 'Regex Utilities',
     creatorName: 'Paras Shah',
     creatorHandle: '@paras-shah',
-    creatorFlag: '🇮🇳',
     creatorAvatar: 'PS',
     timeAgo: '8h',
     views: '3,400',
@@ -139,11 +127,9 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'crontab-guru-visualizer': {
     icon: Clock,
     bg: 'bg-rose-500/15 text-rose-400 border border-rose-500/25',
-    badgeIcon: '⏱',
     badgeLabel: 'Cron Automations',
     creatorName: 'Alex Rivera',
     creatorHandle: '@arivera',
-    creatorFlag: '🇪🇸',
     creatorAvatar: 'AR',
     timeAgo: '1d',
     views: '940',
@@ -153,11 +139,9 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'markdown-slides-preview': {
     icon: Sparkles,
     bg: 'bg-purple-500/15 text-purple-400 border border-purple-500/25',
-    badgeIcon: '📄',
     badgeLabel: 'Markdown & Slides',
     creatorName: 'Elena Rostova',
     creatorHandle: '@erostova',
-    creatorFlag: '🇩🇪',
     creatorAvatar: 'ER',
     timeAgo: '2d',
     views: '610',
@@ -173,11 +157,9 @@ function getToolVisual(slug: string, index: number): ToolVisualMeta {
   return {
     icon: Sparkles,
     bg: 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/25',
-    badgeIcon: '🛠',
     badgeLabel: 'Web Utility',
     creatorName: 'Developer',
     creatorHandle: `@tool-${index + 1}`,
-    creatorFlag: '🌐',
     creatorAvatar: 'DEV',
     timeAgo: `${index + 2}h`,
     views: `${(index + 1) * 320}`,
@@ -358,7 +340,6 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
             }}
             className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.03] hover:bg-white/[0.07] text-gray-300 hover:text-white text-xs font-semibold transition-all active:scale-95 shadow-sm"
           >
-            <span>📢</span>
             <span>Browse All Ads</span>
           </button>
 
@@ -675,15 +656,11 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                       </div>
                     </div>
 
-                    {/* Col 2: App Icon with Corner Badge */}
-                    <div className="relative shrink-0">
+                    {/* Col 2: App Icon */}
+                    <div className="shrink-0">
                       <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${visual.bg} shadow-inner`}>
                         <Icon className="w-5 h-5 stroke-[2]" />
                       </div>
-                      {/* Corner Icon Badge */}
-                      <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#1877f2] border border-[#0d1017] text-[9px] text-white flex items-center justify-center shadow-sm">
-                        {visual.badgeIcon}
-                      </span>
                     </div>
 
                     {/* Col 3: Tool Name, Verified Badge, Pills & One-line Description */}
@@ -732,9 +709,8 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-white/[0.06]">
                     
                     {/* Col 4: Category Pill */}
-                    <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-gray-300">
-                      <span>{visual.badgeIcon}</span>
-                      <span className="font-medium text-[11px]">{visual.badgeLabel}</span>
+                    <div className="hidden lg:flex items-center px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-gray-300">
+                      <span className="font-medium text-[11px] text-[#8b97a8]">{visual.badgeLabel}</span>
                     </div>
 
                     {/* Col 5: Creator Profile */}
@@ -746,7 +722,6 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                         <div className="font-semibold text-white flex items-center gap-1">
                           <span>{visual.creatorName}</span>
                           <Check className="w-2.5 h-2.5 text-[#38bdf8] stroke-[3]" />
-                          <span>{visual.creatorFlag}</span>
                         </div>
                         <div className="text-[#8b97a8] font-mono text-[10px]">
                           {visual.creatorHandle}

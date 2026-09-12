@@ -195,7 +195,7 @@
           // Default header_pill
           link.className = 'sponsorslot-pill';
           link.innerHTML =
-            '<span class="sponsorslot-tag">' + (isFallback ? '⚡ Sponsor' : 'Ad') + '</span>' +
+            '<span class="sponsorslot-tag">' + (isFallback ? 'Sponsor' : 'Ad') + '</span>' +
             '<span>' + escapeHtml(text) + '</span>';
         }
 

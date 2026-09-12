@@ -70,7 +70,7 @@ export function DashboardClient({
       const data = await res.json();
       if (res.ok) {
         setBeaconStatus(
-          `✓ ${event} beacon recorded! (Slot impressions: ${data.impressions_count}, clicks: ${data.clicks_count})`
+          `${event} beacon recorded! (Slot impressions: ${data.impressions_count}, clicks: ${data.clicks_count})`
         );
       } else {
         setBeaconStatus(`Failed: ${data.error}`);
