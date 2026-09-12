@@ -270,7 +270,7 @@ export function SlotManager({
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
               isFormOpen
                 ? 'bg-white text-zinc-700 hover:bg-zinc-50 border border-black/[0.08]'
-                : 'bg-zinc-950 text-white hover:bg-black shadow-2xs'
+                : 'bg-emerald-600 text-white hover:bg-emerald-500 shadow-xs'
             }`}
           >
             {isFormOpen ? (
@@ -508,7 +508,7 @@ export function SlotManager({
             <button
               type="submit"
               disabled={isSubmitting || !escrowBreakdown.valid}
-              className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-zinc-950 hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-xs hover:shadow cursor-pointer"
             >
               {isSubmitting ? (
                 <>
@@ -549,7 +549,7 @@ export function SlotManager({
             <button
               type="button"
               onClick={() => setIsFormOpen(true)}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-zinc-950 hover:bg-black shadow-2xs transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 shadow-xs hover:shadow transition-all cursor-pointer"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Add Your First Slot</span>

@@ -119,7 +119,7 @@ export function Navbar() {
               }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all border ${
                 adsDropdownOpen || pathname === '/'
-                  ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+                  ? 'bg-zinc-100 text-zinc-950 border-black/[0.08] font-medium shadow-2xs'
                   : 'bg-transparent hover:bg-black/[0.04] text-zinc-600 hover:text-zinc-950 border-transparent'
               }`}
             >
@@ -178,7 +178,7 @@ export function Navbar() {
               }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all border ${
                 launchpadDropdownOpen || pathname === '/creator'
-                  ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+                  ? 'bg-zinc-100 text-zinc-950 border-black/[0.08] font-medium shadow-2xs'
                   : 'bg-transparent hover:bg-black/[0.04] text-zinc-600 hover:text-zinc-950 border-transparent'
               }`}
             >
@@ -246,7 +246,7 @@ export function Navbar() {
             href="/dashboard"
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all border ${
               pathname === '/dashboard'
-                ? 'bg-zinc-950 text-white border-zinc-950 font-medium shadow-xs'
+                ? 'bg-zinc-100 text-zinc-950 border-black/[0.08] font-medium shadow-2xs'
                 : 'bg-transparent hover:bg-black/[0.04] text-zinc-600 hover:text-zinc-950 border-transparent'
             }`}
           >
@@ -291,7 +291,7 @@ export function Navbar() {
           {/* High-Contrast Production Action Button */}
           <Link
             href="/creator"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-950 hover:bg-black text-white font-medium text-xs transition-all active:scale-95 shadow-xs hover:shadow"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs transition-all active:scale-[0.98] shadow-xs hover:shadow"
           >
             <span>List Your Tool</span>
             <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -368,7 +368,7 @@ export function Navbar() {
             <Link
               href="/creator"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex w-full items-center justify-center gap-1.5 py-2 rounded-lg bg-zinc-950 text-white font-medium text-xs hover:bg-black shadow-2xs transition-all"
+              className="flex w-full items-center justify-center gap-1.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-medium text-xs shadow-xs transition-all cursor-pointer"
             >
               <span>List Your Tool (85% Payout)</span>
               <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />

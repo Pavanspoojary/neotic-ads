@@ -170,7 +170,7 @@ export function DashboardClient({
             <button
               onClick={testEdgeDelivery}
               disabled={loadingApi}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-950 hover:bg-black text-white text-xs font-medium shadow-2xs transition-all disabled:opacity-50 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-medium shadow-xs hover:shadow transition-all disabled:opacity-50 cursor-pointer"
             >
               {loadingApi ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Play className="h-3 w-3" />}
               <span>Test Delivery</span>

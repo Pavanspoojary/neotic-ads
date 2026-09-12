@@ -137,7 +137,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2.5">
           <Link
             href={`/tools/${listing.slug}`}
-            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-zinc-950 text-white text-xs font-medium hover:bg-black shadow-2xs transition-all text-center"
+            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-medium shadow-xs hover:shadow transition-all text-center cursor-pointer"
           >
             Return to Tool Listing
           </Link>
@@ -272,7 +272,7 @@ export function SponsorBookingClient({ slot, listing }: SponsorBookingClientProp
           <button
             type="submit"
             disabled={loading || isOverLimit}
-            className="w-full mt-3 flex items-center justify-center gap-2 rounded-lg bg-zinc-950 hover:bg-black px-4 py-2.5 text-xs font-medium text-white shadow-2xs focus:outline-none focus:ring-2 focus:ring-black/[0.04] disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
+            className="w-full mt-3 flex items-center justify-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 px-4 py-2.5 text-xs font-semibold text-white shadow-xs hover:shadow focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
           >
             {loading ? (
               <span>Confirming Escrow...</span>

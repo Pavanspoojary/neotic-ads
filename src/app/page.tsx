@@ -62,8 +62,8 @@ export default async function HomePage() {
 
                 <div className="flex items-center justify-between gap-4">
                   {/* Left Icon/Box ($01) */}
-                  <div className="w-10 h-10 rounded-xl bg-zinc-950 text-white flex items-center justify-center shrink-0 shadow-xs">
-                    <span className="font-display font-black text-sm text-emerald-400 font-mono tracking-tight">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-500/25 flex items-center justify-center shrink-0 shadow-2xs">
+                    <span className="font-display font-bold text-sm text-emerald-700 font-mono tracking-tight">
                       $01
                     </span>
                   </div>
@@ -81,7 +81,7 @@ export default async function HomePage() {
                   {/* Right CTA Button */}
                   <Link
                     href={featuredBookingUrl}
-                    className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-medium transition-all shadow-xs hover:shadow active:scale-[0.98] cursor-pointer"
+                    className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-all shadow-xs hover:shadow active:scale-[0.98] cursor-pointer"
                   >
                     <span>Get Started</span>
                     <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />

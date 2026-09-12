@@ -648,7 +648,7 @@ export function ListingForm({ onSuccess, onCancel, existingSlugs = [] }: Listing
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 rounded-xl bg-zinc-950 hover:bg-black px-6 py-2.5 text-sm font-medium text-white shadow-xs hover:shadow active:scale-[0.99] disabled:opacity-50 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 px-6 py-2.5 text-sm font-medium text-white shadow-xs hover:shadow active:scale-[0.99] disabled:opacity-50 transition-all cursor-pointer"
           >
             {isSubmitting ? (
               <>

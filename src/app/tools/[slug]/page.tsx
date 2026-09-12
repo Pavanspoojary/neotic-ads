@@ -268,7 +268,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
                       {slot.is_available ? (
                         <Link
                           href={`/sponsor/${slot.id}`}
-                          className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs font-medium text-white bg-zinc-950 hover:bg-black shadow-xs transition-all active:scale-[0.98]"
+                          className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 shadow-xs hover:shadow transition-all active:scale-[0.98] cursor-pointer"
                         >
                           Book This Slot →
                         </Link>

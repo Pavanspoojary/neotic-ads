@@ -112,7 +112,7 @@ export function CreatorDashboardClient({
               <button
                 type="button"
                 onClick={() => setActiveTab('onboard')}
-                className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-950 hover:bg-black text-white text-xs font-medium shadow-2xs transition-all cursor-pointer"
+                className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-medium shadow-xs hover:shadow transition-all cursor-pointer"
               >
                 <PlusCircle className="h-3.5 w-3.5" />
                 <span>Register First Tool</span>
@@ -159,7 +159,7 @@ export function CreatorDashboardClient({
                         <button
                           type="button"
                           onClick={() => setExpandedToolId(isExpanded ? null : tool.id)}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-950 hover:bg-black text-white text-xs font-medium shadow-2xs transition-all cursor-pointer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-medium shadow-xs hover:shadow transition-all cursor-pointer"
                         >
                           <Layers className="h-3.5 w-3.5" />
                           <span>{isExpanded ? 'Hide Slots' : `Manage Slots (${toolSlots.length})`}</span>

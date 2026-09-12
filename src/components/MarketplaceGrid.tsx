@@ -65,7 +65,7 @@ interface ToolVisualMeta {
 const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'jsonhero-visualizer': {
     icon: Code2,
-    bg: 'bg-zinc-950 text-emerald-400 border border-black/10',
+    bg: 'bg-emerald-50 text-emerald-600 border border-emerald-500/20',
     badgeLabel: 'Developer Tools',
     creatorName: 'Anant Gupta',
     creatorHandle: '@anant-gupta',
@@ -77,7 +77,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'tabmaster-pro': {
     icon: LayoutGrid,
-    bg: 'bg-zinc-950 text-sky-400 border border-black/10',
+    bg: 'bg-sky-50 text-sky-600 border border-sky-500/20',
     badgeLabel: 'Chrome Extension',
     creatorName: 'Sarah Chen',
     creatorHandle: '@sarahchen',
@@ -90,7 +90,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'svg-shape-shifter': {
     icon: Palette,
-    bg: 'bg-zinc-950 text-amber-400 border border-black/10',
+    bg: 'bg-amber-50 text-amber-600 border border-amber-500/20',
     badgeLabel: 'Design & Assets',
     creatorName: 'Marco Rossi',
     creatorHandle: '@mrossi',
@@ -102,7 +102,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'tailscan-devtools': {
     icon: Sliders,
-    bg: 'bg-zinc-950 text-indigo-400 border border-black/10',
+    bg: 'bg-indigo-50 text-indigo-600 border border-indigo-500/20',
     badgeLabel: 'DevTools & CSS',
     creatorName: 'Stanislav Bruch',
     creatorHandle: '@stanislav',
@@ -114,7 +114,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'regex101-companion': {
     icon: FileCode2,
-    bg: 'bg-zinc-950 text-teal-400 border border-black/10',
+    bg: 'bg-teal-50 text-teal-600 border border-teal-500/20',
     badgeLabel: 'Regex Utilities',
     creatorName: 'Paras Shah',
     creatorHandle: '@paras-shah',
@@ -126,7 +126,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'crontab-guru-visualizer': {
     icon: Clock,
-    bg: 'bg-zinc-950 text-rose-400 border border-black/10',
+    bg: 'bg-rose-50 text-rose-600 border border-rose-500/20',
     badgeLabel: 'Cron Automations',
     creatorName: 'Alex Rivera',
     creatorHandle: '@arivera',
@@ -138,7 +138,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'markdown-slides-preview': {
     icon: FileCode2,
-    bg: 'bg-zinc-950 text-zinc-300 border border-black/10',
+    bg: 'bg-zinc-100 text-zinc-700 border border-black/[0.06]',
     badgeLabel: 'Markdown & Slides',
     creatorName: 'Elena Rostova',
     creatorHandle: '@erostova',
@@ -156,7 +156,7 @@ function getToolVisual(slug: string, index: number): ToolVisualMeta {
   }
   return {
     icon: Code2,
-    bg: 'bg-zinc-950 text-zinc-300 border border-black/10',
+    bg: 'bg-zinc-100 text-zinc-700 border border-black/[0.06]',
     badgeLabel: 'Web Utility',
     creatorName: 'Developer',
     creatorHandle: `@tool-${index + 1}`,
@@ -311,7 +311,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                   feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
               }}
-              className="w-8 h-8 rounded-full bg-zinc-950 hover:bg-black text-white flex items-center justify-center transition-colors shadow-xs"
+              className="w-8 h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 hover:text-zinc-950 border border-black/[0.06] flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
               title="Search"
             >
               <Search className="w-3.5 h-3.5" />
@@ -363,16 +363,16 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
           <button
             type="button"
             onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all ${
-              sortBy === 'today'
-                ? 'bg-zinc-950 text-white border-zinc-950 shadow-xs font-medium'
-                : 'bg-white text-zinc-700 border-black/[0.06] hover:border-black/[0.12] shadow-2xs font-medium'
+            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full shrink-0 border transition-all cursor-pointer ${
+              sortDropdownOpen
+                ? 'bg-zinc-100 text-zinc-950 border-black/[0.12] shadow-2xs font-medium'
+                : 'bg-white text-zinc-700 hover:text-zinc-950 border-black/[0.08] hover:border-black/[0.14] shadow-2xs font-medium'
             }`}
           >
-            <span className={`w-1.5 h-1.5 rounded-full ${sortBy === 'today' ? 'bg-emerald-400 shadow-[0_0_6px_#34d399]' : 'bg-emerald-500'}`} />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]" />
             <span>Today</span>
-            <span className={`text-[10px] font-mono ${sortBy === 'today' ? 'opacity-80' : 'text-zinc-500'}`}>{initialListings.length}</span>
-            <ChevronDown className={`w-3 h-3 opacity-60 transition-transform ${sortDropdownOpen ? 'rotate-180' : ''}`} />
+            <span className="text-[10px] font-mono text-zinc-400 font-medium">{initialListings.length}</span>
+            <ChevronDown className={`w-3 h-3 text-zinc-400 transition-transform ${sortDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {/* Sort Dropdown Menu */}
@@ -631,7 +631,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 setAvailableOnly(false);
                 setVerifiedOnly(false);
               }}
-              className="mt-3.5 px-3.5 py-1.5 rounded-lg bg-zinc-950 text-white text-xs font-medium hover:bg-black shadow-2xs transition-all cursor-pointer"
+              className="mt-3.5 px-3.5 py-1.5 rounded-lg bg-white text-zinc-700 hover:text-zinc-950 border border-black/[0.08] hover:border-black/[0.14] text-xs font-medium shadow-2xs transition-all cursor-pointer"
             >
               Reset Filters
             </button>
@@ -742,7 +742,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
 
                     {/* Col 5: Creator Profile */}
                     <div className="flex items-center gap-2 text-left">
-                      <div className="w-6 h-6 rounded-full bg-zinc-950 border border-black/10 flex items-center justify-center text-[9px] font-bold text-zinc-200 font-mono shadow-2xs">
+                      <div className="w-6 h-6 rounded-full bg-zinc-100 border border-black/[0.08] flex items-center justify-center text-[9px] font-bold text-zinc-700 font-mono shadow-2xs">
                         {visual.creatorAvatar}
                       </div>
                       <div className="text-[11px] leading-tight">
@@ -756,17 +756,17 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                       </div>
                     </div>
 
-                    {/* Col 6: Actions — Sleek Obsidian Book Ad button & Bookmark */}
+                    {/* Col 6: Actions — Vibrant Emerald Book Ad button & Bookmark */}
                     <div className="flex items-center gap-2">
                       {firstAvailableSlot ? (
                         <Link
                           href={`/sponsor/${firstAvailableSlot.id}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="px-3.5 py-1.5 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white border border-zinc-950 text-xs font-medium transition-all active:scale-[0.98] shadow-2xs flex items-center gap-1.5"
+                          className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-medium transition-all active:scale-[0.98] shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer"
                           title="Directly book this slot"
                         >
                           <span>Book Ad</span>
-                          <span className="text-emerald-400 font-mono text-[11px] font-normal">({minPrice})</span>
+                          <span className="text-emerald-100 font-mono text-[11px] font-normal">({minPrice})</span>
                         </Link>
                       ) : (
                         <span className="px-2.5 py-1 rounded-lg bg-zinc-100 text-zinc-400 text-[11px] font-medium border border-black/[0.06]">
@@ -870,7 +870,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                               </div>
                               <Link
                                 href={`/sponsor/${slot.id}`}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-black text-white text-xs font-semibold transition-colors shadow-xs"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-medium transition-all shadow-xs hover:shadow cursor-pointer"
                               >
                                 <span>Book This Slot</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
