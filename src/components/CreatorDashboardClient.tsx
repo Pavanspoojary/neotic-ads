@@ -75,7 +75,7 @@ export function CreatorDashboardClient({
           <button
             type="button"
             onClick={() => setActiveTab('tools')}
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-[0.98] cursor-pointer ${
               activeTab === 'tools'
                 ? 'bg-zinc-950 text-white shadow-xs'
                 : 'bg-white text-zinc-600 hover:text-zinc-950 border border-black/[0.06] hover:border-black/[0.12] shadow-2xs'
@@ -87,7 +87,7 @@ export function CreatorDashboardClient({
           <button
             type="button"
             onClick={() => setActiveTab('onboard')}
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-[0.98] cursor-pointer ${
               activeTab === 'onboard'
                 ? 'bg-zinc-950 text-white shadow-xs'
                 : 'bg-white text-zinc-600 hover:text-zinc-950 border border-black/[0.06] hover:border-black/[0.12] shadow-2xs'

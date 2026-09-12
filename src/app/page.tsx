@@ -54,8 +54,9 @@ export default async function HomePage() {
               <div className="max-w-2xl mx-auto relative rounded-xl bg-white border border-black/[0.06] hover:border-black/[0.12] p-4 sm:px-5 sm:py-4 text-left shadow-[0_1px_2px_rgba(0,0,0,0.02),0_8px_24px_rgba(0,0,0,0.03)] transition-all group">
                 {/* Floating "SPONSOR" Pill on top border */}
                 <div className="absolute -top-2.5 left-1/2 -translate-x-1/2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-white border border-black/[0.08] text-[9px] font-mono font-bold text-emerald-700 uppercase tracking-widest shadow-2xs">
-                    SPONSOR
+                  <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white border border-emerald-500/30 text-[9px] font-mono font-bold text-emerald-800 uppercase tracking-widest shadow-2xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span>SPONSOR</span>
                   </span>
                 </div>
 
@@ -80,7 +81,7 @@ export default async function HomePage() {
                   {/* Right CTA Button */}
                   <Link
                     href={featuredBookingUrl}
-                    className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-zinc-950 hover:bg-black text-white text-xs font-medium transition-all shadow-xs hover:shadow active:scale-95"
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-medium transition-all shadow-xs hover:shadow active:scale-[0.98] cursor-pointer"
                   >
                     <span>Get Started</span>
                     <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />

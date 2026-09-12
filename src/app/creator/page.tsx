@@ -78,7 +78,7 @@ export default async function CreatorPage() {
                 <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
                   Registered Tools
                 </span>
-                <div className="p-2 rounded-xl bg-zinc-100 text-zinc-700 border border-black/[0.04]">
+                <div className="p-2 rounded-lg bg-zinc-100 text-zinc-700 border border-black/[0.04]">
                   <Layers className="h-4 w-4" />
                 </div>
               </div>
@@ -97,7 +97,7 @@ export default async function CreatorPage() {
                 <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
                   Configured Slots
                 </span>
-                <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-500/20">
+                <div className="p-2 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-500/20">
                   <CheckCircle2 className="h-4 w-4" />
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default async function CreatorPage() {
                 <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
                   Net Monthly Potential
                 </span>
-                <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-500/20">
+                <div className="p-2 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-500/20">
                   <DollarSign className="h-4 w-4" />
                 </div>
               </div>
@@ -144,7 +144,7 @@ export default async function CreatorPage() {
                 <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
                   Verified Audience Reach
                 </span>
-                <div className="p-2 rounded-xl bg-zinc-100 text-zinc-700 border border-black/[0.04]">
+                <div className="p-2 rounded-lg bg-zinc-100 text-zinc-700 border border-black/[0.04]">
                   <Users className="h-4 w-4" />
                 </div>
               </div>

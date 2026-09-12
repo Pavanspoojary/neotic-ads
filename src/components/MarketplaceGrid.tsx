@@ -21,6 +21,7 @@ import {
   ArrowRight,
   ShieldCheck,
   Zap,
+  Layers,
 } from 'lucide-react';
 import { Listing, InventorySlot, ListingCategory, AppType, SlotType } from '../lib/types';
 import { formatCentsToUsd } from '../lib/escrow';
@@ -64,7 +65,7 @@ interface ToolVisualMeta {
 const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   'jsonhero-visualizer': {
     icon: Code2,
-    bg: 'bg-emerald-50 text-emerald-700 border border-emerald-200/80',
+    bg: 'bg-zinc-950 text-emerald-400 border border-black/10',
     badgeLabel: 'Developer Tools',
     creatorName: 'Anant Gupta',
     creatorHandle: '@anant-gupta',
@@ -76,7 +77,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'tabmaster-pro': {
     icon: LayoutGrid,
-    bg: 'bg-sky-50 text-sky-700 border border-sky-200/80',
+    bg: 'bg-zinc-950 text-sky-400 border border-black/10',
     badgeLabel: 'Chrome Extension',
     creatorName: 'Sarah Chen',
     creatorHandle: '@sarahchen',
@@ -89,7 +90,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'svg-shape-shifter': {
     icon: Palette,
-    bg: 'bg-amber-50 text-amber-700 border border-amber-200/80',
+    bg: 'bg-zinc-950 text-amber-400 border border-black/10',
     badgeLabel: 'Design & Assets',
     creatorName: 'Marco Rossi',
     creatorHandle: '@mrossi',
@@ -101,7 +102,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'tailscan-devtools': {
     icon: Sliders,
-    bg: 'bg-indigo-50 text-indigo-700 border border-indigo-200/80',
+    bg: 'bg-zinc-950 text-indigo-400 border border-black/10',
     badgeLabel: 'DevTools & CSS',
     creatorName: 'Stanislav Bruch',
     creatorHandle: '@stanislav',
@@ -113,7 +114,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'regex101-companion': {
     icon: FileCode2,
-    bg: 'bg-teal-50 text-teal-700 border border-teal-200/80',
+    bg: 'bg-zinc-950 text-teal-400 border border-black/10',
     badgeLabel: 'Regex Utilities',
     creatorName: 'Paras Shah',
     creatorHandle: '@paras-shah',
@@ -125,7 +126,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'crontab-guru-visualizer': {
     icon: Clock,
-    bg: 'bg-rose-50 text-rose-700 border border-rose-200/80',
+    bg: 'bg-zinc-950 text-rose-400 border border-black/10',
     badgeLabel: 'Cron Automations',
     creatorName: 'Alex Rivera',
     creatorHandle: '@arivera',
@@ -137,7 +138,7 @@ const TOOL_VISUALS: Record<string, ToolVisualMeta> = {
   },
   'markdown-slides-preview': {
     icon: FileCode2,
-    bg: 'bg-zinc-100 text-zinc-700 border border-black/[0.06]',
+    bg: 'bg-zinc-950 text-zinc-300 border border-black/10',
     badgeLabel: 'Markdown & Slides',
     creatorName: 'Elena Rostova',
     creatorHandle: '@erostova',
@@ -155,7 +156,7 @@ function getToolVisual(slug: string, index: number): ToolVisualMeta {
   }
   return {
     icon: Code2,
-    bg: 'bg-zinc-100 text-zinc-700 border border-black/[0.06]',
+    bg: 'bg-zinc-950 text-zinc-300 border border-black/10',
     badgeLabel: 'Web Utility',
     creatorName: 'Developer',
     creatorHandle: `@tool-${index + 1}`,
@@ -337,16 +338,17 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                 feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
             }}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-black/[0.08] hover:border-black/[0.14] bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 text-xs font-medium transition-all active:scale-95 shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-black/[0.08] hover:border-black/[0.14] bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 text-xs font-medium transition-all active:scale-[0.98] shadow-2xs cursor-pointer"
           >
+            <Layers className="w-3.5 h-3.5 text-zinc-400" />
             <span>Browse All Ads</span>
           </button>
 
           <Link
             href="/creator"
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 border border-black/[0.08] hover:border-black/[0.14] text-xs font-medium transition-all active:scale-95 shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-950 border border-black/[0.08] hover:border-black/[0.14] text-xs font-medium transition-all active:scale-[0.98] shadow-2xs cursor-pointer"
           >
-            <Plus className="w-3.5 h-3.5" />
+            <Plus className="w-3.5 h-3.5 text-zinc-500" />
             <span>Create / List Tools</span>
           </Link>
         </div>
@@ -740,7 +742,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
 
                     {/* Col 5: Creator Profile */}
                     <div className="flex items-center gap-2 text-left">
-                      <div className="w-6 h-6 rounded-full bg-zinc-100 border border-black/[0.08] flex items-center justify-center text-[9px] font-bold text-zinc-700">
+                      <div className="w-6 h-6 rounded-full bg-zinc-950 border border-black/10 flex items-center justify-center text-[9px] font-bold text-zinc-200 font-mono shadow-2xs">
                         {visual.creatorAvatar}
                       </div>
                       <div className="text-[11px] leading-tight">
@@ -760,10 +762,11 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                         <Link
                           href={`/sponsor/${firstAvailableSlot.id}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="px-3 py-1.5 rounded-lg bg-zinc-950 hover:bg-black text-white border border-zinc-950 text-xs font-medium transition-all active:scale-95 shadow-xs hover:shadow"
+                          className="px-3.5 py-1.5 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white border border-zinc-950 text-xs font-medium transition-all active:scale-[0.98] shadow-2xs flex items-center gap-1.5"
                           title="Directly book this slot"
                         >
-                          Book Ad ({minPrice})
+                          <span>Book Ad</span>
+                          <span className="text-emerald-400 font-mono text-[11px] font-normal">({minPrice})</span>
                         </Link>
                       ) : (
                         <span className="px-2.5 py-1 rounded-lg bg-zinc-100 text-zinc-400 text-[11px] font-medium border border-black/[0.06]">
@@ -782,7 +785,7 @@ export function MarketplaceGrid({ initialListings, initialSlots = [] }: Marketpl
                         }`}
                         title="Bookmark this tool"
                       >
-                        <Bookmark className="w-3.5 h-3.5 fill-current" />
+                        <Bookmark className={`w-3.5 h-3.5 ${isBookmarked ? 'fill-current' : 'fill-none'}`} />
                         <span className="text-[11px] font-mono">
                           {visual.bookmarks + (isBookmarked ? 1 : 0)}
                         </span>
